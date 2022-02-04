@@ -10,22 +10,16 @@ import javax.swing.ImageIcon;
 
 public class Animal{
     protected String nome; 
-    protected String especie;
     protected int idade;
+    protected String especie;
     protected String raca;
     protected String cor;
     protected String porte;
     protected String sexo;
     protected String descricao;
-    protected String temperamento;
-    protected String bairroEncontrado;
-    protected String nomeContato;
-    protected String telefoneContato;
     protected Date dataDeCadastro;
     protected String qualDoenca;
-    protected String qualAcidente;
     protected boolean doente;
-    protected boolean acidentado;
     protected boolean castrado;
     protected boolean vacinado;
     protected boolean prenha; 
@@ -128,38 +122,6 @@ public class Animal{
         this.descricao = descricao;
     }
 
-    public String getTemperamento() {
-        return temperamento;
-    }
-
-    public void setTemperamento(String temperamento) {
-        this.temperamento = temperamento;
-    }
-
-    public String getBairroEncontrado() {
-        return bairroEncontrado;
-    }
-
-    public void setBairroEncontrado(String bairroEncontrado) {
-        this.bairroEncontrado = bairroEncontrado;
-    }
-
-    public String getNomeContato() {
-        return nomeContato;
-    }
-
-    public void setNomeContato(String nomeContato) {
-        this.nomeContato = nomeContato;
-    }
-
-    public String getTelefoneContato() {
-        return telefoneContato;
-    }
-
-    public void setTelefoneContato(String telefoneContato) {
-        this.telefoneContato = telefoneContato;
-    }
-
     public Date getDataDeCadastro() {
         return dataDeCadastro;
     }
@@ -176,13 +138,6 @@ public class Animal{
         this.qualDoenca = qualDoenca;
     }
 
-    public String getQualAcidente() {
-        return qualAcidente;
-    }
-
-    public void setQualAcidente(String qualAcidente) {
-        this.qualAcidente = qualAcidente;
-    }
 
     public boolean isDoente() {
         return doente;
@@ -192,13 +147,6 @@ public class Animal{
         this.doente = doente;
     }
 
-    public boolean isAcidentado() {
-        return acidentado;
-    }
-
-    public void setAcidentado(boolean acidentado) {
-        this.acidentado = acidentado;
-    }
 
     public boolean isCastrado() {
         return castrado;
