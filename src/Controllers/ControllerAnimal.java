@@ -27,25 +27,26 @@ public class ControllerAnimal {
     public void insert(Animal animal) throws Exception {
         PreparedStatement stmt
                 = ConnectionDB.getConnection().prepareStatement(
-                        ("insert into tbl_animais(nome ,especie,idade ,raca ,cor ,porte ,sexo ,descricao ,"
-                        + "temperamento ,bairroEncontrado ,nomeContato,telefoneContato ,dataDeCadastro ,qualDoenca,"
-                        + "qualAcidente , doente ,acidentado ,castrado ,vacinado ,prenha )"
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"));
+
+                        ("INSERT INTO tb_animais(nome,idade,especie,raca,cor,"
+                                + "porte ,sexo ,descricao,dataDeCadastro,"
+                                + "qualDoenca,doente,castrado,vacinado)"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);"));
         
         stmt.setString(1, animal.getNome());
-        stmt.setString(2, (animal.getEspecie()));
-        stmt.setInt(3, animal.getIdade());
+        stmt.setInt(2, animal.getIdade());
+        stmt.setString(3, (animal.getEspecie()));
         stmt.setString(4, (animal.getRaca()));
         stmt.setString(5, (animal.getCor()));
         stmt.setString(6, (animal.getPorte()));
         stmt.setString(7, (animal.getSexo()));
         stmt.setString(8, (animal.getDescricao()));
-        stmt.setDate(13, (animal.getDataDeCadastro()));
-        stmt.setString(14, (animal.getQualDoenca()));
-        stmt.setBoolean(16, animal.isDoente());
-        stmt.setBoolean(18, (animal.isCastrado()));
-        stmt.setBoolean(19, (animal.isVacinado()));
-        stmt.setBoolean(20, (animal.isPrenha()));
+        stmt.setDate(9, (animal.getDataDeCadastro()));
+        stmt.setString(10, (animal.getQualDoenca()));
+        stmt.setBoolean(11, animal.isDoente());
+        stmt.setBoolean(12, (animal.isCastrado()));
+        stmt.setBoolean(13, (animal.isVacinado()));
+
 
         int row = stmt.executeUpdate();
         if (row == 0) {
@@ -57,8 +58,7 @@ public class ControllerAnimal {
         stmt.close();
         
         Statement st2 = ConnectionDB.getConnection().createStatement();
-        ResultSet rsImg = st2.executeQuery("select idAnimal from tbl_animais ORDER BY idAnimal DESC LIMIT 1;");
-            //ResultSet rsImg = st2.executeQuery("select imagem from tb_imagens where CHAVE = '"+animal.getCHAVEIMAGEM()+"';");
+        ResultSet rsImg = st2.executeQuery("select idAnimal from tb_animais ORDER BY idAnimal DESC LIMIT 1;");
             int id = 0;
             while (rsImg.next()) {
                 id = rsImg.getInt(1);
@@ -71,7 +71,7 @@ public class ControllerAnimal {
 
     public void insertImage(String imagem, int id) throws Exception {
         PreparedStatement stmt
-                = ConnectionDB.getConnection().prepareStatement("insert into tbl_imagens(imagem , idAnimal) "
+                = ConnectionDB.getConnection().prepareStatement("insert into tb_imagens(imagem , idAnimal) "
                         + "VALUES(?,?);");
             stmt.setString(1, imagem);
             stmt.setInt(2, id);
@@ -82,14 +82,20 @@ public class ControllerAnimal {
     }
     
     public void delete(Animal animal) throws Exception {
-        PreparedStatement ps
+         PreparedStatement ps
                 = ConnectionDB.getConnection().prepareStatement(
-                        "delete from animais_adocao WHERE id = ?");
+                        "delete from tb_imagens WHERE idAnimal = ?");
         ps.setInt(1, animal.getId());
         int row = ps.executeUpdate();
+        ps = ConnectionDB.getConnection().prepareStatement(
+                       "delete from tb_animais WHERE idAnimal = ?");
+            ps.setInt(1, animal.getId());
+            row = ps.executeUpdate();
         if (row == 0) {
-            throw new Exception("Exclusão não realizada");
+           JOptionPane.showMessageDialog(null, "Exclusão Falhou");
         }
+       
+       
     }
 
     public void update(Animal animal) throws Exception {
@@ -111,7 +117,7 @@ public class ControllerAnimal {
         ps.setBoolean(15, animal.isDoente());
         ps.setBoolean(17, animal.isCastrado());
         ps.setBoolean(18, animal.isVacinado());
-        ps.setBoolean(19, animal.isPrenha());
+//        ps.setBoolean(19, animal.isPrenha());
         ps.setInt(20, animal.getId());
 
         int row = ps.executeUpdate();

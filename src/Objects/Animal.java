@@ -22,7 +22,6 @@ public class Animal{
     protected boolean doente;
     protected boolean castrado;
     protected boolean vacinado;
-    protected boolean prenha; 
     protected int id;
     protected ImageIcon ImagemIcon;
     protected String imagem;
@@ -48,15 +47,23 @@ public class Animal{
     public void setImagem(String imagemPrinc) {
         this.imagem = imagemPrinc;
     }
-   
-    public Animal(String nome, int idade, String porte, String sexo) {
+
+    public Animal(String nome, int idade, String especie, String raca, String cor, String porte, String sexo, String descricao, Date dataDeCadastro, String qualDoenca, boolean doente, boolean castrado, boolean vacinado, String imagem) {
         this.nome = nome;
         this.idade = idade;
+        this.especie = especie;
+        this.raca = raca;
+        this.cor = cor;
         this.porte = porte;
         this.sexo = sexo;
+        this.descricao = descricao;
+        this.dataDeCadastro = dataDeCadastro;
+        this.qualDoenca = qualDoenca;
+        this.doente = doente;
+        this.castrado = castrado;
+        this.vacinado = vacinado;
+        this.imagem = imagem;
     }
-    
-    
     
     public String getNome() {
         return nome;
@@ -164,13 +171,6 @@ public class Animal{
         this.vacinado = vacinado;
     }
 
-    public boolean isPrenha() {
-        return prenha;
-    }
-
-    public void setPrenha(boolean prenha) {
-        this.prenha = prenha;
-    }
 
     public int getId() {
         return id;
