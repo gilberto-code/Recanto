@@ -10,6 +10,7 @@ import Controllers.ControllerAnimal;
 import Services.Convert_Image;
 
 import java.awt.Color;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,15 +18,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -38,6 +43,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
      */
     ImageIcon ImagemIconAnimal = new ImageIcon();
     String ultimoPacote = "";
+    public Animal animal;
 
     public TelaDeCadastroDeAnimais() {
         for(UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
@@ -60,9 +66,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         
         startArrayList();
         jpQual.setVisible(false);
-        pnPrenha.setVisible(false);
         pnDoencas.setVisible(false);
-        pnAcidentado.setVisible(false);
         for (int i = 0; i < listComboBox.size(); i++) {
             backgroundComboBox(listComboBox.get(i));
         }
@@ -74,8 +78,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     public void startArrayList() {
         listComboBox.add(jComboEspecie);
         listComboBox.add(jComboPorte);
-        listComboBox.add(jComboTemperamento);
-        listComboBox.add(jComboBairro);
     }
 
     /**
@@ -165,7 +167,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jComboBairro = new javax.swing.JComboBox<>();
         jLabel31 = new javax.swing.JLabel();
         jtx_raca = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
@@ -174,9 +175,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel46 = new javax.swing.JLabel();
         panelTamanho = new javax.swing.JPanel();
         jComboPorte = new javax.swing.JComboBox<>();
-        jLabel47 = new javax.swing.JLabel();
-        jComboTemperamento = new javax.swing.JComboBox<>();
-        jLabel48 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
@@ -187,11 +185,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jtxoutraraca = new javax.swing.JTextField();
         qual = new javax.swing.JLabel();
         idadeAnimal = new javax.swing.JLabel();
-        jtx_nomeContato = new javax.swing.JTextField();
-        jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
         jrMacho = new javax.swing.JRadioButton();
         rjFemea = new javax.swing.JRadioButton();
         jrVacinadoNao = new javax.swing.JRadioButton();
@@ -200,24 +194,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrCastradoNao = new javax.swing.JRadioButton();
         jrDoenteSim = new javax.swing.JRadioButton();
         jrDoenteNao = new javax.swing.JRadioButton();
-        jrAcidentadoSim = new javax.swing.JRadioButton();
-        jrAcidentadoNao = new javax.swing.JRadioButton();
-        pnPrenha = new javax.swing.JPanel();
-        jblPrenha = new javax.swing.JLabel();
-        jrPrenhaSim = new javax.swing.JRadioButton();
-        jrPrenhaNao = new javax.swing.JRadioButton();
         pnDoencas = new javax.swing.JPanel();
         jlbdoenca = new javax.swing.JLabel();
         jtxdoenca = new javax.swing.JTextField();
-        pnAcidentado = new javax.swing.JPanel();
-        jlbdoenca2 = new javax.swing.JLabel();
-        jtxacidente = new javax.swing.JTextField();
-        jtx_telefoneContato = new javax.swing.JFormattedTextField();
         jLabel74 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        qual1 = new javax.swing.JLabel();
-        jrComunitarioSim = new javax.swing.JRadioButton();
-        jrComunitarioNao = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtx_descricao = new javax.swing.JTextArea();
         txt_imagem = new javax.swing.JLabel();
@@ -738,7 +718,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jPanel1.add(jpnExcluirFoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 1250, 30, 30));
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(700, 1360));
+        setMinimumSize(new java.awt.Dimension(700, 1100));
+        setPreferredSize(new java.awt.Dimension(700, 1100));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel27.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
@@ -772,12 +753,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel30.setText("Porte");
         add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
 
-        jComboBairro.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jComboBairro.setForeground(new java.awt.Color(56, 0, 56));
-        jComboBairro.setMaximumRowCount(100);
-        jComboBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1° de Maio", "Alto Chalé", "Alto São Francisco", "Amália Rodrigues", "Bandeirantes", "Belvedere", "Campus Alto Paraopeba", "Carreiras", "Castiliano", "Centro", "Estiva", "Inconfidentes", "Itatiaia", "João Gote", "Luzia Augusta", "Nova Serrana", "Novo Horizonte", "Olaria", "Pioneiros", "Pires", "Siderurgia", "Soledade", "Tiradentes", "Zona Rural" }));
-        add(jComboBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 185, 30));
-
         jLabel31.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(56, 0, 56));
         jLabel31.setText("Raça");
@@ -797,7 +772,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel42.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(56, 0, 56));
         jLabel42.setText("Fotos");
-        add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1040, -1, 30));
+        add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 760, -1, 30));
 
         btn_cadastrar.setBackground(new java.awt.Color(56, 0, 56));
         btn_cadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -812,7 +787,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel46.setText("Finalizar");
         btn_cadastrar.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 8, 63, 16));
 
-        add(btn_cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 1290, 150, 30));
+        add(btn_cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 1010, 150, 30));
 
         panelTamanho.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -835,26 +810,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jComboPorte.setKeySelectionManager(null);
         add(jComboPorte, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 150, 30));
 
-        jLabel47.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel47.setText("Temperamento");
-        add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 110, 30));
-
-        jComboTemperamento.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jComboTemperamento.setForeground(new java.awt.Color(56, 0, 56));
-        jComboTemperamento.setMaximumRowCount(10);
-        jComboTemperamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medroso", "Agressivo", "Calmo", "Nervoso", "Estressável", "Tímido", "Ousado", "Corajoso", "Curioso" }));
-        add(jComboTemperamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 150, 30));
-
-        jLabel48.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel48.setText("Bairro Encontrado");
-        add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 130, 30));
-
         jLabel50.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(56, 0, 56));
         jLabel50.setText("Vacinado");
-        add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, 70, 30));
+        add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 70, 30));
 
         jLabel36.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(56, 0, 56));
@@ -864,12 +823,12 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel51.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(56, 0, 56));
         jLabel51.setText("Doente");
-        add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, 60, 30));
+        add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 60, 30));
 
         jLabel52.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(56, 0, 56));
         jLabel52.setText("Castrado");
-        add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 70, 30));
+        add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 70, 30));
 
         jtx_cor.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jtx_cor.setForeground(new java.awt.Color(56, 0, 56));
@@ -927,36 +886,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         idadeAnimal.setForeground(new java.awt.Color(56, 0, 56));
         add(idadeAnimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 160, 30));
 
-        jtx_nomeContato.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jtx_nomeContato.setForeground(new java.awt.Color(56, 0, 56));
-        jtx_nomeContato.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
-        jtx_nomeContato.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jtx_nomeContato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtx_nomeContatoActionPerformed(evt);
-            }
-        });
-        add(jtx_nomeContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 820, 300, 30));
-
-        jLabel64.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel64.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel64.setText("Nome do Contato");
-        add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 820, 120, 30));
-
         jLabel65.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
         jLabel65.setForeground(new java.awt.Color(56, 0, 56));
         jLabel65.setText("Descrição");
-        add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 940, 70, 30));
-
-        jLabel66.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel66.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel66.setText("Acidentado");
-        add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 80, 30));
-
-        jLabel67.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jLabel67.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel67.setText("Telefone para Contato");
-        add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 880, 150, 30));
+        add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, 70, 30));
 
         jrMacho.setBackground(new java.awt.Color(255, 255, 255));
         jrMacho.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
@@ -988,7 +921,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrVacinadoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrVacinadoNao.setText("Não");
         jrVacinadoNao.setOpaque(false);
-        add(jrVacinadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 580, -1, 30));
+        add(jrVacinadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, -1, 30));
 
         jrVacinadoSim.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup3.add(jrVacinadoSim);
@@ -996,7 +929,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrVacinadoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrVacinadoSim.setText("Sim");
         jrVacinadoSim.setOpaque(false);
-        add(jrVacinadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, 30));
+        add(jrVacinadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, 30));
 
         jrCastradoSim.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup4.add(jrCastradoSim);
@@ -1004,7 +937,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrCastradoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrCastradoSim.setText("Sim");
         jrCastradoSim.setOpaque(false);
-        add(jrCastradoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 640, -1, 30));
+        add(jrCastradoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, -1, 30));
 
         jrCastradoNao.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup4.add(jrCastradoNao);
@@ -1012,7 +945,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrCastradoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrCastradoNao.setText("Não");
         jrCastradoNao.setOpaque(false);
-        add(jrCastradoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 640, -1, 30));
+        add(jrCastradoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, 30));
 
         jrDoenteSim.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jrDoenteSim);
@@ -1025,7 +958,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                 jrDoenteSimActionPerformed(evt);
             }
         });
-        add(jrDoenteSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 700, -1, 30));
+        add(jrDoenteSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, -1, 30));
 
         jrDoenteNao.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(jrDoenteNao);
@@ -1038,57 +971,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                 jrDoenteNaoActionPerformed(evt);
             }
         });
-        add(jrDoenteNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 700, -1, 30));
-
-        jrAcidentadoSim.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jrAcidentadoSim);
-        jrAcidentadoSim.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrAcidentadoSim.setForeground(new java.awt.Color(56, 0, 56));
-        jrAcidentadoSim.setText("Sim");
-        jrAcidentadoSim.setOpaque(false);
-        jrAcidentadoSim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrAcidentadoSimActionPerformed(evt);
-            }
-        });
-        add(jrAcidentadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 760, -1, 30));
-
-        jrAcidentadoNao.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jrAcidentadoNao);
-        jrAcidentadoNao.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrAcidentadoNao.setForeground(new java.awt.Color(56, 0, 56));
-        jrAcidentadoNao.setText("Não");
-        jrAcidentadoNao.setOpaque(false);
-        jrAcidentadoNao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrAcidentadoNaoActionPerformed(evt);
-            }
-        });
-        add(jrAcidentadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 760, -1, 30));
-
-        pnPrenha.setBackground(new java.awt.Color(255, 255, 255));
-        pnPrenha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jblPrenha.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jblPrenha.setForeground(new java.awt.Color(56, 0, 56));
-        jblPrenha.setText("Prenha");
-        pnPrenha.add(jblPrenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
-
-        jrPrenhaSim.setBackground(new java.awt.Color(255, 255, 255));
-        jrPrenhaSim.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrPrenhaSim.setForeground(new java.awt.Color(56, 0, 56));
-        jrPrenhaSim.setText("Sim");
-        jrPrenhaSim.setOpaque(false);
-        pnPrenha.add(jrPrenhaSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 30));
-
-        jrPrenhaNao.setBackground(new java.awt.Color(255, 255, 255));
-        jrPrenhaNao.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrPrenhaNao.setForeground(new java.awt.Color(56, 0, 56));
-        jrPrenhaNao.setText("Não");
-        jrPrenhaNao.setOpaque(false);
-        pnPrenha.add(jrPrenhaNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, -1, 30));
-
-        add(pnPrenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 190, -1));
+        add(jrDoenteNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, -1, 30));
 
         pnDoencas.setBackground(new java.awt.Color(255, 255, 255));
         pnDoencas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1104,88 +987,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jtxdoenca.setSelectionColor(new java.awt.Color(149, 113, 149));
         pnDoencas.add(jtxdoenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 190, 30));
 
-        add(pnDoencas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 700, -1, 30));
-
-        pnAcidentado.setBackground(new java.awt.Color(255, 255, 255));
-        pnAcidentado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jlbdoenca2.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jlbdoenca2.setForeground(new java.awt.Color(56, 0, 56));
-        jlbdoenca2.setText("Qual acidente");
-        pnAcidentado.add(jlbdoenca2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
-
-        jtxacidente.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jtxacidente.setForeground(new java.awt.Color(56, 0, 56));
-        jtxacidente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
-        jtxacidente.setSelectionColor(new java.awt.Color(149, 113, 149));
-        pnAcidentado.add(jtxacidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 190, 30));
-
-        add(pnAcidentado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 760, 310, 30));
-
-        jtx_telefoneContato.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
-        jtx_telefoneContato.setForeground(new java.awt.Color(56, 0, 56));
-        try {
-            jtx_telefoneContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jtx_telefoneContato.setSelectionColor(new java.awt.Color(149, 113, 149));
-        add(jtx_telefoneContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 880, 300, 30));
+        add(pnDoencas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 550, -1, 30));
         add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, 60, -1));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        qual1.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        qual1.setForeground(new java.awt.Color(56, 0, 56));
-        qual1.setText("Comunitário");
-
-        jrComunitarioSim.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup5.add(jrComunitarioSim);
-        jrComunitarioSim.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrComunitarioSim.setForeground(new java.awt.Color(56, 0, 56));
-        jrComunitarioSim.setText("Sim");
-        jrComunitarioSim.setOpaque(false);
-        jrComunitarioSim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrComunitarioSimActionPerformed(evt);
-            }
-        });
-
-        jrComunitarioNao.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup5.add(jrComunitarioNao);
-        jrComunitarioNao.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        jrComunitarioNao.setForeground(new java.awt.Color(56, 0, 56));
-        jrComunitarioNao.setText("Não");
-        jrComunitarioNao.setOpaque(false);
-        jrComunitarioNao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrComunitarioNaoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(qual1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jrComunitarioSim)
-                .addGap(21, 21, 21)
-                .addComponent(jrComunitarioNao))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(qual1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrComunitarioSim, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrComunitarioNao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 220, 30));
 
         jtx_descricao.setColumns(20);
         jtx_descricao.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
@@ -1199,14 +1002,14 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jtx_descricao.setSelectionColor(new java.awt.Color(149, 113, 149));
         jScrollPane1.setViewportView(jtx_descricao);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 940, 490, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 630, 490, -1));
 
         txt_imagem.setBackground(new java.awt.Color(255, 255, 255));
         txt_imagem.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         txt_imagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_imagem.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
-        add(txt_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 1090, 200, 150));
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 1280, 20, 20));
+        add(txt_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 810, 200, 150));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 1000, 20, 20));
 
         jpnAddFoto.setBackground(new java.awt.Color(56, 0, 56));
         jpnAddFoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1220,7 +1023,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-mais-20 (1).png"))); // NOI18N
         jpnAddFoto.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        add(jpnAddFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 1250, 30, 30));
+        add(jpnAddFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 970, 30, 30));
 
         jpnExcluirFoto.setBackground(new java.awt.Color(56, 0, 56));
         jpnExcluirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1234,7 +1037,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-cancelar-20 (1).png"))); // NOI18N
         jpnExcluirFoto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        add(jpnExcluirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 1250, 30, 30));
+        add(jpnExcluirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 970, 30, 30));
 
         jSlider1.setBackground(new java.awt.Color(255, 255, 255));
         jSlider1.setForeground(new java.awt.Color(56, 0, 56));
@@ -1258,11 +1061,20 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         return b.getSelection().equals("Sim");
     }
     
-    private void cadastrarAnimal(){
+    private void cadastrarAnimal() throws IOException{
         
-        Animal animal = null;
         
-        if(jrComunitarioSim.isSelected()){
+        
+//        
+//        String filePath = "C:/Users/Gilberto/Desktop/a.jpg";
+//        byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
+//        String encodedString = Base64.getEncoder().encodeToString(fileContent);
+//        Animal a = new Animal("nome", 1, "especie", "raca", 
+//                "cor", "porte", "sexo",
+//                "descricao",null, 
+//                "qualDoenca", true, true, true, encodedString);
+        
+        
             try {
                 animal = colherInformacao();
             } catch (SQLException ex) {
@@ -1270,49 +1082,59 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
             } catch (IOException ex) {
                 Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }else{
-            try {
-                animal = colherInformacao();
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+            new Thread(new Runnable() {
+            public void run() {
+                JFrame frame;
+                frame = new TelaLoading();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                             
+                try {
+                    Thread.sleep(1000);
+                    cAnimal.insert(animal);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.setVisible(false);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
-            try {
-                System.out.println("oi");
-                cAnimal.insert(animal);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }).start();
+            
+                
+            
+            
+            
+            //frame.setVisible(false);
+            
                 
  
-        }
+        
     }
     
     private void btn_cadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cadastrarMouseClicked
-        cadastrarAnimal();
-        ///limparComponentes();
+        
+        try {
+            cadastrarAnimal();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        limparComponentes();
         
     }//GEN-LAST:event_btn_cadastrarMouseClicked
-    
+
     private void limparComponentes(){
         jComboEspecie.setSelectedIndex(1);
         jpQual.setVisible(false);
         jtx_nome.setText("");
-        jrComunitarioSim.setSelected(false);
-        jrComunitarioNao.setSelected(false);
         jSlider1.setValue(jSlider1.getMaximum()/2);
         jComboPorte.setSelectedIndex(1);
         jtx_raca.setText("");
         jtx_cor.setText("");
         jrMacho.setSelected(false);
         rjFemea.setSelected(false);
-        pnPrenha.setVisible(false);
-        jrPrenhaSim.setSelected(false);
-        jrPrenhaNao.setSelected(false);
-        jComboTemperamento.setSelectedIndex(1);
-        jComboBairro.setSelectedIndex(1);
         jrVacinadoSim.setSelected(false);
         jrVacinadoNao.setSelected(false);
         jrCastradoSim.setSelected(false);
@@ -1321,30 +1143,16 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         jrDoenteNao.setSelected(false);
         jtxdoenca.setText("");
         pnDoencas.setVisible(false);
-        jrAcidentadoSim.setSelected(false);
-        jrAcidentadoNao.setSelected(false);
-        jtxacidente.setText("");
-        pnAcidentado.setVisible(false);
-        jtx_nomeContato.setText("");
-        jtx_telefoneContato.setText("");
         jtx_descricao.setText("");
         txt_imagem.setIcon(null);
     }
-    //Apagar
-    private void jtx_nomeContatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtx_nomeContatoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtx_nomeContatoActionPerformed
-
     private void jrMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMachoActionPerformed
         // TODO add your handling code here:
-        jrPrenhaSim.setSelected(false);
-        jrPrenhaNao.setSelected(false);
-        pnPrenha.setVisible(false);
         rjFemea.setSelected(false);
     }//GEN-LAST:event_jrMachoActionPerformed
 
     private void rjFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rjFemeaActionPerformed
-        pnPrenha.setVisible(true);
+
         jrMacho.setSelected(false);
     }//GEN-LAST:event_rjFemeaActionPerformed
 
@@ -1359,27 +1167,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         pnDoencas.setVisible(false);
         jtxdoenca.setText("");
     }//GEN-LAST:event_jrDoenteNaoActionPerformed
-
-    private void jrAcidentadoSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrAcidentadoSimActionPerformed
-        // TODO add your handling code here:
-        pnAcidentado.setVisible(true);
-        jtxacidente.setText("");
-    }//GEN-LAST:event_jrAcidentadoSimActionPerformed
-
-    private void jrAcidentadoNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrAcidentadoNaoActionPerformed
-        // TODO add your handling code here:
-        pnAcidentado.setVisible(false);
-        jtxacidente.setText("");
-    }//GEN-LAST:event_jrAcidentadoNaoActionPerformed
-
-    //ADD COMUNITARIO NO BD
-    private void jrComunitarioSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrComunitarioSimActionPerformed
-        jrComunitarioNao.setSelected(false);
-    }//GEN-LAST:event_jrComunitarioSimActionPerformed
-
-    private void jrComunitarioNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrComunitarioNaoActionPerformed
-        jrCastradoSim.setSelected(false);
-    }//GEN-LAST:event_jrComunitarioNaoActionPerformed
 
     private void jpnAddFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoMouseClicked
         adicionarImagem(txt_imagem);
@@ -1457,20 +1244,13 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         String porte;
         String sexo;
         String descricao;
-        String temperamento;
-        String bairroEncontrado;
-        String nomeContato;
-        String telefoneContato;
         Date dataDeCadastro;
         String qualDoenca;
-        String qualAcidente;
         //ImageIcon ImagemIcon;
         String StringImagem;
         boolean doente;
-        boolean acidentado;
         boolean castrado;
         boolean vacinado;
-        boolean prenha = false;
 
         String imagemAnimal;
         //Coleta dos dados dos campos de texto
@@ -1484,21 +1264,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
             sexo = "Macho";
         } else {
             sexo = "Fêmea";
-            if (jrPrenhaSim.isSelected()) {
-                prenha = true;
-            } if (jrPrenhaNao.isSelected()){
-                prenha = false;
-            }
         }
         //sexo = cbSexoPress();
-
         descricao = jtx_descricao.getText();
-        temperamento = jComboTemperamento.getSelectedItem().toString();
-        bairroEncontrado = jComboBairro.getSelectedItem().toString();
         qualDoenca = jtxdoenca.getText();
-        nomeContato = jtx_nomeContato.getText();
-        telefoneContato = jtx_telefoneContato.getText();
-        qualAcidente = jtxacidente.getText();
         //Coleta de dados da barra 'slider'
 
         
@@ -1518,8 +1287,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         vacinado = jrVacinadoSim.isSelected();
 
         doente = jrDoenteSim.isSelected();
-
-        acidentado = jrAcidentadoSim.isSelected();
 
         castrado = jrCastradoSim.isSelected();
 
@@ -1562,13 +1329,11 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JLabel idadeAnimal;
-    private javax.swing.JComboBox<String> jComboBairro;
     private javax.swing.JComboBox<String> jComboBairro1;
     private javax.swing.JComboBox<String> jComboEspecie;
     private javax.swing.JComboBox<String> jComboEspecie1;
     private javax.swing.JComboBox<String> jComboPorte;
     private javax.swing.JComboBox<String> jComboPorte1;
-    private javax.swing.JComboBox<String> jComboTemperamento;
     private javax.swing.JComboBox<String> jComboTemperamento1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -1589,8 +1354,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
@@ -1602,10 +1365,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;
@@ -1614,16 +1374,13 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JLabel jblPrenha;
     private javax.swing.JLabel jblPrenha1;
     private javax.swing.JLabel jlbdoenca;
     private javax.swing.JLabel jlbdoenca1;
-    private javax.swing.JLabel jlbdoenca2;
     private javax.swing.JLabel jlbdoenca3;
     private javax.swing.JPanel jpQual;
     private javax.swing.JPanel jpQual1;
@@ -1631,17 +1388,13 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JPanel jpnAddFoto1;
     private javax.swing.JPanel jpnExcluirFoto;
     private javax.swing.JPanel jpnExcluirFoto1;
-    private javax.swing.JRadioButton jrAcidentadoNao;
     private javax.swing.JRadioButton jrAcidentadoNao1;
-    private javax.swing.JRadioButton jrAcidentadoSim;
     private javax.swing.JRadioButton jrAcidentadoSim1;
     private javax.swing.JRadioButton jrCastradoNao;
     private javax.swing.JRadioButton jrCastradoNao1;
     private javax.swing.JRadioButton jrCastradoSim;
     private javax.swing.JRadioButton jrCastradoSim1;
-    private javax.swing.JRadioButton jrComunitarioNao;
     private javax.swing.JRadioButton jrComunitarioNao1;
-    private javax.swing.JRadioButton jrComunitarioSim;
     private javax.swing.JRadioButton jrComunitarioSim1;
     private javax.swing.JRadioButton jrDoenteNao;
     private javax.swing.JRadioButton jrDoenteNao1;
@@ -1649,9 +1402,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JRadioButton jrDoenteSim1;
     private javax.swing.JRadioButton jrMacho;
     private javax.swing.JRadioButton jrMacho1;
-    private javax.swing.JRadioButton jrPrenhaNao;
     private javax.swing.JRadioButton jrPrenhaNao1;
-    private javax.swing.JRadioButton jrPrenhaSim;
     private javax.swing.JRadioButton jrPrenhaSim1;
     private javax.swing.JRadioButton jrVacinadoNao;
     private javax.swing.JRadioButton jrVacinadoNao1;
@@ -1664,13 +1415,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField jtx_idade1;
     private javax.swing.JTextField jtx_nome;
     private javax.swing.JTextField jtx_nome1;
-    private javax.swing.JTextField jtx_nomeContato;
     private javax.swing.JTextField jtx_nomeContato1;
     private javax.swing.JTextField jtx_raca;
     private javax.swing.JTextField jtx_raca1;
-    private javax.swing.JFormattedTextField jtx_telefoneContato;
     private javax.swing.JFormattedTextField jtx_telefoneContato1;
-    private javax.swing.JTextField jtxacidente;
     private javax.swing.JTextField jtxacidente1;
     private javax.swing.JTextField jtxdoenca;
     private javax.swing.JTextField jtxdoenca1;
@@ -1678,14 +1426,11 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private javax.swing.JTextField jtxoutraraca1;
     private javax.swing.JPanel panelTamanho;
     private javax.swing.JPanel panelTamanho1;
-    private javax.swing.JPanel pnAcidentado;
     private javax.swing.JPanel pnAcidentado1;
     private javax.swing.JPanel pnDoencas;
     private javax.swing.JPanel pnDoencas1;
-    private javax.swing.JPanel pnPrenha;
     private javax.swing.JPanel pnPrenha1;
     private javax.swing.JLabel qual;
-    private javax.swing.JLabel qual1;
     private javax.swing.JLabel qual2;
     private javax.swing.JLabel qual3;
     private javax.swing.JRadioButton rjFemea;

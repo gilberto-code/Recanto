@@ -52,20 +52,20 @@ public class ControllerAnimal {
         if (row == 0) {
             throw new Exception("Insercao não realizada");
         } else {
-            JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
+            stmt.close();
+        
+            Statement st2 = ConnectionDB.getConnection().createStatement();
+            ResultSet rsImg = st2.executeQuery("select idAnimal from tb_animais ORDER BY idAnimal DESC LIMIT 1;");
+                int id = 0;
+                while (rsImg.next()) {
+                    id = rsImg.getInt(1);
+                }
+            insertImage(animal.getImagem(), id);
+
+            stmt.close();
         }
         
-        stmt.close();
         
-        Statement st2 = ConnectionDB.getConnection().createStatement();
-        ResultSet rsImg = st2.executeQuery("select idAnimal from tb_animais ORDER BY idAnimal DESC LIMIT 1;");
-            int id = 0;
-            while (rsImg.next()) {
-                id = rsImg.getInt(1);
-            }
-        insertImage(animal.getImagem(), id);
-        
-        stmt.close();
 
     }
 
@@ -78,6 +78,8 @@ public class ControllerAnimal {
             int row = stmt.executeUpdate();
             if (row == 0) {
                 throw new Exception("Insercao não realizada");
+            }else {
+                JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
             }
     }
     
