@@ -48,7 +48,10 @@ public class Animal{
         this.imagem = imagemPrinc;
     }
 
-    public Animal(String nome, int idade, String especie, String raca, String cor, String porte, String sexo, String descricao, Date dataDeCadastro, String qualDoenca, boolean doente, boolean castrado, boolean vacinado, String imagem) {
+    public Animal(String nome, int idade, String especie, String raca,
+            String cor, String porte, String sexo, String descricao, 
+            Date dataDeCadastro, String qualDoenca, boolean doente,
+            boolean castrado, boolean vacinado, String imagem) {
         this.nome = nome;
         this.idade = idade;
         this.especie = especie;
