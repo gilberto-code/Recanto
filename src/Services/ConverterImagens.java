@@ -27,8 +27,8 @@ public class ConverterImagens {
 
         try {
             if (imgString != null) {
-                //byte[] montar = new sun.misc.BASE64Decoder().decodeBuffer(imgString);
-                byte[] montar = null;
+                byte[] montar = Base64.getDecoder().decode(imgString);
+                
                 ImageIcon oi = new ImageIcon(montar);
                 int larg = oi.getIconWidth();
                 int alt = oi.getIconHeight();

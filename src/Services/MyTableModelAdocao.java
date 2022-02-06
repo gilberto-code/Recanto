@@ -94,7 +94,9 @@ public class MyTableModelAdocao extends AbstractTableModel {
     @Override
     //Obrigatório incluir: método é chamado para exibir cada celula na JTable
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ImageIcon image = this.animals.get(rowIndex).getImagemIcon();
+
+        ImageIcon image;
+        image = Services.ConverterImagens.montarImagem(this.animals.get(rowIndex).getImagem());
         switch(columnIndex){
             case 0: return image;
             case 1: return this.animals.get(rowIndex).getNome();
@@ -105,15 +107,16 @@ public class MyTableModelAdocao extends AbstractTableModel {
         return null;
     }
     
-    //Acrescentado para facilitar fazer inserção de todas as colunas. Faz o mesmo que o método updateRow()
-    public void setValuesAt(Animal discUpdated, int rowIndex, int columnIndex) {       
-          this.animals.get(rowIndex).setImagemIcon(discUpdated.getImagemIcon());
-          this.animals.get(rowIndex).setNome(discUpdated.getNome());
-          this.animals.get(rowIndex).setSexo(discUpdated.getSexo());
-          this.animals.get(rowIndex).setIdade(discUpdated.getIdade());
-          this.animals.get(rowIndex).setEspecie(discUpdated.getEspecie());
-          fireTableRowsUpdated(rowIndex, rowIndex); //Força a atualização de uma linha da JTable
-    }
+//    //Acrescentado para facilitar fazer inserção de todas as colunas. Faz o mesmo que o método updateRow()
+//    public void setValuesAt(Animal discUpdated, int rowIndex, int columnIndex) {       
+//        System.out.println("me amo");
+//          this.animals.get(rowIndex).setImagemIcon(discUpdated.getImagemIcon());
+//          this.animals.get(rowIndex).setNome(discUpdated.getNome());
+//          this.animals.get(rowIndex).setSexo(discUpdated.getSexo());
+//          this.animals.get(rowIndex).setIdade(discUpdated.getIdade());
+//          this.animals.get(rowIndex).setEspecie(discUpdated.getEspecie());
+//          fireTableRowsUpdated(rowIndex, rowIndex); //Força a atualização de uma linha da JTable
+//    }
     @Override
     public Class getColumnClass(int column){
 // 4 is the index of the column image

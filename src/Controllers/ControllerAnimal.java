@@ -166,7 +166,6 @@ public class ControllerAnimal {
     private ArrayList<Animal> carregarLista(ResultSet rs) throws SQLException, IOException {
         ArrayList<Animal> lista = new ArrayList<>();
         Animal animal;
-        animal = new Animal();
         while (rs.next()) {
             animal = new Animal(
                     //nome

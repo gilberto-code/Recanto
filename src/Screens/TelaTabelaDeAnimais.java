@@ -102,14 +102,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel32 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jblPrenha = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         txt_imagem = new javax.swing.JLabel();
         jtfEspecie = new javax.swing.JTextField();
@@ -118,10 +113,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtfPorte = new javax.swing.JTextField();
         jtfRaca = new javax.swing.JTextField();
         jtfCor = new javax.swing.JTextField();
-        jtfTemperamento = new javax.swing.JTextField();
         jtfDoenca = new javax.swing.JTextField();
-        jtfAcidente = new javax.swing.JTextField();
-        jtfNomeDoContato = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtaDescricao = new javax.swing.JTextArea();
@@ -129,7 +121,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jrbVacinadoNao = new javax.swing.JRadioButton();
         jrbCastradoSim = new javax.swing.JRadioButton();
         jrbCastradoNao = new javax.swing.JRadioButton();
-        jtfTelefoneParaContato = new javax.swing.JFormattedTextField();
         jpnAddFoto = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jpnExcluirFoto = new javax.swing.JPanel();
@@ -139,8 +130,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jrbPrenhaSim = new javax.swing.JRadioButton();
         jrbMacho = new javax.swing.JRadioButton();
         jrbFemea = new javax.swing.JRadioButton();
-        jcbTemperamento = new javax.swing.JComboBox<>();
-        jcbBairroEncontrado = new javax.swing.JComboBox<>();
         jcbEscolherTabela = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jpnAtualizar = new javax.swing.JPanel();
@@ -153,7 +142,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jpnLista = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jcbAnimais = new javax.swing.JComboBox<>();
         jpPesquisa = new javax.swing.JPanel();
         jtxPesquisaNome = new javax.swing.JTextField();
         lblPesquisar = new javax.swing.JLabel();
@@ -164,7 +152,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jpnAdocao = new javax.swing.JPanel();
         jcbSelecioneAdotante = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
-        jlbNomeAnimal = new javax.swing.JLabel();
+        jlbNomeAnimalAdocao = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jpnCadastrarAdotanteAtoDeAdocao = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -223,7 +211,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jspDescricao.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jpnDescricao.setBackground(new java.awt.Color(255, 255, 255));
-        jpnDescricao.setPreferredSize(new java.awt.Dimension(300, 1160));
+        jpnDescricao.setPreferredSize(new java.awt.Dimension(300, 1000));
         jpnDescricao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel27.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
@@ -266,56 +254,31 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jblPrenha.setText("Prenha");
         jpnDescricao.add(jblPrenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, 12));
 
-        jLabel47.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel47.setText("Temperamento");
-        jpnDescricao.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 110, 12));
-
-        jLabel48.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel48.setText("Bairro Encontrado");
-        jpnDescricao.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 130, 12));
-
         jLabel50.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(56, 0, 56));
         jLabel50.setText("Vacinado");
-        jpnDescricao.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 70, 12));
+        jpnDescricao.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 70, 12));
 
         jLabel53.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(56, 0, 56));
         jLabel53.setText("Castrado");
-        jpnDescricao.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 70, 12));
+        jpnDescricao.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 70, 12));
 
         jLabel51.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(56, 0, 56));
         jLabel51.setText("Doença");
-        jpnDescricao.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 60, 12));
-
-        jLabel66.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel66.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel66.setText("Acidente");
-        jpnDescricao.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 670, 80, 12));
-
-        jLabel64.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel64.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel64.setText("Nome do Contato");
-        jpnDescricao.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 720, 120, 12));
-
-        jLabel67.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel67.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel67.setText("Telefone para Contato");
-        jpnDescricao.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 770, 150, 12));
+        jpnDescricao.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 60, 12));
 
         jLabel65.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel65.setForeground(new java.awt.Color(56, 0, 56));
         jLabel65.setText("Descrição");
-        jpnDescricao.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 820, 70, 12));
+        jpnDescricao.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 70, 12));
 
         txt_imagem.setBackground(new java.awt.Color(255, 255, 255));
         txt_imagem.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         txt_imagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_imagem.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
-        jpnDescricao.add(txt_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 950, 200, 150));
+        jpnDescricao.add(txt_imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, 200, 150));
 
         jtfEspecie.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jtfEspecie.setForeground(new java.awt.Color(56, 0, 56));
@@ -378,29 +341,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         });
         jpnDescricao.add(jtfCor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 220, 16));
 
-        jtfTemperamento.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfTemperamento.setForeground(new java.awt.Color(56, 0, 56));
-        jtfTemperamento.setBorder(null);
-        jtfTemperamento.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnDescricao.add(jtfTemperamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 220, 16));
-
         jtfDoenca.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jtfDoenca.setForeground(new java.awt.Color(56, 0, 56));
         jtfDoenca.setBorder(null);
         jtfDoenca.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnDescricao.add(jtfDoenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 640, 220, 16));
-
-        jtfAcidente.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfAcidente.setForeground(new java.awt.Color(56, 0, 56));
-        jtfAcidente.setBorder(null);
-        jtfAcidente.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnDescricao.add(jtfAcidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, 220, 16));
-
-        jtfNomeDoContato.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfNomeDoContato.setForeground(new java.awt.Color(56, 0, 56));
-        jtfNomeDoContato.setBorder(null);
-        jtfNomeDoContato.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnDescricao.add(jtfNomeDoContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 740, 220, 16));
+        jpnDescricao.add(jtfDoenca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 220, 16));
         jpnDescricao.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 1140, 20, 20));
 
         jtaDescricao.setColumns(20);
@@ -412,46 +357,35 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtaDescricao.setSelectionColor(new java.awt.Color(149, 113, 149));
         jScrollPane2.setViewportView(jtaDescricao);
 
-        jpnDescricao.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 840, 240, -1));
+        jpnDescricao.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 240, -1));
 
         buttonGroup2.add(jrbVacinadoSim);
         jrbVacinadoSim.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbVacinadoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrbVacinadoSim.setText("Sim");
         jrbVacinadoSim.setOpaque(false);
-        jpnDescricao.add(jrbVacinadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, 16));
+        jpnDescricao.add(jrbVacinadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, 16));
 
         buttonGroup2.add(jrbVacinadoNao);
         jrbVacinadoNao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbVacinadoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrbVacinadoNao.setText("Não");
         jrbVacinadoNao.setOpaque(false);
-        jpnDescricao.add(jrbVacinadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 540, -1, 16));
+        jpnDescricao.add(jrbVacinadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, 16));
 
         buttonGroup3.add(jrbCastradoSim);
         jrbCastradoSim.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbCastradoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrbCastradoSim.setText("Sim");
         jrbCastradoSim.setOpaque(false);
-        jpnDescricao.add(jrbCastradoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, -1, 16));
+        jpnDescricao.add(jrbCastradoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, 16));
 
         buttonGroup3.add(jrbCastradoNao);
         jrbCastradoNao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbCastradoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrbCastradoNao.setText("Não");
         jrbCastradoNao.setOpaque(false);
-        jpnDescricao.add(jrbCastradoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, -1, 16));
-
-        jtfTelefoneParaContato.setBorder(null);
-        jtfTelefoneParaContato.setForeground(new java.awt.Color(56, 0, 56));
-        try {
-            jtfTelefoneParaContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jtfTelefoneParaContato.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfTelefoneParaContato.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnDescricao.add(jtfTelefoneParaContato, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 790, 220, 16));
+        jpnDescricao.add(jrbCastradoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, 16));
 
         jpnAddFoto.setBackground(new java.awt.Color(56, 0, 56));
         jpnAddFoto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -460,7 +394,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-mais-20 (1).png"))); // NOI18N
         jpnAddFoto.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jpnDescricao.add(jpnAddFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1110, 30, 30));
+        jpnDescricao.add(jpnAddFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 850, 30, 30));
 
         jpnExcluirFoto.setBackground(new java.awt.Color(56, 0, 56));
         jpnExcluirFoto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -469,7 +403,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-cancelar-20 (1).png"))); // NOI18N
         jpnExcluirFoto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        jpnDescricao.add(jpnExcluirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 1110, 30, 30));
+        jpnDescricao.add(jpnExcluirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 850, 30, 30));
 
         jpnPrenha.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -530,18 +464,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         });
         jpnDescricao.add(jrbFemea, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, 16));
 
-        jcbTemperamento.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jcbTemperamento.setForeground(new java.awt.Color(56, 0, 56));
-        jcbTemperamento.setMaximumRowCount(10);
-        jcbTemperamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medroso", "Agressivo", "Calmo", "Nervoso", "Estressável", "Tímido", "Ousado", "Corajoso", "Curioso" }));
-        jpnDescricao.add(jcbTemperamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 230, 23));
-
-        jcbBairroEncontrado.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jcbBairroEncontrado.setForeground(new java.awt.Color(56, 0, 56));
-        jcbBairroEncontrado.setMaximumRowCount(50);
-        jcbBairroEncontrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1° de Maio", "Alto Chalé", "Alto São Francisco", "Amália Rodrigues", "Bandeirantes", "Belvedere", "Campus Alto Paraopeba", "Carreiras", "Castiliano", "Centro", "Estiva", "Inconfidentes", "Itatiaia", "João Gote", "Luzia Augusta", "Nova Serrana", "Novo Horizonte", "Olaria", "Pioneiros", "Pires", "Siderurgia", "Soledade", "Tiradentes", "Zona Rural" }));
-        jpnDescricao.add(jcbBairroEncontrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 230, 23));
-
         jspDescricao.setViewportView(jpnDescricao);
 
         jpnPrincipal.add(jspDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 300, 370));
@@ -556,7 +478,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jcbEscolherTabelaActionPerformed(evt);
             }
         });
-        jpnPrincipal.add(jcbEscolherTabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 170, 30));
+        jpnPrincipal.add(jcbEscolherTabela, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 170, 30));
         jpnPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
         jpnAtualizar.setBackground(new java.awt.Color(56, 0, 56));
@@ -659,10 +581,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnPrincipal.add(jpnLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 80, 30));
 
-        jcbAnimais.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jcbAnimais.setMaximumRowCount(100);
-        jpnPrincipal.add(jcbAnimais, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 170, 30));
-
         jpnPaiLeft.add(jpnPrincipal, "jpnPrincipal");
 
         jpPesquisa.setBackground(new java.awt.Color(255, 255, 255));
@@ -721,10 +639,10 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel34.setText("Selecione o adotante:");
         jpnAdocao.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 12));
 
-        jlbNomeAnimal.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jlbNomeAnimal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbNomeAnimal.setText("-----------------------------------------");
-        jpnAdocao.add(jlbNomeAnimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 170, 30));
+        jlbNomeAnimalAdocao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jlbNomeAnimalAdocao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbNomeAnimalAdocao.setText("-----------------------------------------");
+        jpnAdocao.add(jlbNomeAnimalAdocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 170, 30));
 
         jLabel35.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(56, 0, 56));
@@ -1172,10 +1090,10 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         int i = jTable1.getSelectedRow();
         Animal animal_up = modeloTabela.getRowSelected(i);
         
-        //Animal animal_up = jcbAnimais.getSelectedItem();
-        
-        animal_up.setEspecie(jtfEspecie.getText());
+
+       
         animal_up.setNome(jtfNome.getText());
+        animal_up.setEspecie(jtfEspecie.getText());
         animal_up.setIdade(Integer.parseInt(jtfIdade.getText()));
         animal_up.setPorte(jtfPorte.getText());
         animal_up.setRaca(jtfRaca.getText());
@@ -1213,10 +1131,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         atualizarAnimal();
     }//GEN-LAST:event_jpnAtualizarMouseClicked
 
-    private void jtfEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEspecieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEspecieActionPerformed
-
     private void jpnPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnPesquisarMouseClicked
         CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnPesquisa");
@@ -1226,23 +1140,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         GerarPDF gerarPDF = new GerarPDF();
         gerarPDF.gerar();
     }//GEN-LAST:event_jpnListaMouseClicked
-
-    private void jrbFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemeaActionPerformed
-        jpnPrenha.setVisible(true);
-        jrbPrenhaSim.setSelected(false);
-        jrbPrenhaNao.setSelected(false);
-        
-    }//GEN-LAST:event_jrbFemeaActionPerformed
-
-    private void jrbMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMachoActionPerformed
-        jpnPrenha.setVisible(false);
-        jrbPrenhaSim.setSelected(false);
-        jrbPrenhaNao.setSelected(false);
-    }//GEN-LAST:event_jrbMachoActionPerformed
-
-    private void jtfPorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPorteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfPorteActionPerformed
 
     private void jcbEscolherTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEscolherTabelaActionPerformed
         switch (jcbEscolherTabela.getSelectedItem().toString()) {
@@ -1276,21 +1173,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             default:
                 break;
         }
-        preencherComboBoxAnimaisAdocao(jcbAnimais);
         System.out.println(jcbEscolherTabela.getSelectedItem().toString());
     }//GEN-LAST:event_jcbEscolherTabelaActionPerformed
-
-    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomeActionPerformed
-
-    private void jtfCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCorActionPerformed
-
-    private void jtfRacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfRacaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfRacaActionPerformed
 
     private void jtfEmailAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmailAdotanteActionPerformed
         // TODO add your handling code here:
@@ -1368,7 +1252,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         //////////////////////////////////////////////////////////////
         int row = jTable2.getSelectedRow();
         Animal animalAdocao =  modeloTabela.getRowSelected(row);
-        jlbNomeAnimal.setText(animalAdocao.getNome());
+        //jlbNomeAnimal.setText(animalAdocao.getNome());
         //////////////////////////////////////////////////////////////
         preencherLabelsDescricao(animalAdocao);
         
@@ -1428,6 +1312,39 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         Animal animalAdotado =  (Animal) modeloTabela2.getRowSelected(row);
         //////////////////////////////////////////////////////////////
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jrbFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemeaActionPerformed
+        jpnPrenha.setVisible(true);
+        jrbPrenhaSim.setSelected(false);
+        jrbPrenhaNao.setSelected(false);
+
+    }//GEN-LAST:event_jrbFemeaActionPerformed
+
+    private void jrbMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMachoActionPerformed
+        jpnPrenha.setVisible(false);
+        jrbPrenhaSim.setSelected(false);
+        jrbPrenhaNao.setSelected(false);
+    }//GEN-LAST:event_jrbMachoActionPerformed
+
+    private void jtfCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCorActionPerformed
+
+    private void jtfRacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfRacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfRacaActionPerformed
+
+    private void jtfPorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPorteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPorteActionPerformed
+
+    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomeActionPerformed
+
+    private void jtfEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfEspecieActionPerformed
     
     private void ColetarDadosAdocao(){
         LocalDate hoje = LocalDate.now();
@@ -1503,17 +1420,12 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1523,15 +1435,12 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel jblPrenha;
-    private javax.swing.JComboBox<String> jcbAnimais;
     private javax.swing.JComboBox<String> jcbAnimais1;
-    private javax.swing.JComboBox<String> jcbBairroEncontrado;
     private javax.swing.JComboBox<String> jcbEscolherTabela;
     private javax.swing.JComboBox<String> jcbSelecioneAdotante;
-    private javax.swing.JComboBox<String> jcbTemperamento;
     private javax.swing.JCheckBox jcheqIdade;
     private javax.swing.JCheckBox jcheqNome;
-    private javax.swing.JLabel jlbNomeAnimal;
+    private javax.swing.JLabel jlbNomeAnimalAdocao;
     private javax.swing.JPanel jpPesquisa;
     private javax.swing.JPanel jpnAddFoto;
     private javax.swing.JPanel jpnAddFotoAdotant;
@@ -1566,7 +1475,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JScrollPane jspAdotados;
     private javax.swing.JScrollPane jspDescricao;
     private javax.swing.JTextArea jtaDescricao;
-    private javax.swing.JTextField jtfAcidente;
     private javax.swing.JFormattedTextField jtfCPFAdotante;
     private javax.swing.JTextField jtfCor;
     private javax.swing.JFormattedTextField jtfDataAdotante;
@@ -1578,12 +1486,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JTextField jtfIdade;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeAdotante;
-    private javax.swing.JTextField jtfNomeDoContato;
     private javax.swing.JTextField jtfPorte;
     private javax.swing.JTextField jtfRaca;
     private javax.swing.JFormattedTextField jtfTelefoneAdotante;
-    private javax.swing.JFormattedTextField jtfTelefoneParaContato;
-    private javax.swing.JTextField jtfTemperamento;
     private javax.swing.JTextField jtxPesquisaIdade;
     private javax.swing.JTextField jtxPesquisaNome;
     private javax.swing.JLabel lblPesquisar;
