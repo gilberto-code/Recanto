@@ -13,8 +13,15 @@ public class User {
     private String nome;
     private String email;
     private String senha;
+    public User(){
+        
+    }
     public User(String nome, String email, String senha) {
         this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+     public User(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
@@ -42,5 +49,16 @@ public class User {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("User{nome=").append(nome);
+        sb.append(", email=").append(email);
+        sb.append(", senha=").append(senha);
+        sb.append('}');
+        return sb.toString();
+    }
+    
     
 }

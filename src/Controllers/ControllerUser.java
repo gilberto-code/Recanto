@@ -21,16 +21,15 @@ import javax.swing.JOptionPane;
  * @author Gilberto
  */
 public class ControllerUser {
+    
+    private Connection con = ConnectionDB.getConnection();
+    private PreparedStatement stmt = null;
+    private ResultSet rs = null;
      public boolean checkLogin(User user) throws Exception {
-
-        Connection con = ConnectionDB.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
         boolean check = false;
 
         try {
-
+            
             stmt = con.prepareStatement("SELECT * FROM tb_user WHERE email = ? and senha = ?");
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getSenha());
@@ -45,13 +44,19 @@ public class ControllerUser {
         } catch (SQLException ex) {
             Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.close();
+            
+//            if(stmt != null)
+//                stmt.close();
+//            if(rs != null)
+//                rs.close();
+//            if(con != null)
+//                con.close();
         }
         return check;
 
     }
     public void inserir(User user)throws Exception{
-      PreparedStatement stmt=ConnectionDB.
+      PreparedStatement stmt = ConnectionDB.
               getConnection().prepareStatement(("insert into tb_user(nome,email,senha)"
                   +"VALUES(?,?,?);"));
       stmt.setString(1, user.getNome());

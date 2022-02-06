@@ -6,8 +6,6 @@
 package Screens;
 
 import Controllers.ControllerAnimal;
-import Controllers.ControllerUser;
-import Screens.TelaDeCadastroDeAnimais;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -19,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -39,12 +36,11 @@ public class TelaMenu extends javax.swing.JFrame {
     String path;
     ArrayList<JPanel> listPanels = new ArrayList<JPanel> ();
     
-    
 
     ControllerAnimal cAnimal = new ControllerAnimal();
     
     
-    public TelaMenu() throws Exception {
+    public TelaMenu() throws Exception { 
         card = new CardLayout();
         panelCadastro = new TelaDeCadastroDeAnimais();
         panelTabel = new TelaDeCadastroDeAnimais();
@@ -70,15 +66,9 @@ public class TelaMenu extends javax.swing.JFrame {
         resetColor(CadastrarAdm);
         
         jlbVoltar.setVisible(false);
-        //cbnaoprenha.setVisible(false);
-        //cbprenha.setVisible(false);
-        //jlbdoenca.setVisible(false);
-        //jtxdoenca.setVisible(false);
         
         jspScreens.setVisible(false);
         jspScreens.getVerticalScrollBar().setUnitIncrement(10);
-        
-        
 
     }
     
@@ -91,12 +81,10 @@ public class TelaMenu extends javax.swing.JFrame {
        
     } 
     
-
     public void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("px.png")));
     }
 
-    
 
     public static void visiblePanel(JPanel j1) {
         j1.setVisible(true);
@@ -104,8 +92,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
     public void cleanAll() {
         for(int cont = 0; cont<listPanels.size();cont++)
-            listPanels.get(cont).setVisible(false);
-        
+            listPanels.get(cont).setVisible(false); 
     }
 
     @SuppressWarnings("unchecked")
