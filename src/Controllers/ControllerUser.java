@@ -29,7 +29,6 @@ public class ControllerUser {
         boolean check = false;
 
         try {
-            
             stmt = con.prepareStatement("SELECT * FROM tb_user WHERE email = ? and senha = ?");
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getSenha());

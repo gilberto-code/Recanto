@@ -12,13 +12,11 @@ import Services.Convert_Image;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
-import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -27,14 +25,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.apache.commons.io.FileUtils;
 
 /**
  *
- * @author aluno
+ * @author Gilberto
  */
 public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
 

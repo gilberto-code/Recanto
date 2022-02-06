@@ -270,11 +270,12 @@ public class TelaLogin extends javax.swing.JFrame {
             
             if(b){
                 menu.setVisible(true);
-            
                 this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Login Falhou");
             }
-            JOptionPane.showMessageDialog(rootPane, "Login Falhou");
+            
 
         } catch (Exception ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);

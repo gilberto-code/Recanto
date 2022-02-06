@@ -1,5 +1,7 @@
 
 import DataAcess.ConnectionDB;
+import Screens.TelaLogin;
+import Screens.TelaMenu;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,8 +13,11 @@ import DataAcess.ConnectionDB;
  * @author Gilberto
  */
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello Word");
-        ConnectionDB.getConnection();
+    public static void main(String[] args) throws Exception {
+        //TelaLogin telaLogin = new TelaLogin(); 
+        //telaLogin.setVisible(true);
+        
+        TelaMenu telaMenu = new TelaMenu(); 
+        telaMenu.setVisible(true);
     }
 }
