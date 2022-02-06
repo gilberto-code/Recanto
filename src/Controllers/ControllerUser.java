@@ -71,7 +71,6 @@ public class ControllerUser {
                 JOptionPane.showMessageDialog(null, "Inserção falhou, tente por favor novamente");
             }
         } catch (Exception e) {
-             System.out.println(e.getLocalizedMessage());
              if(e.getLocalizedMessage().startsWith("Duplicate entry")){
                 JOptionPane.showMessageDialog(null, "Usuário já cadastrado");
              }else{

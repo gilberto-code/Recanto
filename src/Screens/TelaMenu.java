@@ -143,11 +143,15 @@ public class TelaMenu extends javax.swing.JFrame {
         About = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
         User = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -493,11 +497,6 @@ public class TelaMenu extends javax.swing.JFrame {
         jLabel34.setText("Sobre");
         About.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 70, 40));
 
-        jLabel35.setBackground(new java.awt.Color(102, 204, 0));
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(56, 0, 56));
-        About.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 500, 220));
-
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconRecantoDosAnimaisPng.png"))); // NOI18N
         About.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 100));
 
@@ -506,9 +505,34 @@ public class TelaMenu extends javax.swing.JFrame {
 
         jLabel41.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel41.setText("-Recanto dos Animais");
-        About.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+        jLabel41.setText("João Lucas Solano");
+        About.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
         About.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, 40));
+
+        jLabel42.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel42.setText("-Recanto dos Animais");
+        About.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+
+        jLabel43.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel43.setText("Agradecimentos especiais para a Ong Recanto dos Animais ");
+        About.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 510, 60));
+
+        jLabel44.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel44.setText("pela oportunidade, somos muito gratos a todos vocês.");
+        About.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        jLabel45.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel45.setText("Créditos de Produção do Software:");
+        About.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jLabel46.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel46.setText("Gilberto Filho");
+        About.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
         jpScreen.add(About, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -715,8 +739,8 @@ public class TelaMenu extends javax.swing.JFrame {
             
     private void ListarAnimaisAdotadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMouseClicked
         try {
-            panelTabel = new TelaDeCadastroDeAnimais();
-            //panelTabel = new TelaTabelaDeAnimais();
+            //panelTabel = new TelaDeCadastroDeAnimais();
+            panelTabel = new TelaTabelaDeAnimais();
         } catch (Exception ex) {
             Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -868,13 +892,17 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;

@@ -155,10 +155,10 @@ public class ControllerAnimal {
 
     public ArrayList<Animal> getList() throws Exception {
         Statement st = ConnectionDB.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("select nome ,especie,idade ,raca ,cor ,porte ,sexo ,descricao ,\n" +
-"                + temperamento ,bairroEncontrado ,nomeContato,telefoneContato ,dataDeCadastro ,qualDoenca,\n" +
-"                + qualAcidente , doente ,acidentado ,castrado ,vacinado \n" +
-"                ,prenha,imagem ,tb.idAnimal from tbl_animais tb left join tbl_imagens img on tb.idAnimal = img.idAnimal;");
+        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
+            " doente ,castrado ,vacinado,imagem ,\n" +
+            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
         //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
         return carregarLista(rs);
     }
@@ -168,51 +168,36 @@ public class ControllerAnimal {
         Animal animal;
         animal = new Animal();
         while (rs.next()) {
-//            animal = new Animal(
-//                    //nome
-//                    rs.getString(1),
-//                    //especie
-//                    rs.getString(2),
-//                    //idade
-//                    rs.getInt(3),
-//                    //raca
-//                    rs.getString(4),
-//                    //cor
-//                    rs.getString(5),
-//                    //porte
-//                    rs.getString(6),
-//                    //sexo
-//                    rs.getString(7),
-//                    //descricao
-//                    rs.getString(8),
-//                    //temperamento
-//                    rs.getString(9),
-//                    //bairroEncontrado
-//                    rs.getString(10),
-//                    //nomecontato
-//                    rs.getString(11),
-//                    //telefone
-//                    rs.getString(12),
-//                    //datadecadastro
-//                    rs.getDate(13),
-//                    //qualDoenca
-//                    rs.getString(14),
-//                    //qualAcidente
-//                    rs.getString(15),
-//                    //doente
-//                    rs.getBoolean(16),
-//                    //acidentado
-//                    rs.getBoolean(17),
-//                    //castrado
-//                    rs.getBoolean(18),
-//                    //vacinado
-//                    rs.getBoolean(19),
-//                    //prenha
-//                    rs.getBoolean(20),
-//                    //id
-//                    rs.getString(21),
-//                    rs.getInt(22)
-//            );
+            animal = new Animal(
+                    //nome
+                    rs.getString(1),
+                    //especie
+                    rs.getInt(2),
+                    //idade
+                    rs.getString(3),
+                    //raca
+                    rs.getString(4),
+                    //cor
+                    rs.getString(5),
+                    //porte
+                    rs.getString(6),
+                    //sexo
+                    rs.getString(7),
+                    //descricao
+                    rs.getString(8),
+                    //date
+                    rs.getDate(9),
+                    //qualDoenca
+                    rs.getString(10),
+                    //doente
+                    rs.getBoolean(11),
+                    //castrado
+                    rs.getBoolean(12),
+                    //vacinado
+                    rs.getBoolean(13),
+                    //imaagem
+                    rs.getString(14)
+            );
             lista.add(animal);
         }
         rs.close();
