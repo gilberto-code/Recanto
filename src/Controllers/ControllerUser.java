@@ -63,12 +63,22 @@ public class ControllerUser {
       stmt.setString(3, user.getSenha());
 
       
-       int row = stmt.executeUpdate();
-        if (row == 0) {
+        try {
+            int row = stmt.executeUpdate();
+            if (row == 0) {
             throw new Exception("Insercao não realizada");
-        } else {
-            JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Inserção falhou, tente por favor novamente");
+            }
+        } catch (Exception e) {
+             System.out.println(e.getLocalizedMessage());
+             if(e.getLocalizedMessage().startsWith("Duplicate entry")){
+                JOptionPane.showMessageDialog(null, "Usuário já cadastrado");
+             }else{
+                JOptionPane.showMessageDialog(null, "Cadastro Realizado");
+             }
         }
+        
         
         
     }

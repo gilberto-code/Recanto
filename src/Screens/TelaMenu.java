@@ -6,9 +6,12 @@
 package Screens;
 
 import Controllers.ControllerAnimal;
+import Controllers.ControllerUser;
+import Objects.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -744,13 +748,40 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jlbVoltarMouseClicked
 
     private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
-//       DAOUsuario DU=new DAOUsuario();
-//        try{
-//            DU.inserir(cxEmail.getText(),cxNome.getText(),pswSenha1.getText(),pswConfSenha1.getText());
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, "e-mail já existente!");
-//        }
+        if(pswSenha1.getText().equals(pswConfSenha1.getText())){
+           User u = new User(cxEmail.getText(),cxNome.getText(),pswSenha1.getText());
+            try {
+                
+                
+                new Thread(new Runnable() {
+                public void run() {
+                    JFrame frame;
+                    frame = new TelaLoading();
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+                    try {
+                        Thread.sleep(1000);
+                        new ControllerUser().inserir(u);
+                    } catch (Exception ex) {
+                        Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    frame.setVisible(false);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                }
+                }).start();
+                
+                
+                
+            } catch (Exception ex) {
+                Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }else{
+             JOptionPane.showMessageDialog(this, "As senhas não são iguais");
+        }
     }//GEN-LAST:event_jLabel25MousePressed
     
     
