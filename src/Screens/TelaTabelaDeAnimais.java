@@ -6,10 +6,10 @@
  */
 package Screens;
 
-import Processos.*;
 import Objects.*;
 import Controllers.*;
 import Services.CellRenderer;
+import Services.Controll_Images;
 import Services.GerarPDF;
 import Services.MyTableModelAdocao;
 import java.awt.CardLayout;
@@ -1203,7 +1203,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             ImageIcon imagem = new ImageIcon(ultimoPacote);
-            Coleta_Imagem redimencionar = new Coleta_Imagem();
+            Controll_Images redimencionar = new Controll_Images();
             imagem = redimencionar.redimensionar_imagem(imagem);
             fotinha.setIcon(imagem);
             ImagemIconAnimal = imagem;

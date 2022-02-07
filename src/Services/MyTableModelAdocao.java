@@ -96,7 +96,7 @@ public class MyTableModelAdocao extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
 
         ImageIcon image;
-        image = Services.ConverterImagens.montarImagem(this.animals.get(rowIndex).getImagem());
+        image = Services.Controll_Images.montarImagem(this.animals.get(rowIndex).getImagem());
         switch(columnIndex){
             case 0: return image;
             case 1: return this.animals.get(rowIndex).getNome();

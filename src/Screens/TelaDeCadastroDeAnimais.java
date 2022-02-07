@@ -7,8 +7,7 @@ package Screens;
 
 import Objects.Animal;
 import Controllers.ControllerAnimal;
-import Services.Convert_Image;
-
+import Services.Controll_Images;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -1277,7 +1276,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         System.out.println();
         java.sql.Date dat = java.sql.Date.valueOf(date);
         dataDeCadastro = dat;
-        imagemAnimal = Convert_Image.ImagemParaString(ImagemIconAnimal);
+        imagemAnimal = Controll_Images.ImagemParaString(ImagemIconAnimal);
         //System.out.println(imagemAnimal);
         
         vacinado = jrVacinadoSim.isSelected();
