@@ -9,6 +9,7 @@ package Screens;
 import Processos.*;
 import Objects.*;
 import Controllers.*;
+import Services.CellRenderer;
 import Services.GerarPDF;
 import Services.MyTableModelAdocao;
 import java.awt.CardLayout;
@@ -25,8 +26,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,9 +55,12 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         //modeloTabela2 = new MyTableModelAdotados();
         //jTable1.setModel(modeloTabela2);
         
+        
         jTable2.setModel(modeloTabela);
+        jTable2.setDefaultRenderer(Object.class, new CellRenderer());
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
         jTable2.setRowHeight(150);
+              
         //jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
         //jTable1.setRowHeight(150);
         

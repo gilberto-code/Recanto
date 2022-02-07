@@ -101,7 +101,7 @@ public class MyTableModelAdocao extends AbstractTableModel {
             case 0: return image;
             case 1: return this.animals.get(rowIndex).getNome();
             case 2: return this.animals.get(rowIndex).getSexo();
-            case 3: return this.animals.get(rowIndex).getIdade();
+            case 3: return this.animals.get(rowIndex).getIdade()+"   ";
             case 4: return this.animals.get(rowIndex).getEspecie();
         }
         return null;
