@@ -33,7 +33,7 @@ public class ConverterImagens {
                 int larg = oi.getIconWidth();
                 int alt = oi.getIconHeight();
                 ImageIcon image = new ImageIcon(oi.getImage()
-                        .getScaledInstance(larg, alt, Image.SCALE_DEFAULT));
+                        .getScaledInstance(150, 150, Image.SCALE_FAST));
                 return image;
             }
 

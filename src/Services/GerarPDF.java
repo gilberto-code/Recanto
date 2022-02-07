@@ -13,6 +13,7 @@ import Objects.Animal;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,9 +26,9 @@ import javax.management.Query;
 
 public class GerarPDF {
     
-    public void gerar (){
+    public void gerar () throws Exception{
         int numcolunas = 10;
-        ArrayList<Animal> lis = BindTable();
+        ArrayList<Animal> lis = getList();
         Document doc = new Document();
         String arquivoPdf = "PDF Animais";
         try {
@@ -99,9 +100,10 @@ public class GerarPDF {
 
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select nome ,especie,idade ,raca ,cor ,porte ,sexo ,descricao ,"
-                + "temperamento ,bairroEncontrado ,nomeContato,telefoneContato ,dataDeCadastro ,qualDoenca,"
-                + "qualAcidente , doente ,acidentado ,castrado ,vacinado ,prenha,idAnimal from tbl_animais;");
+            rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
+            " doente ,castrado ,vacinado,imagem ,\n" +
+            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
 
             Animal animal;
             //animal = new Animal(nome, );
@@ -150,6 +152,56 @@ public class GerarPDF {
 
         ConnectionDB fdc = new ConnectionDB();
         return ConnectionDB.getConnection();
+    }
+    public ArrayList<Animal> getList() throws Exception {
+        Statement st = ConnectionDB.getConnection().createStatement();
+        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
+            " doente ,castrado ,vacinado,imagem ,\n" +
+            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
+        //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
+        return carregarLista(rs);
+    }
+    private ArrayList<Animal> carregarLista(ResultSet rs) throws SQLException, IOException {
+        ArrayList<Animal> lista = new ArrayList<>();
+        Animal animal;
+        while (rs.next()) {
+            animal = new Animal(
+                    //nome
+                    rs.getString(1),
+                    //especie
+                    rs.getInt(2),
+                    //idade
+                    rs.getString(3),
+                    //raca
+                    rs.getString(4),
+                    //cor
+                    rs.getString(5),
+                    //porte
+                    rs.getString(6),
+                    //sexo
+                    rs.getString(7),
+                    //descricao
+                    rs.getString(8),
+                    //date
+                    rs.getDate(9),
+                    //qualDoenca
+                    rs.getString(10),
+                    //doente
+                    rs.getBoolean(11),
+                    //castrado
+                    rs.getBoolean(12),
+                    //vacinado
+                    rs.getBoolean(13),
+                    //imaagem
+                    rs.getString(14),
+                    //id
+                    rs.getInt(15)
+            );
+            lista.add(animal);
+        }
+        rs.close();
+        return lista;
     }
 }
 

@@ -11,7 +11,6 @@ import Objects.*;
 import Controllers.*;
 import Services.GerarPDF;
 import Services.MyTableModelAdocao;
-import Services.MyTableModelAdotados;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.File;
@@ -38,7 +37,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private CardLayout cardPaiTabela; 
     private CardLayout cardPaiLeft; 
     private MyTableModelAdocao modeloTabela;
-    private MyTableModelAdotados modeloTabela2;
+    
     //private ArrayList<ImageIcon> imagens = new ArrayList<ImageIcon>();
     int posicaoImagem = -1;
     ControllerAnimal controllerAnimal = new ControllerAnimal();
@@ -50,14 +49,14 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     public TelaTabelaDeAnimais() throws Exception {
         initComponents();
         modeloTabela = new MyTableModelAdocao();
-        modeloTabela2 = new MyTableModelAdotados();
-        jTable1.setModel(modeloTabela2);
-        jTable2.setModel(modeloTabela);
+        //modeloTabela2 = new MyTableModelAdotados();
+        //jTable1.setModel(modeloTabela2);
         
+        jTable2.setModel(modeloTabela);
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(150);
         jTable2.setRowHeight(150);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-        jTable1.setRowHeight(150);
+        //jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+        //jTable1.setRowHeight(150);
         
         for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
             if("Windows".equals(info.getName())){
@@ -190,8 +189,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jpnPai = new javax.swing.JPanel();
-        jspAdotados = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jspAdocao = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -960,23 +957,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnPai.setLayout(new java.awt.CardLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jspAdotados.setViewportView(jTable1);
-
-        jpnPai.add(jspAdotados, "TelaAdotados");
-
         jTable2.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jTable2.setForeground(new java.awt.Color(56, 0, 56));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -1035,7 +1015,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
         if(jcheqNome.isSelected() || jcheqIdade.isSelected()){
             modeloTabela = new MyTableModelAdocao(animais);
-            jTable1.setModel(modeloTabela);
+            //jTable1.setModel(modeloTabela);
         }else{
             JOptionPane.showMessageDialog(null, "Não existem campos selecionados");
         }
@@ -1064,14 +1044,14 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.modeloTabela = new MyTableModelAdocao();
-            jTable1.setModel(modeloTabela);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.setRowHeight(150);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.modeloTabela = new MyTableModelAdocao();
+//            jTable1.setModel(modeloTabela);
+//            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+//            jTable1.setRowHeight(150);
+//        } catch (Exception ex) {
+//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_jpnExcluirMouseClicked
 
@@ -1118,14 +1098,14 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            this.modeloTabela = new MyTableModelAdocao();
-            jTable1.setModel(modeloTabela);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.setRowHeight(150);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.modeloTabela = new MyTableModelAdocao();
+//            jTable1.setModel(modeloTabela);
+//            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+//            jTable1.setRowHeight(150);
+//        } catch (Exception ex) {
+//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
     private void jpnAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAtualizarMouseClicked
@@ -1139,7 +1119,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
     private void jpnListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnListaMouseClicked
         GerarPDF gerarPDF = new GerarPDF();
-        gerarPDF.gerar();
+        try {
+            gerarPDF.gerar();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jpnListaMouseClicked
 
     private void jcbEscolherTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEscolherTabelaActionPerformed
@@ -1164,11 +1148,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     cl.show(jpnPai, "TelaAdotados");
                     
                     try {
-                        modeloTabela2 = new MyTableModelAdotados();
+                        modeloTabela = new MyTableModelAdocao();
                     } catch (Exception ex) {
                         Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    jTable2.setModel(modeloTabela2);
+                    jTable2.setModel(modeloTabela);
                     break;
                 }
             default:
@@ -1307,13 +1291,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 //        }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        //////////////////////////////////////////////////////////////
-        int row = jTable1.getSelectedRow();
-        Animal animalAdotado =  (Animal) modeloTabela2.getRowSelected(row);
-        //////////////////////////////////////////////////////////////
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jrbFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemeaActionPerformed
         jpnPrenha.setVisible(true);
         jrbPrenhaSim.setSelected(false);
@@ -1432,7 +1409,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel jblPrenha;
@@ -1473,7 +1449,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JRadioButton jrbVacinadoNao;
     private javax.swing.JRadioButton jrbVacinadoSim;
     private javax.swing.JScrollPane jspAdocao;
-    private javax.swing.JScrollPane jspAdotados;
     private javax.swing.JScrollPane jspDescricao;
     private javax.swing.JTextArea jtaDescricao;
     private javax.swing.JFormattedTextField jtfCPFAdotante;

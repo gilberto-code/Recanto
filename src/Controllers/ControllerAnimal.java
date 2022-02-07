@@ -78,7 +78,7 @@ public class ControllerAnimal {
             if (row == 0) {
                 throw new Exception("Insercao não realizada");
             }else {
-                JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
+                //JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
             }
     }
     
