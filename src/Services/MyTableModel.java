@@ -16,21 +16,22 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Daniela
  */
-public class MyTableModelAdocao extends AbstractTableModel {
+public class MyTableModel extends AbstractTableModel {
+    private boolean isAdotado;
     private static final String[] columnNames = 
                     {"Foto", "Nome", "Sexo", "Idade", "Espécie"};
     private ArrayList<Animal> animals;
     private ControllerAnimal controllerAnimal;
     
     //O construtor já recebe os dados do ArrayList para exibição 
-    public MyTableModelAdocao() throws Exception{
+    public MyTableModel(boolean isAdotado) throws Exception{
         this.controllerAnimal = new ControllerAnimal();
-        this.animals = this.controllerAnimal.getList();
+        this.animals = this.controllerAnimal.getList(isAdotado);
         fireTableRowsInserted(0, this.animals.size()-1);//Força a chamada de getValueAt() para inserir todas as células na JTable
     }
     
     //O construtor já recebe os dados do ArrayList para exibição 
-    public MyTableModelAdocao (ArrayList<Animal> a){
+    public MyTableModel (ArrayList<Animal> a){
         this.animals = a;
         fireTableRowsInserted(0, a.size()-1);  //Força a chamada de getValueAt() para inserir todas as células na JTable
     }
@@ -44,7 +45,7 @@ public class MyTableModelAdocao extends AbstractTableModel {
     //Acrescentado para adicionar uma linha ao JTableModel
     public void addRow(Animal d) throws Exception{
         this.controllerAnimal.insert(d);
-        this.animals = this.controllerAnimal.getList();
+        this.animals = this.controllerAnimal.getList(d.isAdotado());
         fireTableRowsInserted(0, this.animals.size()-1); //Força a chamada de getValueAt() para inserir mais uma linha ao final da JTable
         setValueAt(d, this.animals.size()-1, 0);
     }

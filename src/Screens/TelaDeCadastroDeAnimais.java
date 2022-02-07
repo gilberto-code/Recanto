@@ -1287,10 +1287,12 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
 
         //idade = jSlider1.getValue();
         idade = 0;
+        boolean adotado = false;
         Animal animal = new Animal(nome, idade, especie, raca, 
                 cor, porte, sexo,
                 descricao,null, 
-                qualDoenca, doente, castrado, vacinado, imagemAnimal);
+                qualDoenca, doente, castrado, vacinado,
+                adotado,imagemAnimal);
         return animal;
     }
 

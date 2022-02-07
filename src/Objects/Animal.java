@@ -22,9 +22,11 @@ public class Animal{
     protected boolean doente;
     protected boolean castrado;
     protected boolean vacinado;
+    protected boolean adotado;
     protected int id;
     protected ImageIcon ImagemIcon;
     protected String imagem;
+    
     
     
         
@@ -50,7 +52,7 @@ public class Animal{
     public Animal(String nome, int idade, String especie, String raca,
             String cor, String porte, String sexo, String descricao, 
             Date dataDeCadastro, String qualDoenca, boolean doente,
-            boolean castrado, boolean vacinado, String imagem) {
+            boolean castrado, boolean vacinado, boolean adotado, String imagem) {
         this.nome = nome;
         this.idade = idade;
         this.especie = especie;
@@ -64,7 +66,9 @@ public class Animal{
         this.doente = doente;
         this.castrado = castrado;
         this.vacinado = vacinado;
+        this.adotado = adotado;
         this.imagem = imagem;
+        
     }
 
     public Animal(String nome, int idade, String especie, String raca,
@@ -193,6 +197,16 @@ public class Animal{
     public void setVacinado(boolean vacinado) {
         this.vacinado = vacinado;
     }
+
+    public boolean isAdotado() {
+        return adotado;
+    }
+
+    public void setAdotado(boolean adotado) {
+        this.adotado = adotado;
+    }
+
+   
 
 
     public int getId() {

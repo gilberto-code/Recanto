@@ -161,12 +161,33 @@ public class ControllerAnimal {
         return carregarLista(rs);
     }
 
-    public ArrayList<Animal> getList() throws Exception {
-        Statement st = ConnectionDB.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+//    public ArrayList<Animal> getList() throws Exception {
+//        Statement st = ConnectionDB.getConnection().createStatement();
+//        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+//            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
+//            " doente ,castrado ,vacinado,imagem ,\n" +
+//            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
+//        //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
+//        return carregarLista(rs);
+//    }
+    public ArrayList<Animal> getList(boolean isAdotado) throws Exception {
+        PreparedStatement ps
+                = ConnectionDB.getConnection().prepareStatement("select nome ,idade,especie,raca "
+                        + ",cor ,porte ,\n" +
             "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
             " doente ,castrado ,vacinado,imagem ,\n" +
-            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
+            "tb.idAnimal from tb_animais tb left join "
+                        + "tb_imagens img on tb.idAnimal = img.idAnimal "
+                        + "WHERE adotado = ?;");
+        ps.setBoolean(1, isAdotado);
+        ResultSet rs = ps.executeQuery();
+        
+        
+//        Statement st = ConnectionDB.getConnection().createStatement();
+//        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
+//            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
+//            " doente ,castrado ,vacinado,imagem ,\n" +
+//            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
         //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
         return carregarLista(rs);
     }
