@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -64,9 +66,6 @@ public class ControllerAnimal {
 
             stmt.close();
         }
-        
-        
-
     }
 
     public void insertImage(String imagem, int id) throws Exception {
@@ -84,15 +83,16 @@ public class ControllerAnimal {
     }
     
     public void delete(Animal animal) throws Exception {
-         PreparedStatement ps
+//         PreparedStatement ps
+//                = ConnectionDB.getConnection().prepareStatement(
+//                        "delete from tb_imagens WHERE idAnimal = ?");
+//        ps.setInt(1, animal.getId());
+        System.out.println(animal);
+        PreparedStatement ps
                 = ConnectionDB.getConnection().prepareStatement(
-                        "delete from tb_imagens WHERE idAnimal = ?");
-        ps.setInt(1, animal.getId());
-        int row = ps.executeUpdate();
-        ps = ConnectionDB.getConnection().prepareStatement(
                        "delete from tb_animais WHERE idAnimal = ?");
             ps.setInt(1, animal.getId());
-            row = ps.executeUpdate();
+            int row = ps.executeUpdate();
         if (row == 0) {
            JOptionPane.showMessageDialog(null, "Exclusão Falhou");
         }
@@ -100,31 +100,36 @@ public class ControllerAnimal {
        
     }
 
-    public void update(Animal animal) throws Exception {
-        PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement(
-                        "UPDATE tbl_animais SET  especie = ?, nome = ?, idade = ?,raca = ?, cor = ?,"
-                                +"porte = ?, descricao = ?, temperamento = ?,bairroEncontrado = ?, nomeContato = ?,"
-                                +"telefoneContato = ?,dataDeCadastro = ?, qualDoenca = ?, qualAcidente = ?, doente  = ?,"
-                                +"acidentado = ?, castrado = ?, vacinado = ?,prenha = ? WHERE idAnimal  = ?");
-        ps.setString(1, animal.getEspecie());
-        ps.setString(2, animal.getNome());
-        ps.setInt(3, animal.getIdade());
-        ps.setString(4, animal.getRaca());
-        ps.setString(5, animal.getCor());
-        ps.setString(6, animal.getPorte());
-        ps.setString(7, animal.getDescricao());
-        ps.setDate(12, animal.getDataDeCadastro());
-        ps.setString(13, animal.getQualDoenca());
-        ps.setBoolean(15, animal.isDoente());
-        ps.setBoolean(17, animal.isCastrado());
-        ps.setBoolean(18, animal.isVacinado());
-//        ps.setBoolean(19, animal.isPrenha());
-        ps.setInt(20, animal.getId());
+    public void update(Animal animal){
+        try {
+            PreparedStatement ps
+                    = ConnectionDB.getConnection().prepareStatement(
+                            "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, cor = ?,porte = ?, "
+                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, doente  = ?, castrado = ?, vacinado = ?, sexo = ? WHERE idAnimal = ?");
 
-        int row = ps.executeUpdate();
-        if (row == 0) {
-            throw new Exception("Atualização não realizada");
+            ps.setString(1, animal.getEspecie());
+            ps.setString(2, animal.getNome());
+            ps.setInt(3, animal.getIdade());
+            ps.setString(4, animal.getRaca());
+            ps.setString(5, animal.getCor());
+            ps.setString(6, animal.getPorte());
+            ps.setString(7, animal.getDescricao());
+            ps.setDate(8, animal.getDataDeCadastro());
+            ps.setString(9, animal.getQualDoenca());
+            ps.setBoolean(10, animal.isDoente());
+            ps.setBoolean(11, animal.isCastrado());
+            ps.setBoolean(12, animal.isVacinado());
+            ps.setString(13, animal.getSexo());
+            ps.setInt(14, animal.getId());
+            
+            //System.out.println("1 - "+ ps.getConnection().());
+            int row = ps.executeUpdate();
+            if (row == 0) {
+                //throw new Exception("Atualização não realizada");
+                JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -195,7 +200,9 @@ public class ControllerAnimal {
                     //vacinado
                     rs.getBoolean(13),
                     //imaagem
-                    rs.getString(14)
+                    rs.getString(14),
+                    //id
+                    rs.getInt(15)
             );
             lista.add(animal);
         }

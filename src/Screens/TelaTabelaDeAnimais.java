@@ -190,10 +190,10 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jpnPai = new javax.swing.JPanel();
-        jspAdocao = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jspAdotados = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jspAdocao = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -960,6 +960,23 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnPai.setLayout(new java.awt.CardLayout());
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jspAdotados.setViewportView(jTable1);
+
+        jpnPai.add(jspAdotados, "TelaAdotados");
+
         jTable2.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jTable2.setForeground(new java.awt.Color(56, 0, 56));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -982,23 +999,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jspAdocao.setViewportView(jTable2);
 
         jpnPai.add(jspAdocao, "TabelaAdocao");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jspAdotados.setViewportView(jTable1);
-
-        jpnPai.add(jspAdotados, "TelaAdotados");
 
         jpnBackground.add(jpnPai, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 700, 580));
 
@@ -1085,13 +1085,13 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
         preencherComboBoxAnimaisAdocao(jcbAnimais1);
     }//GEN-LAST:event_jpnAdotarMouseClicked
-    
+    public int rowSelect;
     private void atualizarAnimal(){
-        int i = jTable1.getSelectedRow();
-        Animal animal_up = modeloTabela.getRowSelected(i);
+        System.out.println(rowSelect);
+        Animal animal_up = modeloTabela.getRowSelected(rowSelect);
+        //Animal animal_up = new Animal();
         
-
-       
+        
         animal_up.setNome(jtfNome.getText());
         animal_up.setEspecie(jtfEspecie.getText());
         animal_up.setIdade(Integer.parseInt(jtfIdade.getText()));
@@ -1113,6 +1113,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         
 
         try {
+            System.out.println(animal_up);
             controllerAnimal.update(animal_up);
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
@@ -1250,8 +1251,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         //////////////////////////////////////////////////////////////
-        int row = jTable2.getSelectedRow();
-        Animal animalAdocao =  modeloTabela.getRowSelected(row);
+        rowSelect = jTable2.getSelectedRow();
+        Animal animalAdocao =  modeloTabela.getRowSelected(rowSelect);
         //jlbNomeAnimal.setText(animalAdocao.getNome());
         //////////////////////////////////////////////////////////////
         preencherLabelsDescricao(animalAdocao);
@@ -1259,6 +1260,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable2MouseClicked
     
     private void preencherLabelsDescricao(Animal animalAdocao){
+        System.out.println(animalAdocao);
         jtfEspecie.setText(animalAdocao.getEspecie());
         jtfNome.setText(animalAdocao.getNome());
         jtfIdade.setText(String.valueOf(animalAdocao.getIdade()));
@@ -1271,7 +1273,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }else if(animalAdocao.getSexo().equals("femea")){
             jrbFemea.setSelected(true);
             jpnPrenha.setVisible(true);
-            
         }
         if(animalAdocao.isVacinado())
             jrbVacinadoSim.setSelected(true);

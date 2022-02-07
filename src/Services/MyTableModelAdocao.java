@@ -71,7 +71,7 @@ public class MyTableModelAdocao extends AbstractTableModel {
        } 
     }
     
-    //Acrescentado para retornar o objeto Disciplina associado à linha selecionada
+    //Acrescentado para retornar o objeto associado à linha selecionada
     public Animal getRowSelected(int index){
        if (index != -1){
            return this.animals.get(index);
