@@ -90,7 +90,10 @@ public class ControllerAnimal {
         System.out.println(animal);
         PreparedStatement ps
                 = ConnectionDB.getConnection().prepareStatement(
-                       "delete from tb_animais WHERE idAnimal = ?");
+                       "DELETE tb_imagens,tb_animais  FROM tb_imagens\n" +
+                        "LEFT JOIN tb_animais ON  tb_imagens.idAnimal= tb_animais.idAnimal \n" +
+                        "WHERE tb_animais.idAnimal = tb_imagens.idAnimal \n" +
+                        "AND tb_imagens.idAnimal =?;");
             ps.setInt(1, animal.getId());
             int row = ps.executeUpdate();
         if (row == 0) {
@@ -210,19 +213,4 @@ public class ControllerAnimal {
         return lista;
     }
 
-    public ImageIcon montarImagem(String imgString) {
-
-        if (imgString != null) {
-            //byte[] montar = new sun.misc.BASE64Decoder().decodeBuffer(imgString);
-            byte[] montar = null;
-            ImageIcon oi = new ImageIcon(montar);
-            int larg = oi.getIconWidth();
-            int alt = oi.getIconHeight();
-            ImageIcon image = new ImageIcon(oi.getImage()
-                    .getScaledInstance(larg, alt, Image.SCALE_DEFAULT));
-            return image;
-        }
-        return null;
-    }
-    
 }

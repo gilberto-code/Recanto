@@ -1057,8 +1057,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     
     private void jpnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirMouseClicked
         // TODO add your handling code here:
-        int i = jTable1.getSelectedRow();
-        Animal animal = modeloTabela.getRowSelected(i);
+        //int i = jTable1.getSelectedRow();
+        Animal animal = modeloTabela.getRowSelected(rowSelect);
         try {
             controllerAnimal.delete(animal);
         } catch (Exception ex) {

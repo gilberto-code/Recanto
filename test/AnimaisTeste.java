@@ -20,8 +20,10 @@ import org.apache.commons.io.FileUtils;
  */
 public class AnimaisTeste {
     public static void main(String[] args) throws Exception {
-        criarAnimal();
-        //deleteAnimal();
+//        criarAnimal();
+//        criarAnimal();
+//        criarAnimal();
+        deleteAnimal();
         
         
 //        if(checkLogin() != true){
@@ -31,7 +33,7 @@ public class AnimaisTeste {
 //        }
     }
     public static void criarAnimal() throws Exception{
-        String filePath = "C:/Users/Gilberto/Desktop/a.jpg";
+        String filePath = "C:/Users/Gilberto/Desktop/_MG_5330.jpg";
         byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
         String encodedString = Base64.getEncoder().encodeToString(fileContent);
         Animal animal = new Animal("nome", 1, "especie", "raca", 
@@ -48,7 +50,7 @@ public class AnimaisTeste {
                 "cor", "porte", "sexo",
                 "descricao",null, 
                 "qualDoenca", true, true, true, "imagem");
-        animal.setId(5);
+        animal.setId(37);
         ControllerAnimal controllerAnimal = new ControllerAnimal();
         controllerAnimal.delete(animal);
     }
