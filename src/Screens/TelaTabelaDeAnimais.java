@@ -391,6 +391,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jpnDescricao.add(jrbCastradoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, -1, 16));
 
         jpnAddFoto.setBackground(new java.awt.Color(56, 0, 56));
+        jpnAddFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnAddFotoMouseClicked(evt);
+            }
+        });
         jpnAddFoto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -400,6 +405,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jpnDescricao.add(jpnAddFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 850, 30, 30));
 
         jpnExcluirFoto.setBackground(new java.awt.Color(56, 0, 56));
+        jpnExcluirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnExcluirFotoMouseClicked(evt);
+            }
+        });
         jpnExcluirFoto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1097,6 +1107,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setQualDoenca(jtfDoenca.getText());
         animal_up.setDescricao(jtaDescricao.getText());
         
+        
+        animal_up.setImagem(Controll_Images.ImagemParaString2((ImageIcon) txt_imagem.getIcon()));
+        
 
         try {
             System.out.println(animal_up);
@@ -1328,6 +1341,17 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private void jtfEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEspecieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfEspecieActionPerformed
+
+    private void jpnExcluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirFotoMouseClicked
+        // TODO add your handling code here:
+        ImagemIconAnimal = null;
+        txt_imagem.setIcon(null);
+    }//GEN-LAST:event_jpnExcluirFotoMouseClicked
+
+    private void jpnAddFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoMouseClicked
+        // TODO add your handling code here:
+        adicionarImagem(txt_imagem);
+    }//GEN-LAST:event_jpnAddFotoMouseClicked
     
     private void ColetarDadosAdocao(){
         LocalDate hoje = LocalDate.now();

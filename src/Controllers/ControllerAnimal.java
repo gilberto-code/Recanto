@@ -105,10 +105,18 @@ public class ControllerAnimal {
 
     public void update(Animal animal){
         try {
-            PreparedStatement ps
+//            PreparedStatement ps
+//                    = ConnectionDB.getConnection().prepareStatement(
+//                            "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, cor = ?,porte = ?, "
+//                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, doente  = ?, castrado = ?, vacinado = ?, sexo = ? WHERE idAnimal = ?");;
+        PreparedStatement ps
                     = ConnectionDB.getConnection().prepareStatement(
-                            "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, cor = ?,porte = ?, "
-                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, doente  = ?, castrado = ?, vacinado = ?, sexo = ? WHERE idAnimal = ?");
+                            "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, "
+                                    + "cor = ?,porte = ?, "
+                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, "
+                                    + "doente  = ?, castrado = ?, vacinado = ?,"
+                                    + " sexo = ? WHERE idAnimal = ?");
+
 
             ps.setString(1, animal.getEspecie());
             ps.setString(2, animal.getNome());
@@ -130,6 +138,19 @@ public class ControllerAnimal {
             if (row == 0) {
                 //throw new Exception("Atualização não realizada");
                 JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
+            }else{
+                 ps
+                    = ConnectionDB.getConnection().prepareStatement(
+                            "UPDATE tb_imagens SET "
+                                    + " imagem = ? WHERE idAnimal = ?");
+
+                ps.setString(1, animal.getImagem());
+                ps.setInt(2, animal.getId());
+                row = ps.executeUpdate();
+                if (row == 0) {
+                //throw new Exception("Atualização não realizada");
+                    JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControllerAnimal.class.getName()).log(Level.SEVERE, null, ex);

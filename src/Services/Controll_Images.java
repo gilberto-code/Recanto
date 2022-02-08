@@ -66,7 +66,8 @@ public class Controll_Images {
         
     }
     public static String ImagemParaString2 (ImageIcon Imagem){
-            ImageIcon img_icon = Imagem;
+            if(Imagem != null){
+                ImageIcon img_icon = Imagem;
             Icon icon = img_icon;
 
             BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -90,6 +91,7 @@ public class Controll_Images {
                 return(encodedImage);
             } catch (IOException ex) {
                 ex.printStackTrace();
+            }
             }
         return null;   
     }
