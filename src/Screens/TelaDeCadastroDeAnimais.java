@@ -9,7 +9,9 @@ import Objects.Animal;
 import Controllers.ControllerAnimal;
 import Services.Controll_Images;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,6 +20,7 @@ import java.util.Calendar;
 import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -1164,7 +1167,11 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jrDoenteNaoActionPerformed
 
     private void jpnAddFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoMouseClicked
-        adicionarImagem(txt_imagem);
+        try {
+            adicionarImagem(txt_imagem);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
 
     private void jpnExcluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirFotoMouseClicked
@@ -1296,14 +1303,21 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         return animal;
     }
 
-    public void adicionarImagem(JLabel fotinha) {
+    public void adicionarImagem(JLabel fotinha) throws IOException {
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
         jFileChooser1.showOpenDialog(null);
         File arquivo = jFileChooser1.getSelectedFile();
+        
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
-            ImageIcon imagem = new ImageIcon(ultimoPacote);
-            fotinha.setIcon(redimensionar_imagem(imagem));
+            BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
+            Image image = bufferedImage.getScaledInstance(500,
+                    500, Image.SCALE_SMOOTH);
+           
+            ImageIcon imagem = new ImageIcon(image);
+            Controll_Images redimencionar = new Controll_Images();
+            imagem = redimencionar.redimensionar_imagem(imagem);
+            fotinha.setIcon(imagem);
             ImagemIconAnimal = imagem;
         } else {
             System.out.println("Deu muito ruim");

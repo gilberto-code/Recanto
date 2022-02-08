@@ -1238,8 +1238,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
-            
-            
             BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
             Image image = bufferedImage.getScaledInstance(500,
                     500, Image.SCALE_SMOOTH);
