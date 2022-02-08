@@ -106,37 +106,10 @@ public class GerarPDF {
             "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
 
             Animal animal;
-            //animal = new Animal(nome, );
+            animal = new Animal();
             while (rs.next()) {
                 animal = new Animal(
-                    //nome
-                    rs.getString(1),
-                    //idade
-                    rs.getInt(2),
-                    //especie
-                    rs.getString(3),
-                    //raca
-                    rs.getString(4),
-                    //cor
-                    rs.getString(5),
-                    //porte
-                    rs.getString(6),
-                    //sexo
-                    rs.getString(7),
-                    //descricao
-                    rs.getString(8),
-                    //date
-                    rs.getDate(9),
-                    //qualDoenca
-                    rs.getString(10),
-                    //doente
-                    rs.getBoolean(11),
-                    //castrado
-                    rs.getBoolean(12),
-                    //vacinado
-                    rs.getBoolean(13),
-                    //imaagem
-                    rs.getString(21)
+                    
                     
             );
                 list.add(animal);

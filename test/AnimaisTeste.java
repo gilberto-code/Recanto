@@ -47,7 +47,7 @@ public class AnimaisTeste {
 //        }
     }
     public static void criarAnimal() throws Exception{
-        String filePath = "C:/Users/Gilberto/Desktop/_MG_5330.jpg";
+        String filePath = "C:/Users/Gilberto/Desktop/650PIN.png";
         //byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
         //System.out.println(fileContent.length);
         
@@ -70,7 +70,7 @@ public class AnimaisTeste {
         Animal animal = new Animal("nome", 1, "especie", "raca", 
                 "cor", "porte", "sexo",
                 "descricao",null, 
-                "qualDoenca", true, true, true, encodedString);
+                "qualDoenca", true, true, true,false, encodedString);
         
         ControllerAnimal controllerAnimal = new ControllerAnimal();
         controllerAnimal.insert(animal);
@@ -81,7 +81,7 @@ public class AnimaisTeste {
         Animal animal = new Animal("nome", 1, "especie", "raca", 
                 "cor", "porte", "sexo",
                 "descricao",null, 
-                "qualDoenca", true, true, true, "imagem");
+                "qualDoenca", true, true, true,false, "imagem");
         animal.setId(37);
         ControllerAnimal controllerAnimal = new ControllerAnimal();
         controllerAnimal.delete(animal);

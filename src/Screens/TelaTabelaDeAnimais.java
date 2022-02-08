@@ -1274,8 +1274,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         
         jtfDoenca.setText(animalAdocao.getQualDoenca());
         jtaDescricao.setText(animalAdocao.getDescricao());
-        
-        txt_imagem.setIcon(animalAdocao.getImagemIcon());
+        ImageIcon image;
+        image = Services.Controll_Images.montarImagem(animalAdocao.getImagem());
+        txt_imagem.setIcon(image);
         
         
     }
