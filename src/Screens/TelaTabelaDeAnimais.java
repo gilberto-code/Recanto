@@ -14,12 +14,19 @@ import Services.GerarPDF;
 import Services.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -1087,7 +1094,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         Animal animal_up = modeloTabela.getRowSelected(rowSelect);
         //Animal animal_up = new Animal();
         
-        
         animal_up.setNome(jtfNome.getText());
         animal_up.setEspecie(jtfEspecie.getText());
         animal_up.setIdade(Integer.parseInt(jtfIdade.getText()));
@@ -1108,7 +1114,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setDescricao(jtaDescricao.getText());
         
         
-        animal_up.setImagem(Controll_Images.ImagemParaString2((ImageIcon) txt_imagem.getIcon()));
+        
+        animal_up.setImagem(Controll_Images.ImagemParaString((ImageIcon) txt_imagem.getIcon()));
         
 
         try {
@@ -1126,6 +1133,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 //            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
+    
     
     private void jpnAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAtualizarMouseClicked
         atualizarAnimal();
@@ -1207,10 +1215,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 //        return adotante;
 //    }
     
-    public void adicionarImagem(JLabel fotinha) {
+    public void adicionarImagemDesabilitado(JLabel fotinha) {
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
         jFileChooser1.showOpenDialog(null);
         File arquivo = jFileChooser1.getSelectedFile();
+        
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             ImageIcon imagem = new ImageIcon(ultimoPacote);
@@ -1222,9 +1231,35 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             System.out.println("Deu muito ruim");
         }
     }
+    public void adicionarImagem(JLabel fotinha) throws IOException {
+        JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
+        jFileChooser1.showOpenDialog(null);
+        File arquivo = jFileChooser1.getSelectedFile();
+        
+        if (arquivo != null) {
+            ultimoPacote = arquivo.getPath();
+            
+            
+            BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
+            Image image = bufferedImage.getScaledInstance(500,
+                    500, Image.SCALE_SMOOTH);
+           
+            ImageIcon imagem = new ImageIcon(image);
+            Controll_Images redimencionar = new Controll_Images();
+            imagem = redimencionar.redimensionar_imagem(imagem);
+            fotinha.setIcon(imagem);
+            ImagemIconAnimal = imagem;
+        } else {
+            System.out.println("Deu muito ruim");
+        }
+    }
     
     private void jpnAddFotoAdotantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoAdotantMouseClicked
-        adicionarImagem(jtfFotoAdotante);
+        try {
+            adicionarImagem(jtfFotoAdotante);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jpnAddFotoAdotantMouseClicked
 
     private void jpnVoltarAAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnVoltarAAdocaoMouseClicked
@@ -1349,8 +1384,12 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnExcluirFotoMouseClicked
 
     private void jpnAddFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoMouseClicked
-        // TODO add your handling code here:
-        adicionarImagem(txt_imagem);
+        try {
+            // TODO add your handling code here:
+            adicionarImagem(txt_imagem);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
     
     private void ColetarDadosAdocao(){

@@ -4,6 +4,7 @@
  */
 package Services;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -27,8 +28,27 @@ import org.apache.commons.io.FileUtils;
  */
 public class Controll_Images {
     public ImageIcon redimensionar_imagem(ImageIcon img) {
+        
         img.setImage(img.getImage().getScaledInstance(200, 200, 100));
         return img;
+    }
+    
+    public String redimensionar(String filePath) throws IOException{
+        BufferedImage bufferedImage = ImageIO.read(new File(filePath));
+        Image image = bufferedImage.getScaledInstance(500,
+                500, Image.SCALE_SMOOTH);
+
+        BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null),
+        BufferedImage.SCALE_SMOOTH);
+
+        Graphics g = bi.createGraphics();
+        g.drawImage(image, 0, 0, null);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bi, "jpg", bos );
+        byte [] data = bos.toByteArray();
+        String encodedString = Base64.getEncoder().encodeToString(data);
+        return encodedString;
     }
 
     public String inserirFoto(JLabel fotinha) {
@@ -65,7 +85,7 @@ public class Controll_Images {
     public static void convertBase64ForImage(){
         
     }
-    public static String ImagemParaString2 (ImageIcon Imagem){
+    public static String ImagemParaString(ImageIcon Imagem){
             if(Imagem != null){
                 ImageIcon img_icon = Imagem;
             Icon icon = img_icon;
@@ -117,7 +137,7 @@ public class Controll_Images {
         return null;
     }
     
-    public static String ImagemParaString (ImageIcon Imagem){
+    public static String ImagemParaStringNAO (ImageIcon Imagem){
             ImageIcon img_icon = Imagem;
             Icon icon = img_icon;
 

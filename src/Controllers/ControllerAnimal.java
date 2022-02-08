@@ -105,18 +105,13 @@ public class ControllerAnimal {
 
     public void update(Animal animal){
         try {
-//            PreparedStatement ps
-//                    = ConnectionDB.getConnection().prepareStatement(
-//                            "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, cor = ?,porte = ?, "
-//                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, doente  = ?, castrado = ?, vacinado = ?, sexo = ? WHERE idAnimal = ?");;
-        PreparedStatement ps
+            PreparedStatement ps
                     = ConnectionDB.getConnection().prepareStatement(
                             "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, "
                                     + "cor = ?,porte = ?, "
                                     + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, "
                                     + "doente  = ?, castrado = ?, vacinado = ?,"
                                     + " sexo = ? WHERE idAnimal = ?");
-
 
             ps.setString(1, animal.getEspecie());
             ps.setString(2, animal.getNome());
@@ -135,6 +130,7 @@ public class ControllerAnimal {
             
             //System.out.println("1 - "+ ps.getConnection().());
             int row = ps.executeUpdate();
+            System.out.println("OP 1  "+row);
             if (row == 0) {
                 //throw new Exception("Atualização não realizada");
                 JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
@@ -148,6 +144,7 @@ public class ControllerAnimal {
                 ps.setInt(2, animal.getId());
                 row = ps.executeUpdate();
                 if (row == 0) {
+                    System.out.println("OP 2  "+row);
                 //throw new Exception("Atualização não realizada");
                     JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
                 }
