@@ -14,17 +14,14 @@ import Services.GerarPDF;
 import Services.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -34,23 +31,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gilberto 
  */
 public class TelaTabelaDeAnimais extends javax.swing.JPanel {
-    private CardLayout cardPaiTabela; 
-    private CardLayout cardPaiLeft; 
     private MyTableModel modeloTabela;
     
-    //private ArrayList<ImageIcon> imagens = new ArrayList<ImageIcon>();
     int posicaoImagem = -1;
     ControllerAnimal controllerAnimal = new ControllerAnimal();
     ImageIcon ImagemIconAnimal = new ImageIcon();
@@ -60,7 +50,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     
     public TelaTabelaDeAnimais() throws Exception {
         initComponents();
-        
         new Thread(new Runnable() {
             public void run() {
                 JFrame frame;
@@ -70,14 +59,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 
-                
                 try {
-                   // Thread.sleep(100);
                     modeloTabela = new MyTableModel(false);;                
                     jtTabelaAnimais.setModel(modeloTabela);
                     jtTabelaAnimais.setModel(modeloTabela);
                     jtTabelaAnimais.setDefaultRenderer(Object.class, new CellRenderer());
-                    //jtTabelaAnimais.getColumnModel().getColumn(0).setPreferredWidth(150);
                     jtTabelaAnimais.setRowHeight(150);
 
                     for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
@@ -88,7 +74,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     }
                     jspAdocao.getVerticalScrollBar().setUnitIncrement(5);
                     jcbEscolherTabela.setBackground(Color.WHITE);
-
                     jspDescricao.getVerticalScrollBar().setUnitIncrement(10);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,17 +84,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
             }).start();
-        
-        //modeloTabela2 = new MyTableModelAdotados();
-        //jTable1.setModel(modeloTabela2);
-        
-        
-        
     }
-    
-/**
-     * Creates new form painelTabel
-     */
     
     
     /**
@@ -1033,7 +1008,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPesquisarMouseClicked
-        // TODO add your handling code here:
         String nome ;
         int idade;
         nome = jtxPesquisaNome.getText();
@@ -1062,12 +1036,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
         if(jcheqNome.isSelected() || jcheqIdade.isSelected()){
             modeloTabela = new MyTableModel(animais);
-            //jTable1.setModel(modeloTabela);
         }else{
             JOptionPane.showMessageDialog(null, "Não existem campos selecionados");
         }
-        
-      
     }//GEN-LAST:event_lblPesquisarMouseClicked
     
     private void preencherComboBoxAnimaisAdocao(JComboBox jcbAnimaisParaAdotar){
@@ -1080,37 +1051,18 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     private void jpnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirMouseClicked
-        // TODO add your handling code here:
-        //int i = jTable1.getSelectedRow();
         Animal animal = modeloTabela.getRowSelected(rowSelect);
         try {
             controllerAnimal.delete(animal);
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            this.modeloTabela = new MyTableModel();
-//            jTable1.setModel(modeloTabela);
-//            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-//            jTable1.setRowHeight(150);
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
     }//GEN-LAST:event_jpnExcluirMouseClicked
 
     private void jpnAdotarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAdotarMouseClicked
-        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
-        cl.show(jpnPaiLeft, "jpnAdocao");
-        try {
-            preencherComboBoxAdotante(jcbSelecioneAdotante);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        preencherComboBoxAnimaisAdocao(jcbAnimais1);
+
     }//GEN-LAST:event_jpnAdotarMouseClicked
     public int rowSelect;
     private void atualizarAnimal() throws Exception{
@@ -1122,7 +1074,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setPorte(jtfPorte.getText());
         animal_up.setRaca(jtfRaca.getText());
         animal_up.setCor(jtfCor.getText());
-        //ARRUMAR
         if(jrbFemea.isSelected()){
             animal_up.setSexo("Fêmea");
             jpnPrenha.setVisible(true);
@@ -1136,7 +1087,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setDescricao(jtaDescricao.getText());
         animal_up.setImagem(Controll_Images.ImagemParaString((ImageIcon) txt_imagem.getIcon()));
         
-
         new Thread(new Runnable() {
             public void run() {
                 JFrame frame;
@@ -1146,32 +1096,23 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 
-                
                 try {
                     Thread.sleep(500);
                     controllerAnimal.update(animal_up);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
                 try {
                     modeloTabela = new MyTableModel(animal_up.isAdotado());                
                     jtTabelaAnimais.setModel(modeloTabela);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
                 frame.setVisible(false);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
             }).start();
-        
-        
-        
-        
-        
-
     }
     
     
@@ -1202,7 +1143,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         switch (jcbEscolherTabela.getSelectedItem().toString()) {
             case "Animais para Adoção":
                 {
-                    
                     cl.show(jpnPai, "TabelaAdocao");
                     try {
                         modeloTabela = new MyTableModel(false);
@@ -1251,30 +1191,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         txt_imagem.setIcon(null);
     }//GEN-LAST:event_jpnSemFotoMouseClicked
     
-//    private Adotante coletarInformacoesAdotante(){
-//        String fotoString;
-//        ConverterImagens converter = new ConverterImagens();
-//        fotoString = ConverterImagens.ImagemParaString(ImagemIconAnimal);
-//        Adotante adotante = new Adotante(jtfNomeAdotante.getText(),jtfTelefoneAdotante.getText() , jtfCPFAdotante.getText(), jtfDataAdotante.getText(), jtfEndereçoAdotante.getText(), jtfEmailAdotante.getText(), fotoString);
-//        return adotante;
-//    }
-    
-    public void adicionarImagemDesabilitado(JLabel fotinha) {
-        JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
-        jFileChooser1.showOpenDialog(null);
-        File arquivo = jFileChooser1.getSelectedFile();
-        
-        if (arquivo != null) {
-            ultimoPacote = arquivo.getPath();
-            ImageIcon imagem = new ImageIcon(ultimoPacote);
-            Controll_Images redimencionar = new Controll_Images();
-            imagem = redimencionar.redimensionar_imagem(imagem);
-            fotinha.setIcon(imagem);
-            ImagemIconAnimal = imagem;
-        } else {
-            System.out.println("Deu muito ruim");
-        }
-    }
     public void adicionarImagem(JLabel fotinha) throws IOException {
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
         jFileChooser1.showOpenDialog(null);
@@ -1310,31 +1226,19 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnVoltarAAdocaoMouseClicked
 
     private void jpnEfetuarAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnEfetuarAdocaoMouseClicked
-        ColetarDadosAdocao();
-        
-        
+       
     }//GEN-LAST:event_jpnEfetuarAdocaoMouseClicked
 
     private void jpnVoltarATeladeAnimaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnVoltarATeladeAnimaisMouseClicked
         CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnPrincipal");
     }//GEN-LAST:event_jpnVoltarATeladeAnimaisMouseClicked
-    
-//    private void atualizarTabelasPosAdocao(){
-//        int row = jTable2.getSelectedRow();
-//        Animal animalAdocao =  modeloTabela.getRowSelected(row);
-//        Adotante adotante = (Adotante) jcbSelecioneAdotante.getSelectedItem();
-//        //AnimalAdotado animalAdotado = new AnimalAdotado(ABORT, data_adocao, WIDTH, ultimoPacote, ultimoPacote, WIDTH, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, ultimoPacote, dataDeCadastro, ultimoPacote, ultimoPacote, true, true, true, true, true, ultimoPacote)
-//    }
+
         
     private void jtTabelaAnimaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaAnimaisMouseClicked
-        //////////////////////////////////////////////////////////////
         rowSelect = jtTabelaAnimais.getSelectedRow();
         Animal animalAdocao =  modeloTabela.getRowSelected(rowSelect);
-        //jlbNomeAnimal.setText(animalAdocao.getNome());
-        //////////////////////////////////////////////////////////////
         preencherLabelsDescricao(animalAdocao);
-        
     }//GEN-LAST:event_jtTabelaAnimaisMouseClicked
     
     private void preencherLabelsDescricao(Animal animalAdocao){
@@ -1356,7 +1260,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             jrbVacinadoSim.setSelected(true);
         else if(!animalAdocao.isVacinado())
             jrbVacinadoNao.setSelected(true);
-        
         if(animalAdocao.isCastrado())
             jrbCastradoSim.setSelected(true);
         else if(!animalAdocao.isCastrado())
@@ -1367,8 +1270,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         ImageIcon image;
         image = Services.Controll_Images.montarImagem(animalAdocao.getImagem());
         txt_imagem.setIcon(image);
-        
-        
     }
         
     private void jpnCadastrarAdotanteAtoDeAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnCadastrarAdotanteAtoDeAdocaoMouseClicked
@@ -1377,20 +1278,13 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnCadastrarAdotanteAtoDeAdocaoMouseClicked
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-//        DAOAdotante daoAdotante = new DAOAdotante();
-//        try {
-//            System.out.println(coletarInformacoesAdotante().getNome());
-//            daoAdotante.insert(coletarInformacoesAdotante());
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jrbFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemeaActionPerformed
         jpnPrenha.setVisible(true);
         jrbPrenhaSim.setSelected(false);
         jrbPrenhaNao.setSelected(false);
-
     }//GEN-LAST:event_jrbFemeaActionPerformed
 
     private void jrbMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMachoActionPerformed
@@ -1420,7 +1314,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfEspecieActionPerformed
 
     private void jpnExcluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirFotoMouseClicked
-        // TODO add your handling code here:
         ImagemIconAnimal = null;
         txt_imagem.setIcon(null);
     }//GEN-LAST:event_jpnExcluirFotoMouseClicked
@@ -1434,42 +1327,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
     
-    private void ColetarDadosAdocao(){
-        LocalDate hoje = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String hojeFormatado = hoje.format(formatter);
-        System.out.println(hojeFormatado);
-        
-        int row = jtTabelaAnimais.getSelectedRow();
-        Animal animalAdocao =  modeloTabela.getRowSelected(row);
-        //Animal animalAdocao = jcbAnimais1.getSelectedItem();
-        
-//        Adotante adotante;
-//        adotante = (Adotante) jcbSelecioneAdotante.getSelectedItem();
-        
-//        Animal animalAdotado = new Animal(adotante.getIdAdotante(), hojeFormatado, animalAdocao.getId());
-//        ControllerAnimalAdotado daoAnimalAdotado = new ControllerAnimalAdotado();
-//        
-//        try {
-//            daoAnimalAdotado.insert(animalAdotado);
-//            
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        try {
-//            daoAnimalAdotado.updateAdocaoParaAdotado(animalAdocao);
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
-
-    private void preencherComboBoxAdotante(JComboBox jcbAdotante) throws Exception{
-//        DAOAdotante daoAdotante = new DAOAdotante();
-//        for(Adotante adotante : daoAdotante.getList()){
-//            jcbAdotante.addItem(adotante);
-//        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1581,7 +1438,4 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel txt_imagem;
     // End of variables declaration//GEN-END:variables
 
-    private void setText(String especie) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

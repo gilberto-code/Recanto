@@ -5,17 +5,12 @@
  */
 package Screens;
 
-import Controllers.ControllerAnimal;
-import Controllers.ControllerUser;
 import Controllers.ControllerUser;
 import Objects.User;
-import Screens.TelaMenu;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +18,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -36,24 +30,18 @@ public class TelaLogin extends javax.swing.JFrame {
     //Variáveis que pertencem ao código de movimentação do jFrame
     String data;
     String path;
-        
-     
+
     public TelaLogin() throws Exception {
-        
-        
-        //panelTabel = new TelaTabelaDeAnimais();
-       
         initComponents();
-        
-        for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
-            if("Windows".equals(info.getName())){
+
+        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Windows".equals(info.getName())) {
                 UIManager.setLookAndFeel(info.getClassName());
                 break;
             }
         }
-        
         setLocationRelativeTo(null); //Para o jFrame ser gerado no centro da tela
-       
+
     }
 
     public void setIcon() {
@@ -64,7 +52,6 @@ public class TelaLogin extends javax.swing.JFrame {
         j1.setVisible(true);
     } //Deixar visível a tela a ser exibida
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -240,11 +227,11 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void moveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMousePressed
-        
+
     }//GEN-LAST:event_moveMousePressed
 
     private void moveMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseDragged
-        
+
     }//GEN-LAST:event_moveMouseDragged
 
     //Botão de exit do programa
@@ -257,33 +244,28 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jlbMinimizarMouseClicked
     User u = new User();
     private void btnCadastroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastroMousePressed
-            ControllerUser cUser = new ControllerUser();
+        ControllerUser cUser = new ControllerUser();
 
-            String email = txtEmail.getText();
-            String senha = pswSenha.getText();
-            u.setEmail(email);
-            u.setSenha(senha);
-            
-            User user = new User(email,senha);
+        String email = txtEmail.getText();
+        String senha = pswSenha.getText();
+        u.setEmail(email);
+        u.setSenha(senha);
         try {
             boolean b = cUser.checkLogin(u);
-            
+
             TelaMenu menu = new TelaMenu();
-            
-            if(b){
+
+            if (b) {
                 menu.setVisible(true);
                 this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 this.setVisible(false);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Login Falhou");
             }
-            
 
         } catch (Exception ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-                        
     }//GEN-LAST:event_btnCadastroMousePressed
 
     private void getDate() {
@@ -291,10 +273,8 @@ public class TelaLogin extends javax.swing.JFrame {
         DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
         String strDate = dateFormat.format(date);
         data = strDate;
-        //System.out.println(strDate);
-    }                
-    
-    
+    }
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(186, 46, 186));
     }
@@ -308,36 +288,6 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public static void main(String[] args) {
 
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -346,7 +296,6 @@ public class TelaLogin extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
     }

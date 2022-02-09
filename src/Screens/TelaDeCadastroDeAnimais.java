@@ -44,8 +44,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     public Animal animal;
 
     public TelaDeCadastroDeAnimais() {
-        for(UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
-            if("Windows".equals(info.getName())){
+        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Windows".equals(info.getName())) {
                 try {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -61,7 +61,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
             }
         }
         initComponents();
-        
+
         startArrayList();
         jpQual.setVisible(false);
         pnDoencas.setVisible(false);
@@ -1058,29 +1058,16 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     public boolean qualbg(ButtonGroup b) {
         return b.getSelection().equals("Sim");
     }
-    
-    private void cadastrarAnimal() throws IOException{
-        
-        
-        
-//        
-//        String filePath = "C:/Users/Gilberto/Desktop/a.jpg";
-//        byte[] fileContent = FileUtils.readFileToByteArray(new File(filePath));
-//        String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//        Animal a = new Animal("nome", 1, "especie", "raca", 
-//                "cor", "porte", "sexo",
-//                "descricao",null, 
-//                "qualDoenca", true, true, true, encodedString);
-        
-        
-            try {
-                animal = colherInformacao();
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            new Thread(new Runnable() {
+
+    private void cadastrarAnimal() throws IOException {
+        try {
+            animal = colherInformacao();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        new Thread(new Runnable() {
             public void run() {
                 JFrame frame;
                 frame = new TelaLoading();
@@ -1088,7 +1075,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                             
+
                 try {
                     Thread.sleep(1000);
                     cAnimal.insert(animal);
@@ -1099,35 +1086,23 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
-            }).start();
-            
-                
-            
-            
-            
-            //frame.setVisible(false);
-            
-                
- 
-        
+        }).start();
     }
-    
+
     private void btn_cadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cadastrarMouseClicked
-        
         try {
             cadastrarAnimal();
         } catch (IOException ex) {
             Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
         limparComponentes();
-        
     }//GEN-LAST:event_btn_cadastrarMouseClicked
 
-    private void limparComponentes(){
+    private void limparComponentes() {
         jComboEspecie.setSelectedIndex(1);
         jpQual.setVisible(false);
         jtx_nome.setText("");
-        jSlider1.setValue(jSlider1.getMaximum()/2);
+        jSlider1.setValue(jSlider1.getMaximum() / 2);
         jComboPorte.setSelectedIndex(1);
         jtx_raca.setText("");
         jtx_cor.setText("");
@@ -1145,12 +1120,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         txt_imagem.setIcon(null);
     }
     private void jrMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMachoActionPerformed
-        // TODO add your handling code here:
         rjFemea.setSelected(false);
     }//GEN-LAST:event_jrMachoActionPerformed
 
     private void rjFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rjFemeaActionPerformed
-
         jrMacho.setSelected(false);
     }//GEN-LAST:event_rjFemeaActionPerformed
 
@@ -1161,7 +1134,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jrDoenteSimActionPerformed
 
     private void jrDoenteNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrDoenteNaoActionPerformed
-        // TODO add your handling code here:
         pnDoencas.setVisible(false);
         jtxdoenca.setText("");
     }//GEN-LAST:event_jrDoenteNaoActionPerformed
@@ -1177,7 +1149,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private void jpnExcluirFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirFotoMouseClicked
         ImagemIconAnimal = null;
         txt_imagem.setIcon(null);
-
     }//GEN-LAST:event_jpnExcluirFotoMouseClicked
 
     private void jComboEspecie1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEspecie1ActionPerformed
@@ -1233,11 +1204,10 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnExcluirFoto1MouseClicked
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        idadeAnimal.setText(""+jSlider1.getValue());
+        idadeAnimal.setText("" + jSlider1.getValue());
     }//GEN-LAST:event_jSlider1StateChanged
 
     public Animal colherInformacao() throws SQLException, IOException {
-
         String nome;
         String especie;
         int idade;
@@ -1246,15 +1216,13 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         String porte;
         String sexo;
         String descricao;
-        Date dataDeCadastro;
         String qualDoenca;
-        //ImageIcon ImagemIcon;
-        String StringImagem;
         boolean doente;
         boolean castrado;
         boolean vacinado;
 
         String imagemAnimal;
+        
         //Coleta dos dados dos campos de texto
         nome = jtx_nome.getText();
         especie = jComboEspecie.getSelectedItem().toString();
@@ -1267,55 +1235,37 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         } else {
             sexo = "Fêmea";
         }
-        //sexo = cbSexoPress();
         descricao = jtx_descricao.getText();
         qualDoenca = jtxdoenca.getText();
-        //Coleta de dados da barra 'slider'
-
         
-        Calendar c = Calendar.getInstance();
-        int dia = c.get(Calendar.DAY_OF_MONTH);
-        int ano = c.get(Calendar.YEAR);
-        int mes = c.get(Calendar.MONTH);
-        //Coleta de dados da barra 'slider'
-
-        String date = ano+"-"+(mes+1)+"-"+dia;
-        System.out.println();
-        java.sql.Date dat = java.sql.Date.valueOf(date);
-        dataDeCadastro = dat;
         imagemAnimal = Controll_Images.ImagemParaString(ImagemIconAnimal);
-        //System.out.println(imagemAnimal);
-        
         vacinado = jrVacinadoSim.isSelected();
-
         doente = jrDoenteSim.isSelected();
-
         castrado = jrCastradoSim.isSelected();
 
         //idade = jSlider1.getValue();
         idade = 0;
         boolean adotado = false;
-        
-        
-        Animal animal = new Animal(nome, idade, especie, raca, 
+
+        Animal a = new Animal(nome, idade, especie, raca,
                 cor, porte, sexo,
-                descricao, 
+                descricao,
                 qualDoenca, doente, castrado, vacinado,
-                adotado,imagemAnimal);
-        return animal;
+                adotado, imagemAnimal);
+        return a;
     }
 
     public void adicionarImagem(JLabel fotinha) throws IOException {
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
         jFileChooser1.showOpenDialog(null);
         File arquivo = jFileChooser1.getSelectedFile();
-        
+
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
             Image image = bufferedImage.getScaledInstance(500,
                     500, Image.SCALE_SMOOTH);
-           
+
             ImageIcon imagem = new ImageIcon(image);
             Controll_Images redimencionar = new Controll_Images();
             imagem = redimencionar.redimensionar_imagem(imagem);

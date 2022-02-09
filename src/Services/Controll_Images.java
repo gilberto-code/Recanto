@@ -27,32 +27,33 @@ import org.apache.commons.io.FileUtils;
  * @author Gilberto
  */
 public class Controll_Images {
+
     public ImageIcon redimensionar_imagem(ImageIcon img) {
-        
+
         img.setImage(img.getImage().getScaledInstance(200, 200, 100));
         return img;
     }
-    
-    public String redimensionar(String filePath) throws IOException{
+
+    public String redimensionar(String filePath) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(new File(filePath));
         Image image = bufferedImage.getScaledInstance(500,
                 500, Image.SCALE_SMOOTH);
 
         BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null),
-        BufferedImage.SCALE_SMOOTH);
+                BufferedImage.SCALE_SMOOTH);
 
         Graphics g = bi.createGraphics();
         g.drawImage(image, 0, 0, null);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bi, "jpg", bos );
-        byte [] data = bos.toByteArray();
+        ImageIO.write(bi, "jpg", bos);
+        byte[] data = bos.toByteArray();
         String encodedString = Base64.getEncoder().encodeToString(data);
         return encodedString;
     }
 
     public String inserirFoto(JLabel fotinha) {
-        String path ="";
+        String path = "";
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser();
         jFileChooser1.showOpenDialog(null);
         File arquivo = jFileChooser1.getSelectedFile();
@@ -62,32 +63,26 @@ public class Controll_Images {
             foto = (fotinha.getIcon().toString());
             path = foto;
         } else {
-            /*jLfoto.setIcon(new ImageIcon(getClass().getResource("/ViewImagens/no_photo.png")));
-            foto = (jLfoto.getIcon().toString());
-            System.out.println("else:" + foto);
-             */
             System.out.println("Deu muito ruim");
         }
         return path;
-       
     }
-    public static String convertImageForBASE64(String filePath){
+
+    public static String convertImageForBASE64(String filePath) {
         byte[] fileContent;
         try {
             fileContent = FileUtils.readFileToByteArray(new File(filePath));
             String encodedString = Base64.getEncoder().encodeToString(fileContent);
             return encodedString;
         } catch (IOException ex) {
-           // Logger.getLogger( )).log(Level.SEVERE, null, ex);
+            
         }
         return "";
     }
-    public static void convertBase64ForImage(){
-        
-    }
-    public static String ImagemParaString(ImageIcon Imagem){
-            if(Imagem != null){
-                ImageIcon img_icon = Imagem;
+
+    public static String ImagemParaString(ImageIcon Imagem) {
+        if (Imagem != null) {
+            ImageIcon img_icon = Imagem;
             Icon icon = img_icon;
 
             BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -97,7 +92,7 @@ public class Controll_Images {
 
             byte[] img_bytes = null;
             String encodedImage = null;
-            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            try ( ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
                 ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
                 try {
                     ImageIO.write(img, "png", ios);
@@ -108,19 +103,20 @@ public class Controll_Images {
                 img_bytes = baos.toByteArray();
                 Base64.Encoder encoder = Base64.getEncoder();
                 encodedImage = encoder.encodeToString(img_bytes);
-                return(encodedImage);
+                return (encodedImage);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            }
-        return null;   
+        }
+        return null;
     }
+
     public static ImageIcon montarImagem(String imgString) {
 
         try {
             if (imgString != null) {
                 byte[] montar = Base64.getDecoder().decode(imgString);
-                
+
                 ImageIcon oi = new ImageIcon(montar);
                 int larg = oi.getIconWidth();
                 int alt = oi.getIconHeight();
@@ -132,38 +128,38 @@ public class Controll_Images {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             Logger.getLogger(Controllers.ControllerAnimal.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
         return null;
     }
-    
-    public static String ImagemParaStringNAO (ImageIcon Imagem){
-            ImageIcon img_icon = Imagem;
-            Icon icon = img_icon;
 
-            BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = img.createGraphics();
-            icon.paintIcon(null, g2d, 0, 0);
-            g2d.dispose();
+    public static String ImagemParaStringNAO(ImageIcon Imagem) {
+        ImageIcon img_icon = Imagem;
+        Icon icon = img_icon;
 
-            byte[] img_bytes = null;
-            String encodedImage = null;
-            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-                ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
-                try {
-                    ImageIO.write(img, "png", ios);
-                    // Set a flag to indicate that the write was successful
-                } finally {
-                    ios.close();
-                }
-                img_bytes = baos.toByteArray();
-                Base64.Encoder encoder = Base64.getEncoder();
-                encodedImage = encoder.encodeToString(img_bytes);
-                return(encodedImage);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+        BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = img.createGraphics();
+        icon.paintIcon(null, g2d, 0, 0);
+        g2d.dispose();
+
+        byte[] img_bytes = null;
+        String encodedImage = null;
+        try ( ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
+            try {
+                ImageIO.write(img, "png", ios);
+                // Set a flag to indicate that the write was successful
+            } finally {
+                ios.close();
             }
-        return null;   
+            img_bytes = baos.toByteArray();
+            Base64.Encoder encoder = Base64.getEncoder();
+            encodedImage = encoder.encodeToString(img_bytes);
+            return (encodedImage);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

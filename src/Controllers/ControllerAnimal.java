@@ -1,9 +1,7 @@
 package Controllers;
 
-
 import DataAcess.ConnectionDB;
 import Objects.Animal;
-import java.awt.Image;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,14 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author João Lucas Silva Solano
@@ -28,18 +20,16 @@ import javax.swing.JOptionPane;
 public class ControllerAnimal {
 
     public void insert(Animal animal) throws Exception {
-        
         long miliseconds = System.currentTimeMillis();
         Date dataAtual = new Date(miliseconds);
-        
+
         PreparedStatement stmt
                 = ConnectionDB.getConnection().prepareStatement(
-
                         ("INSERT INTO tb_animais(nome,idade,especie,raca,cor,"
-                                + "porte ,sexo ,descricao,dataDeCadastro,"
-                                + "qualDoenca,doente,castrado,vacinado)"
+                        + "porte ,sexo ,descricao,dataDeCadastro,"
+                        + "qualDoenca,doente,castrado,vacinado)"
                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);"));
-        
+
         stmt.setString(1, animal.getNome());
         stmt.setInt(2, animal.getIdade());
         stmt.setString(3, (animal.getEspecie()));
@@ -54,19 +44,19 @@ public class ControllerAnimal {
         stmt.setBoolean(12, (animal.isCastrado()));
         stmt.setBoolean(13, (animal.isVacinado()));
 
-
         int row = stmt.executeUpdate();
         if (row == 0) {
             throw new Exception("Insercao não realizada");
         } else {
             stmt.close();
-        
+
             Statement st2 = ConnectionDB.getConnection().createStatement();
-            ResultSet rsImg = st2.executeQuery("select idAnimal from tb_animais ORDER BY idAnimal DESC LIMIT 1;");
-                int id = 0;
-                while (rsImg.next()) {
-                    id = rsImg.getInt(1);
-                }
+            ResultSet rsImg = st2.executeQuery("select idAnimal from tb_animais"
+                    + " ORDER BY idAnimal DESC LIMIT 1;");
+            int id = 0;
+            while (rsImg.next()) {
+                id = rsImg.getInt(1);
+            }
             insertImage(animal.getImagem(), id);
 
             stmt.close();
@@ -75,48 +65,43 @@ public class ControllerAnimal {
 
     public void insertImage(String imagem, int id) throws Exception {
         PreparedStatement stmt
-                = ConnectionDB.getConnection().prepareStatement("insert into tb_imagens(imagem , idAnimal) "
+                = ConnectionDB.getConnection().prepareStatement("insert into "
+                        + "tb_imagens(imagem , idAnimal) "
                         + "VALUES(?,?);");
-            stmt.setString(1, imagem);
-            stmt.setInt(2, id);
-            int row = stmt.executeUpdate();
-            if (row == 0) {
-                throw new Exception("Insercao não realizada");
-            }else {
-                //JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
-            }
-    }
-    
-    public void delete(Animal animal) throws Exception {
-//         PreparedStatement ps
-//                = ConnectionDB.getConnection().prepareStatement(
-//                        "delete from tb_imagens WHERE idAnimal = ?");
-//        ps.setInt(1, animal.getId());
-        System.out.println(animal);
-        PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement(
-                       "DELETE tb_imagens,tb_animais  FROM tb_imagens\n" +
-                        "LEFT JOIN tb_animais ON  tb_imagens.idAnimal= tb_animais.idAnimal \n" +
-                        "WHERE tb_animais.idAnimal = tb_imagens.idAnimal \n" +
-                        "AND tb_imagens.idAnimal =?;");
-            ps.setInt(1, animal.getId());
-            int row = ps.executeUpdate();
+        stmt.setString(1, imagem);
+        stmt.setInt(2, id);
+        int row = stmt.executeUpdate();
         if (row == 0) {
-           JOptionPane.showMessageDialog(null, "Exclusão Falhou");
+            throw new Exception("Insercao não realizada");
+        } else {
+            //JOptionPane.showMessageDialog(null, "Inserção realizada com sucesso");
         }
-       
-       
     }
 
-    public void update(Animal animal){
+    public void delete(Animal animal) throws Exception {
+        PreparedStatement ps
+                = ConnectionDB.getConnection().prepareStatement(
+                        "DELETE tb_imagens,tb_animais  FROM tb_imagens\n"
+                        + "LEFT JOIN tb_animais ON  tb_imagens.idAnimal= tb_animais.idAnimal \n"
+                        + "WHERE tb_animais.idAnimal = tb_imagens.idAnimal \n"
+                        + "AND tb_imagens.idAnimal =?;");
+        ps.setInt(1, animal.getId());
+        int row = ps.executeUpdate();
+        if (row == 0) {
+            JOptionPane.showMessageDialog(null, "Exclusão Falhou");
+        }
+
+    }
+
+    public void update(Animal animal) {
         try {
             PreparedStatement ps
                     = ConnectionDB.getConnection().prepareStatement(
                             "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, "
-                                    + "cor = ?,porte = ?, "
-                                    + "descricao = ?, qualDoenca = ?, "
-                                    + "doente  = ?, castrado = ?, vacinado = ?,"
-                                    + " sexo = ? WHERE idAnimal = ?");
+                            + "cor = ?,porte = ?, "
+                            + "descricao = ?, qualDoenca = ?, "
+                            + "doente  = ?, castrado = ?, vacinado = ?,"
+                            + " sexo = ? WHERE idAnimal = ?");
 
             ps.setString(1, animal.getEspecie());
             ps.setString(2, animal.getNome());
@@ -131,25 +116,22 @@ public class ControllerAnimal {
             ps.setBoolean(11, animal.isVacinado());
             ps.setString(12, animal.getSexo());
             ps.setInt(13, animal.getId());
-            
-            //System.out.println("1 - "+ ps.getConnection().());
+
             int row = ps.executeUpdate();
-            System.out.println("OP 1  "+row);
+            System.out.println("OP 1  " + row);
             if (row == 0) {
-                //throw new Exception("Atualização não realizada");
                 JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
-            }else{
-                 ps
-                    = ConnectionDB.getConnection().prepareStatement(
-                            "UPDATE tb_imagens SET "
-                                    + " imagem = ? WHERE idAnimal = ?");
+            } else {
+                ps
+                        = ConnectionDB.getConnection().prepareStatement(
+                                "UPDATE tb_imagens SET "
+                                + " imagem = ? WHERE idAnimal = ?");
 
                 ps.setString(1, animal.getImagem());
                 ps.setInt(2, animal.getId());
                 row = ps.executeUpdate();
                 if (row == 0) {
-                    System.out.println("OP 2  "+row);
-                //throw new Exception("Atualização não realizada");
+                    System.out.println("OP 2  " + row);
                     JOptionPane.showMessageDialog(null, "Atualização falhou, por favor tente novamente");
                 }
             }
@@ -160,7 +142,8 @@ public class ControllerAnimal {
 
     public ArrayList<Animal> retrieve(String nome) throws Exception {
         PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais where nome like ?");
+                = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais"
+                        + " where nome like ?");
         ps.setString(1, "%" + nome + "%");
         ResultSet rs = ps.executeQuery();
         return carregarLista(rs);
@@ -168,7 +151,8 @@ public class ControllerAnimal {
 
     public ArrayList<Animal> retrieve(String nome, int idade) throws Exception {
         PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais where nome like ? and idade like ?");
+                = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais"
+                        + " where nome like ? and idade like ?");
         ps.setString(1, "%" + nome + "%");
         ps.setInt(2, idade);
         ResultSet rs = ps.executeQuery();
@@ -177,40 +161,24 @@ public class ControllerAnimal {
 
     public ArrayList<Animal> retrieve(int idade) throws Exception {
         PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais where idade like ?");
+                = ConnectionDB.getConnection().prepareStatement("select * from "
+                        + "tbl_animais where idade like ?");
         ps.setInt(1, idade);
         ResultSet rs = ps.executeQuery();
         return carregarLista(rs);
     }
 
-//    public ArrayList<Animal> getList() throws Exception {
-//        Statement st = ConnectionDB.getConnection().createStatement();
-//        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
-//            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
-//            " doente ,castrado ,vacinado,imagem ,\n" +
-//            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
-//        //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
-//        return carregarLista(rs);
-//    }
     public ArrayList<Animal> getList(boolean isAdotado) throws Exception {
         PreparedStatement ps
                 = ConnectionDB.getConnection().prepareStatement("select nome ,idade,especie,raca "
-                        + ",cor ,porte ,\n" +
-            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
-            " doente ,castrado ,vacinado,imagem ,\n" +
-            "tb.idAnimal from tb_animais tb left join "
+                        + ",cor ,porte ,\n"
+                        + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
+                        + " doente ,castrado ,vacinado,imagem ,\n"
+                        + "tb.idAnimal from tb_animais tb left join "
                         + "tb_imagens img on tb.idAnimal = img.idAnimal "
                         + "WHERE adotado = ?;");
         ps.setBoolean(1, isAdotado);
         ResultSet rs = ps.executeQuery();
-        
-        
-//        Statement st = ConnectionDB.getConnection().createStatement();
-//        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
-//            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
-//            " doente ,castrado ,vacinado,imagem ,\n" +
-//            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
-        //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
         return carregarLista(rs);
     }
 
@@ -255,5 +223,4 @@ public class ControllerAnimal {
         rs.close();
         return lista;
     }
-
 }

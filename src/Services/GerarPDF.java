@@ -15,18 +15,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.management.Query;
 
 public class GerarPDF {
-    
-    public void gerar () throws Exception{
+
+    public void gerar() throws Exception {
         int numcolunas = 10;
         ArrayList<Animal> lis = getList();
         Document doc = new Document();
@@ -41,7 +37,7 @@ public class GerarPDF {
             doc.add(p);
             PdfPTable table = new PdfPTable(numcolunas);
             PdfPCell cell = new PdfPCell(new Paragraph("Nome",
-                    new Font(FontFamily.UNDEFINED, 10, Font.NORMAL,new BaseColor(0, 0, 255))));
+                    new Font(FontFamily.UNDEFINED, 10, Font.NORMAL, new BaseColor(0, 0, 255))));
             PdfPCell cel2 = new PdfPCell(new Paragraph("Especie"));
             PdfPCell cel3 = new PdfPCell(new Paragraph("Raça"));
             PdfPCell cel4 = new PdfPCell(new Paragraph("Cor"));
@@ -50,7 +46,7 @@ public class GerarPDF {
             PdfPCell cel7 = new PdfPCell(new Paragraph("Está Aci dentado"));
             PdfPCell cel8 = new PdfPCell(new Paragraph("Data De Cadastro"));
             PdfPCell cel9 = new PdfPCell(new Paragraph("Idade"));
-            
+
             table.addCell(cell);
             table.addCell(cel2);
             table.addCell(cel3);
@@ -60,18 +56,20 @@ public class GerarPDF {
             table.addCell(cel7);
             table.addCell(cel8);
             table.addCell(cel9);
-            
+
             for (Animal animal : lis) {
                 cell = new PdfPCell(new Paragraph(animal.getNome()));
                 cel2 = new PdfPCell(new Paragraph(animal.getEspecie()));
                 cel3 = new PdfPCell(new Paragraph(animal.getRaca()));
                 cel4 = new PdfPCell(new Paragraph(animal.getCor()));
-                if (animal.isDoente())
-                        cel6 = new PdfPCell(new Paragraph("Sim"));
-                else cel6 = new PdfPCell(new Paragraph("não"));
+                if (animal.isDoente()) {
+                    cel6 = new PdfPCell(new Paragraph("Sim"));
+                } else {
+                    cel6 = new PdfPCell(new Paragraph("não"));
+                }
                 cel8 = new PdfPCell(new Paragraph("DATE"));
                 cel9 = new PdfPCell(new Paragraph(animal.getIdade() + ""));
-                
+
                 table.addCell(cell);
                 table.addCell(cel2);
                 table.addCell(cel3);
@@ -82,7 +80,7 @@ public class GerarPDF {
                 table.addCell(cel8);
                 table.addCell(cel9);
             }
-            
+
             table.setLockedWidth(true);
             table.setTotalWidth(595);
             doc.add(table);
@@ -92,6 +90,7 @@ public class GerarPDF {
             System.out.println("Fecha o outro PDF  :)");
         }
     }
+
     private static ArrayList<Animal> BindTable() {
         ArrayList<Animal> list = new ArrayList<Animal>();
         Connection con = getConnection();
@@ -100,18 +99,15 @@ public class GerarPDF {
 
         try {
             st = con.createStatement();
-            rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
-            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
-            " doente ,castrado ,vacinado,imagem ,\n" +
-            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
+            rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n"
+                    + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
+                    + " doente ,castrado ,vacinado,imagem ,\n"
+                    + "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
 
             Animal animal;
             animal = new Animal();
             while (rs.next()) {
-                animal = new Animal(
-                    
-                    
-            );
+                animal = new Animal();
                 list.add(animal);
             }
 
@@ -126,15 +122,16 @@ public class GerarPDF {
         ConnectionDB fdc = new ConnectionDB();
         return ConnectionDB.getConnection();
     }
+
     public ArrayList<Animal> getList() throws Exception {
         Statement st = ConnectionDB.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n" +
-            "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n" +
-            " doente ,castrado ,vacinado,imagem ,\n" +
-            "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
-        //ResultSet rsIm = st.executeQuery("select imagem from tb_imagens where id =");
+        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n"
+                + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
+                + " doente ,castrado ,vacinado,imagem ,\n"
+                + "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
         return carregarLista(rs);
     }
+
     private ArrayList<Animal> carregarLista(ResultSet rs) throws SQLException, IOException {
         ArrayList<Animal> lista = new ArrayList<>();
         Animal animal;
@@ -177,4 +174,3 @@ public class GerarPDF {
         return lista;
     }
 }
-

@@ -29,72 +29,65 @@ import javax.swing.UIManager.LookAndFeelInfo;
  *
  * @author João Lucas Silva Solano
  */
-public class TelaMenu extends javax.swing.JFrame {
+public final class TelaMenu extends javax.swing.JFrame {
 
     //Variáveis que pertencem ao código de movimentação do jFrame
     private final CardLayout card;
-    private final  JPanel panelCadastro;
-    private  JPanel panelTabel;
+    private final JPanel panelCadastro;
+    private JPanel panelTabel;
     int xx, xy;
     String data;
     String path;
-    ArrayList<JPanel> listPanels = new ArrayList<JPanel> ();
-    
+    ArrayList<JPanel> listPanels = new ArrayList<>();
 
     ControllerAnimal cAnimal = new ControllerAnimal();
-    
-    
-    public TelaMenu() throws Exception { 
+
+    public TelaMenu() throws Exception {
         card = new CardLayout();
         panelCadastro = new TelaDeCadastroDeAnimais();
         panelTabel = new TelaDeCadastroDeAnimais();
         //panelTabel = new TelaTabelaDeAnimais();
         initComponents();
-        
-        for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
-            if("Windows".equals(info.getName())){
+
+        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Windows".equals(info.getName())) {
                 UIManager.setLookAndFeel(info.getClassName());
                 break;
             }
         }
-        
         startArrayList();
         cleanAll();
-        
-        
 
         setLocationRelativeTo(null); //Para o jFrame ser gerado no centro da tela
         resetColor(ListarAnimaisAdotados);
         resetColor(CadastrarAnimal1);
         resetColor(Sobre);
-        
+
         jlbVoltar.setVisible(false);
-        
+
         jspScreens.setVisible(false);
         jspScreens.getVerticalScrollBar().setUnitIncrement(10);
 
     }
-    
-    
-    public void startArrayList(){
+
+    public void startArrayList() {
         listPanels.add(User);
         listPanels.add(About);
         listPanels.add(Animals);
-       
-    } 
-    
+    }
+
     public void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("px.png")));
     }
-
 
     public static void visiblePanel(JPanel j1) {
         j1.setVisible(true);
     } //Deixar visível a tela a ser exibida
 
     public void cleanAll() {
-        for(int cont = 0; cont<listPanels.size();cont++)
-            listPanels.get(cont).setVisible(false); 
+        for (int cont = 0; cont < listPanels.size(); cont++) {
+            listPanels.get(cont).setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -667,7 +660,7 @@ public class TelaMenu extends javax.swing.JFrame {
         cleanAll();
         jspScreens.setVisible(true);
         jspScreens.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        card.show(panelScreens,"panelCadastro");
+        card.show(panelScreens, "panelCadastro");
         visiblePanel(Animals);
     }//GEN-LAST:event_CadastrarAnimal1MouseClicked
 
@@ -703,29 +696,8 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastrarUser1MousePressed
 
     private void jpnFinalizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarMousePressed
-       
-
-        /*if(verificarSenha(senha, confSenha)){
-            if(verificar(email)){
-                emails.add(email);
-                lnomes.add(nome);
-                lsenha.add(senha);
-                JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-                cxNome.setText("");
-                cxEmail.setText("");
-                pswConfSenha.setText("");
-                pswSenha.setText("");
-            }
-        }*/
     }//GEN-LAST:event_jpnFinalizarMousePressed
 
-    private void getDate() {
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-        String strDate = dateFormat.format(date);
-        data = strDate;
-        //System.out.println(strDate);
-    }
     private void moveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMousePressed
         xx = evt.getX();
         xy = evt.getY();
@@ -736,10 +708,9 @@ public class TelaMenu extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_moveMouseDragged
-            
+
     private void ListarAnimaisAdotadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMouseClicked
         try {
-            //panelTabel = new TelaDeCadastroDeAnimais();
             panelTabel = new TelaTabelaDeAnimais();
         } catch (Exception ex) {
             Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
@@ -749,9 +720,6 @@ public class TelaMenu extends javax.swing.JFrame {
         cleanAll();
         jlbVoltar.setVisible(true);
         resetColor(ListarAnimaisAdotados);
-        
-        
-                
     }//GEN-LAST:event_ListarAnimaisAdotadosMouseClicked
 
     private void ListarAnimaisAdotadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMousePressed
@@ -768,48 +736,41 @@ public class TelaMenu extends javax.swing.JFrame {
     private void jlbVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbVoltarMouseClicked
         jpnTabel.remove(panelTabel);
         jlbVoltar.setVisible(false);
-        
     }//GEN-LAST:event_jlbVoltarMouseClicked
 
     private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
-        if(pswSenha1.getText().equals(pswConfSenha1.getText())){
-           User u = new User(cxEmail.getText(),cxNome.getText(),pswSenha1.getText());
+        if (pswSenha1.getText().equals(pswConfSenha1.getText())) {
+            User u = new User(cxEmail.getText(), cxNome.getText(), pswSenha1.getText());
             try {
-                
-                
                 new Thread(new Runnable() {
-                public void run() {
-                    JFrame frame;
-                    frame = new TelaLoading();
-                    frame.pack();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    public void run() {
+                        JFrame frame;
+                        frame = new TelaLoading();
+                        frame.pack();
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
+                        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-                    try {
-                        Thread.sleep(1000);
-                        new ControllerUser().inserir(u);
-                    } catch (Exception ex) {
-                        Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                        try {
+                            Thread.sleep(1000);
+                            new ControllerUser().inserir(u);
+                        } catch (Exception ex) {
+                            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        frame.setVisible(false);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
                     }
-                    frame.setVisible(false);
-                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                }
                 }).start();
-                
-                
-                
+
             } catch (Exception ex) {
                 Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        }else{
-             JOptionPane.showMessageDialog(this, "As senhas não são iguais");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "As senhas não são iguais");
         }
     }//GEN-LAST:event_jLabel25MousePressed
-    
-    
-    
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(186, 46, 186));
     }
@@ -857,7 +818,6 @@ public class TelaMenu extends javax.swing.JFrame {
                 } catch (Exception ex) {
                     Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
     }
@@ -930,5 +890,4 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JPasswordField pswConfSenha1;
     private javax.swing.JPasswordField pswSenha1;
     // End of variables declaration//GEN-END:variables
-
 }

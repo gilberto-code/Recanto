@@ -4,12 +4,12 @@ package Objects;
  *
  * @author Gilberto
  */
-
 import java.sql.Date;
 import javax.swing.ImageIcon;
 
-public class Animal{
-    protected String nome; 
+public class Animal {
+
+    protected String nome;
     protected int idade;
     protected String especie;
     protected String raca;
@@ -26,10 +26,7 @@ public class Animal{
     protected int id;
     protected ImageIcon ImagemIcon;
     protected String imagem;
-    
-    
-    
-        
+
     public Animal() {
     }
 
@@ -50,13 +47,10 @@ public class Animal{
         this.imagem = imagem;
     }
 
-    
-
     public ImageIcon getImagemIcon() {
         return ImagemIcon;
     }
 
-    
     public void setImagemIcon(ImageIcon ImagemIcon) {
         this.ImagemIcon = ImagemIcon;
     }
@@ -68,8 +62,9 @@ public class Animal{
     public void setImagem(String imagemPrinc) {
         this.imagem = imagemPrinc;
     }
+
     public Animal(String nome, int idade, String especie, String raca,
-            String cor, String porte, String sexo, String descricao, 
+            String cor, String porte, String sexo, String descricao,
             Date dataDeCadastro, String qualDoenca, boolean doente,
             boolean castrado, boolean vacinado, boolean adotado, String imagem) {
         this.nome = nome;
@@ -87,11 +82,11 @@ public class Animal{
         this.vacinado = vacinado;
         this.adotado = adotado;
         this.imagem = imagem;
-        
+
     }
 
     public Animal(String nome, int idade, String especie, String raca,
-            String cor, String porte, String sexo, String descricao, 
+            String cor, String porte, String sexo, String descricao,
             Date dataDeCadastro, String qualDoenca, boolean doente,
             boolean castrado, boolean vacinado, String imagem, int id) {
         this.nome = nome;
@@ -110,7 +105,7 @@ public class Animal{
         this.imagem = imagem;
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -191,7 +186,6 @@ public class Animal{
         this.qualDoenca = qualDoenca;
     }
 
-
     public boolean isDoente() {
         return doente;
     }
@@ -199,7 +193,6 @@ public class Animal{
     public void setDoente(boolean doente) {
         this.doente = doente;
     }
-
 
     public boolean isCastrado() {
         return castrado;
@@ -224,9 +217,6 @@ public class Animal{
     public void setAdotado(boolean adotado) {
         this.adotado = adotado;
     }
-
-   
-
 
     public int getId() {
         return id;
@@ -257,7 +247,4 @@ public class Animal{
         sb.append('}');
         return sb.toString();
     }
-
-    
-
 }

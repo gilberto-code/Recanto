@@ -10,18 +10,22 @@ package Objects;
  * @author Gilberto
  */
 public class User {
+
     private String nome;
     private String email;
     private String senha;
-    public User(){
-        
+
+    public User() {
+
     }
+
     public User(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
-     public User(String email, String senha) {
+
+    public User(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }
@@ -59,6 +63,5 @@ public class User {
         sb.append('}');
         return sb.toString();
     }
-    
-    
+
 }
