@@ -22,6 +22,8 @@ public class TelaLoading extends javax.swing.JFrame {
      */
     public TelaLoading() {
         initComponents();
+        
+        this.setAlwaysOnTop(true);
     }
 
     /**

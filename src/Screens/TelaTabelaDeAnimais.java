@@ -16,6 +16,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,6 +31,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1113,15 +1115,40 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setImagem(Controll_Images.ImagemParaString((ImageIcon) txt_imagem.getIcon()));
         
 
-        try {
-            System.out.println(animal_up);
-            controllerAnimal.update(animal_up);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new Thread(new Runnable() {
+            public void run() {
+                JFrame frame;
+                frame = new TelaLoading();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                System.out.println("Parente " + frame.getParent());
+                System.out.println("Root " + frame.getRootPane());
+                try {
+                    Thread.sleep(500);
+                    controllerAnimal.update(animal_up);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                try {
+                    modeloTabela = new MyTableModel(animal_up.isAdotado());                
+                    jtTabelaAnimais.setModel(modeloTabela);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                frame.setVisible(false);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+            }).start();
         
-        modeloTabela = new MyTableModel(animal_up.isAdotado());
-        jtTabelaAnimais.setModel(modeloTabela);
+        
+        
+        
+        
 
     }
     
