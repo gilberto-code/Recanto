@@ -5,6 +5,7 @@ import DataAcess.ConnectionDB;
 import Objects.Animal;
 import java.awt.Image;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +28,10 @@ import javax.swing.JOptionPane;
 public class ControllerAnimal {
 
     public void insert(Animal animal) throws Exception {
+        
+        long miliseconds = System.currentTimeMillis();
+        Date dataAtual = new Date(miliseconds);
+        
         PreparedStatement stmt
                 = ConnectionDB.getConnection().prepareStatement(
 
@@ -43,7 +48,7 @@ public class ControllerAnimal {
         stmt.setString(6, (animal.getPorte()));
         stmt.setString(7, (animal.getSexo()));
         stmt.setString(8, (animal.getDescricao()));
-        stmt.setDate(9, (animal.getDataDeCadastro()));
+        stmt.setDate(9, dataAtual);
         stmt.setString(10, (animal.getQualDoenca()));
         stmt.setBoolean(11, animal.isDoente());
         stmt.setBoolean(12, (animal.isCastrado()));
@@ -109,7 +114,7 @@ public class ControllerAnimal {
                     = ConnectionDB.getConnection().prepareStatement(
                             "UPDATE tb_animais SET especie = ?, nome = ?, idade = ?,raca = ?, "
                                     + "cor = ?,porte = ?, "
-                                    + "descricao = ?,dataDeCadastro = ?, qualDoenca = ?, "
+                                    + "descricao = ?, qualDoenca = ?, "
                                     + "doente  = ?, castrado = ?, vacinado = ?,"
                                     + " sexo = ? WHERE idAnimal = ?");
 
@@ -120,13 +125,12 @@ public class ControllerAnimal {
             ps.setString(5, animal.getCor());
             ps.setString(6, animal.getPorte());
             ps.setString(7, animal.getDescricao());
-            ps.setDate(8, animal.getDataDeCadastro());
-            ps.setString(9, animal.getQualDoenca());
-            ps.setBoolean(10, animal.isDoente());
-            ps.setBoolean(11, animal.isCastrado());
-            ps.setBoolean(12, animal.isVacinado());
-            ps.setString(13, animal.getSexo());
-            ps.setInt(14, animal.getId());
+            ps.setString(8, animal.getQualDoenca());
+            ps.setBoolean(9, animal.isDoente());
+            ps.setBoolean(10, animal.isCastrado());
+            ps.setBoolean(11, animal.isVacinado());
+            ps.setString(12, animal.getSexo());
+            ps.setInt(13, animal.getId());
             
             //System.out.println("1 - "+ ps.getConnection().());
             int row = ps.executeUpdate();

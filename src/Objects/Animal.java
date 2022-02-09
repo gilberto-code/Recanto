@@ -33,6 +33,25 @@ public class Animal{
     public Animal() {
     }
 
+    public Animal(String nome, int idade, String especie, String raca, String cor, String porte, String sexo, String descricao, String qualDoenca, boolean doente, boolean castrado, boolean vacinado, boolean adotado, String imagem) {
+        this.nome = nome;
+        this.idade = idade;
+        this.especie = especie;
+        this.raca = raca;
+        this.cor = cor;
+        this.porte = porte;
+        this.sexo = sexo;
+        this.descricao = descricao;
+        this.qualDoenca = qualDoenca;
+        this.doente = doente;
+        this.castrado = castrado;
+        this.vacinado = vacinado;
+        this.adotado = adotado;
+        this.imagem = imagem;
+    }
+
+    
+
     public ImageIcon getImagemIcon() {
         return ImagemIcon;
     }
