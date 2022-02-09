@@ -74,9 +74,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     jcbEscolherTabela.setBackground(Color.WHITE);
                     jspDescricao.getVerticalScrollBar().setUnitIncrement(10);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
@@ -1049,9 +1048,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jcbAnimaisParaAdotar.addItem(animal);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -1061,9 +1059,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         try {
             controllerAnimal.delete(animal);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jpnExcluirMouseClicked
@@ -1107,18 +1104,16 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     Thread.sleep(500);
                     controllerAnimal.update(animal_up);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
                     modeloTabela = new MyTableModel(animal_up.isAdotado());                
                     jtTabelaAnimais.setModel(modeloTabela);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.setVisible(false);
@@ -1336,9 +1331,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             // TODO add your handling code here:
             adicionarImagem(txt_imagem);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jpnAddFotoMouseClicked

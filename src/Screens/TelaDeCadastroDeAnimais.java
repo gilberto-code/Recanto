@@ -49,24 +49,21 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 } catch (ClassNotFoundException ex) {
-                    JOptionPane.showMessageDialog(null,
-                            "Conexão não estabelecida\n " + ex.getMessage(),
-                            "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
-                    JOptionPane.showMessageDialog(null,
-                            "Conexão não estabelecida\n " + ex.getMessage(),
-                            "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
-                    JOptionPane.showMessageDialog(null,
-                            "Conexão não estabelecida\n " + ex.getMessage(),
-                            "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedLookAndFeelException ex) {
-                    JOptionPane.showMessageDialog(null,
-                            "Conexão não estabelecida\n " + ex.getMessage(),
-                            "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -1073,18 +1070,7 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     private void cadastrarAnimal() throws IOException {
         try {
             animal = colherInformacao();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
-            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
-            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        new Thread(new Runnable() {
+            new Thread(new Runnable() {
             public void run() {
                 JFrame frame;
                 frame = new TelaLoading();
@@ -1097,9 +1083,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                     Thread.sleep(1000);
                     cAnimal.insert(animal);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.setVisible(false);
@@ -1107,15 +1092,24 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         }).start();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     private void btn_cadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cadastrarMouseClicked
         try {
             cadastrarAnimal();
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,
-                    "Conexão não estabelecida\n " + ex.getMessage(),
-                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
         limparComponentes();

@@ -20,6 +20,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -75,7 +76,7 @@ public class Controll_Images {
             String encodedString = Base64.getEncoder().encodeToString(fileContent);
             return encodedString;
         } catch (IOException ex) {
-            
+
         }
         return "";
     }
@@ -85,28 +86,35 @@ public class Controll_Images {
             ImageIcon img_icon = Imagem;
             Icon icon = img_icon;
 
-            BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = img.createGraphics();
-            icon.paintIcon(null, g2d, 0, 0);
-            g2d.dispose();
+            try {
+                BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = img.createGraphics();
+                icon.paintIcon(null, g2d, 0, 0);
+                g2d.dispose();
 
-            byte[] img_bytes = null;
-            String encodedImage = null;
-            try ( ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-                ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
-                try {
-                    ImageIO.write(img, "png", ios);
-                    // Set a flag to indicate that the write was successful
-                } finally {
-                    ios.close();
+                byte[] img_bytes = null;
+                String encodedImage = null;
+
+                try ( ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                    ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
+                    try {
+                        ImageIO.write(img, "png", ios);
+                        // Set a flag to indicate that the write was successful
+                    } finally {
+                        ios.close();
+                    }
+                    img_bytes = baos.toByteArray();
+                    Base64.Encoder encoder = Base64.getEncoder();
+                    encodedImage = encoder.encodeToString(img_bytes);
+                    return (encodedImage);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-                img_bytes = baos.toByteArray();
-                Base64.Encoder encoder = Base64.getEncoder();
-                encodedImage = encoder.encodeToString(img_bytes);
-                return (encodedImage);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(null, "Imagem não adicionada corretamente",
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             }
+
         }
         return null;
     }
