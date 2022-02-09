@@ -65,7 +65,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         
         jtTabelaAnimais.setModel(modeloTabela);
         jtTabelaAnimais.setDefaultRenderer(Object.class, new CellRenderer());
-        jtTabelaAnimais.getColumnModel().getColumn(0).setPreferredWidth(150);
+        //jtTabelaAnimais.getColumnModel().getColumn(0).setPreferredWidth(150);
         jtTabelaAnimais.setRowHeight(150);
               
         //jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -1089,11 +1089,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         preencherComboBoxAnimaisAdocao(jcbAnimais1);
     }//GEN-LAST:event_jpnAdotarMouseClicked
     public int rowSelect;
-    private void atualizarAnimal(){
+    private void atualizarAnimal() throws Exception{
         System.out.println(rowSelect);
-        Animal animal_up = modeloTabela.getRowSelected(rowSelect);
-        //Animal animal_up = new Animal();
-        
+        Animal animal_up = modeloTabela.getRowSelected(rowSelect);        
         animal_up.setNome(jtfNome.getText());
         animal_up.setEspecie(jtfEspecie.getText());
         animal_up.setIdade(Integer.parseInt(jtfIdade.getText()));
@@ -1112,9 +1110,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         animal_up.setCastrado(jrbCastradoSim.isSelected());
         animal_up.setQualDoenca(jtfDoenca.getText());
         animal_up.setDescricao(jtaDescricao.getText());
-        
-        
-        
         animal_up.setImagem(Controll_Images.ImagemParaString((ImageIcon) txt_imagem.getIcon()));
         
 
@@ -1124,19 +1119,19 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            this.modeloTabela = new MyTableModel();
-//            jTable1.setModel(modeloTabela);
-//            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-//            jTable1.setRowHeight(150);
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        
+        modeloTabela = new MyTableModel(animal_up.isAdotado());
+        jtTabelaAnimais.setModel(modeloTabela);
+
     }
     
     
     private void jpnAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAtualizarMouseClicked
-        atualizarAnimal();
+        try {
+            atualizarAnimal();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jpnAtualizarMouseClicked
 
     private void jpnPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnPesquisarMouseClicked
