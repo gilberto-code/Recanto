@@ -60,29 +60,51 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     
     public TelaTabelaDeAnimais() throws Exception {
         initComponents();
-        modeloTabela = new MyTableModel(false);
+        
+        new Thread(new Runnable() {
+            public void run() {
+                JFrame frame;
+                frame = new TelaLoading();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                
+                
+                try {
+                   // Thread.sleep(100);
+                    modeloTabela = new MyTableModel(false);;                
+                    jtTabelaAnimais.setModel(modeloTabela);
+                    jtTabelaAnimais.setModel(modeloTabela);
+                    jtTabelaAnimais.setDefaultRenderer(Object.class, new CellRenderer());
+                    //jtTabelaAnimais.getColumnModel().getColumn(0).setPreferredWidth(150);
+                    jtTabelaAnimais.setRowHeight(150);
+
+                    for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
+                        if("Windows".equals(info.getName())){
+                            UIManager.setLookAndFeel(info.getClassName());
+                            break;
+                        }
+                    }
+                    jspAdocao.getVerticalScrollBar().setUnitIncrement(5);
+                    jcbEscolherTabela.setBackground(Color.WHITE);
+
+                    jspDescricao.getVerticalScrollBar().setUnitIncrement(10);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                frame.setVisible(false);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+            }).start();
+        
         //modeloTabela2 = new MyTableModelAdotados();
         //jTable1.setModel(modeloTabela2);
         
         
-        jtTabelaAnimais.setModel(modeloTabela);
-        jtTabelaAnimais.setDefaultRenderer(Object.class, new CellRenderer());
-        //jtTabelaAnimais.getColumnModel().getColumn(0).setPreferredWidth(150);
-        jtTabelaAnimais.setRowHeight(150);
-              
-        //jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-        //jTable1.setRowHeight(150);
         
-        for(LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
-            if("Windows".equals(info.getName())){
-                UIManager.setLookAndFeel(info.getClassName());
-                break;
-            }
-        }
-        jspAdocao.getVerticalScrollBar().setUnitIncrement(5);
-        jcbEscolherTabela.setBackground(Color.WHITE);
-
-        jspDescricao.getVerticalScrollBar().setUnitIncrement(10);
     }
     
 /**
@@ -1123,8 +1145,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                System.out.println("Parente " + frame.getParent());
-                System.out.println("Root " + frame.getRootPane());
+                
+                
                 try {
                     Thread.sleep(500);
                     controllerAnimal.update(animal_up);
