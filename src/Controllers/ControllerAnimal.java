@@ -46,7 +46,7 @@ public class ControllerAnimal {
 
         int row = stmt.executeUpdate();
         if (row == 0) {
-            throw new Exception("Insercao não realizada");
+            throw new Exception("Infelismente o Animal não foi cadastrado, tente novamente");
         } else {
             stmt.close();
 

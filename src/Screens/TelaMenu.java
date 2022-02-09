@@ -12,10 +12,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -62,9 +59,7 @@ public final class TelaMenu extends javax.swing.JFrame {
         resetColor(ListarAnimaisAdotados);
         resetColor(CadastrarAnimal1);
         resetColor(Sobre);
-
         jlbVoltar.setVisible(false);
-
         jspScreens.setVisible(false);
         jspScreens.getVerticalScrollBar().setUnitIncrement(10);
 
@@ -750,7 +745,6 @@ public final class TelaMenu extends javax.swing.JFrame {
                         frame.setLocationRelativeTo(null);
                         frame.setVisible(true);
                         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
                         try {
                             Thread.sleep(1000);
                             new ControllerUser().inserir(u);
@@ -764,6 +758,7 @@ public final class TelaMenu extends javax.swing.JFrame {
                 }).start();
 
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
                 Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -816,6 +811,7 @@ public final class TelaMenu extends javax.swing.JFrame {
                 try {
                     new TelaMenu().setVisible(true);
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                     Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

@@ -65,7 +65,6 @@ public class MyTableModel extends AbstractTableModel {
     public void updateRow(int index, Animal d) throws Exception {
         if (index != -1) {
             d.setId(this.animals.get(index).getId()); // pois d passado não tem o atributo id preenchido!
-            //System.out.println(d.getId()+ " - "+this.animals.get(index).isAcidentado());
             this.controllerAnimal.update(d);
             this.animals.remove(index);
             this.animals.add(index, d);

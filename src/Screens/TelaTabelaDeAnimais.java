@@ -19,8 +19,6 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,6 +74,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     jcbEscolherTabela.setBackground(Color.WHITE);
                     jspDescricao.getVerticalScrollBar().setUnitIncrement(10);
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
@@ -1048,6 +1049,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jcbAnimaisParaAdotar.addItem(animal);
             }
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -1057,6 +1061,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         try {
             controllerAnimal.delete(animal);
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jpnExcluirMouseClicked
@@ -1100,12 +1107,18 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                     Thread.sleep(500);
                     controllerAnimal.update(animal_up);
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
                     modeloTabela = new MyTableModel(animal_up.isAdotado());                
                     jtTabelaAnimais.setModel(modeloTabela);
                 } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
                     Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 frame.setVisible(false);
@@ -1323,6 +1336,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             // TODO add your handling code here:
             adicionarImagem(txt_imagem);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Conexão não estabelecida\n " + ex.getMessage(),
+                    "Erro na Conexao com o SGBD", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
