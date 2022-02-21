@@ -1047,6 +1047,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
 
         jSlider1.setBackground(new java.awt.Color(255, 255, 255));
         jSlider1.setForeground(new java.awt.Color(56, 0, 56));
+        jSlider1.setMaximum(30);
+        jSlider1.setValue(0);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);
@@ -1066,32 +1068,41 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     public boolean qualbg(ButtonGroup b) {
         return b.getSelection().equals("Sim");
     }
+    boolean cadastrado = true;
 
-    private void cadastrarAnimal() throws IOException {
+    private boolean cadastrarAnimal() throws IOException {
         try {
             animal = colherInformacao();
-            new Thread(new Runnable() {
-            public void run() {
-                JFrame frame;
-                frame = new TelaLoading();
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            if (animal != null) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        cadastrado = true;
+                        JFrame frame;
+                        frame = new TelaLoading();
+                        frame.pack();
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
+                        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-                try {
-                    Thread.sleep(1000);
-                    cAnimal.insert(animal);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(),
-                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
-                    Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.setVisible(false);
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                        try {
+                            Thread.sleep(1000);
+                            cAnimal.insert(animal);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(),
+                                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+                            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        frame.setVisible(false);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
+                    }
+                }).start();
+            } else {
+                cadastrado = false;
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha as informações corretamente", JOptionPane.INFORMATION_MESSAGE);
             }
-        }).start();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
@@ -1101,18 +1112,21 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
                     "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return cadastrado;
     }
 
     private void btn_cadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cadastrarMouseClicked
         try {
-            cadastrarAnimal();
+            if (cadastrarAnimal()) {
+                JOptionPane.showMessageDialog(null,
+                    "Animal Cadastrado com Sucesso");
+                limparComponentes();
+            }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
             Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
-        limparComponentes();
     }//GEN-LAST:event_btn_cadastrarMouseClicked
 
     private void limparComponentes() {
@@ -1225,50 +1239,84 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jSlider1StateChanged
 
     public Animal colherInformacao() throws SQLException, IOException {
-        String nome;
-        String especie;
-        int idade;
-        String raca;
-        String cor;
-        String porte;
-        String sexo;
-        String descricao;
-        String qualDoenca;
-        boolean doente;
-        boolean castrado;
-        boolean vacinado;
+        try {
+            String nome;
+            String especie;
+            int idade;
+            String raca;
+            String cor;
+            String porte;
+            String sexo;
+            String descricao;
+            String qualDoenca;
+            boolean doente;
+            boolean castrado;
+            boolean vacinado;
+            String imagemAnimal;
 
-        String imagemAnimal;
+            nome = jtx_nome.getText();
+            especie = jComboEspecie.getSelectedItem().toString();
+            raca = jtx_raca.getText();
+            cor = jtx_cor.getText();
+            porte = (String) jComboPorte.getSelectedItem();
 
-        //Coleta dos dados dos campos de texto
-        nome = jtx_nome.getText();
-        especie = jComboEspecie.getSelectedItem().toString();
-        raca = jtx_raca.getText();
-        cor = jtx_cor.getText();
-        porte = (String) jComboPorte.getSelectedItem();
+            if (jrMacho.isSelected()) {
+                sexo = "Macho";
+            } else {
+                sexo = "Fêmea";
+            }
+            descricao = jtx_descricao.getText();
+            qualDoenca = jtxdoenca.getText();
 
-        if (jrMacho.isSelected()) {
-            sexo = "Macho";
-        } else {
-            sexo = "Fêmea";
+            imagemAnimal = Controll_Images.ImagemParaString(ImagemIconAnimal);
+            vacinado = jrVacinadoSim.isSelected();
+            doente = jrDoenteSim.isSelected();
+            castrado = jrCastradoSim.isSelected();
+            idade = jSlider1.getValue();
+
+            if (nome.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha o nome do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (especie.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha a espécie do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (raca.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha a raça do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (cor.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha a cor do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (porte.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha o porte do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (descricao.equals("")) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha a descrição do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else if (idade == 0) {
+                JOptionPane.showMessageDialog(null, "Falha no Cadastro",
+                        "Preencha a idade do Animal", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                boolean adotado = false;
+                Animal a = new Animal(nome, idade, especie, raca,
+                        cor, porte, sexo,
+                        descricao,
+                        qualDoenca, doente, castrado, vacinado,
+                        adotado, imagemAnimal);
+                return a;
+            }
+            return null;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
         }
-        descricao = jtx_descricao.getText();
-        qualDoenca = jtxdoenca.getText();
 
-        imagemAnimal = Controll_Images.ImagemParaString(ImagemIconAnimal);
-        vacinado = jrVacinadoSim.isSelected();
-        doente = jrDoenteSim.isSelected();
-        castrado = jrCastradoSim.isSelected();
+        return null;
+    }
 
-        idade = 0;
-        boolean adotado = false;
+    public boolean verificarPreenchido() {
 
-        Animal a = new Animal(nome, idade, especie, raca,
-                cor, porte, sexo,
-                descricao,
-                qualDoenca, doente, castrado, vacinado,
-                adotado, imagemAnimal);
-        return a;
+        return false;
     }
 
     public void adicionarImagem(JLabel fotinha) throws IOException {

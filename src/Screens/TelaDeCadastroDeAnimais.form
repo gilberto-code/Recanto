@@ -2341,6 +2341,8 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="38" green="0" red="38" type="rgb"/>
         </Property>
+        <Property name="maximum" type="int" value="30"/>
+        <Property name="value" type="int" value="0"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider1StateChanged"/>
