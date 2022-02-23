@@ -29,6 +29,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -45,8 +46,10 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     ImageIcon ImagemIconAdotante = new ImageIcon();
     
     String ultimoPacote = "";
+    TelaMenu framePrincipal;
     
-    public TelaTabelaDeAnimais() throws Exception {
+    public TelaTabelaDeAnimais(JFrame jf) throws Exception {
+        framePrincipal = (TelaMenu) jf;
         initComponents();
         new Thread(new Runnable() {
             public void run() {
@@ -160,6 +163,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jcheqNome = new javax.swing.JCheckBox();
         jcheqIdade = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
+        jFecharPesquisa = new javax.swing.JLabel();
         jpnAdocao = new javax.swing.JPanel();
         jcbSelecioneAdotante = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
@@ -611,7 +615,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtxPesquisaNome.setAlignmentX(0.0F);
         jtxPesquisaNome.setAlignmentY(0.0F);
         jtxPesquisaNome.setPreferredSize(new java.awt.Dimension(0, 17));
-        jpPesquisa.add(jtxPesquisaNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 230, 25));
+        jpPesquisa.add(jtxPesquisaNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 230, 25));
 
         lblPesquisar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-pesquisar-30.png"))); // NOI18N
@@ -620,7 +624,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 lblPesquisarMouseClicked(evt);
             }
         });
-        jpPesquisa.add(lblPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        jpPesquisa.add(lblPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         jtxPesquisaIdade.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jtxPesquisaIdade.setForeground(new java.awt.Color(56, 0, 56));
@@ -628,20 +632,29 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtxPesquisaIdade.setAlignmentY(0.0F);
         jtxPesquisaIdade.setPreferredSize(new java.awt.Dimension(0, 17));
         jtxPesquisaIdade.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpPesquisa.add(jtxPesquisaIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 230, 25));
+        jpPesquisa.add(jtxPesquisaIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 230, 25));
 
         jcheqNome.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jcheqNome.setForeground(new java.awt.Color(56, 0, 56));
         jcheqNome.setText("Nome:");
         jcheqNome.setOpaque(false);
-        jpPesquisa.add(jcheqNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jpPesquisa.add(jcheqNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jcheqIdade.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jcheqIdade.setForeground(new java.awt.Color(56, 0, 56));
         jcheqIdade.setText("Idade");
         jcheqIdade.setOpaque(false);
-        jpPesquisa.add(jcheqIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jpPesquisa.add(jcheqIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
         jpPesquisa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, 360));
+
+        jFecharPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/IconExit (6).png"))); // NOI18N
+        jFecharPesquisa.setPreferredSize(new java.awt.Dimension(40, 40));
+        jFecharPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFecharPesquisaMouseClicked(evt);
+            }
+        });
+        jpPesquisa.add(jFecharPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, 20));
 
         jpnPaiLeft.add(jpPesquisa, "jpnPesquisa");
 
@@ -1135,6 +1148,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private void jpnPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnPesquisarMouseClicked
         CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnPesquisa");
+        JPanel p = framePrincipal.getLeftPanel();
+        p.setVisible(false);
     }//GEN-LAST:event_jpnPesquisarMouseClicked
 
     private void jpnListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnListaMouseClicked
@@ -1336,6 +1351,12 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
+
+    private void jFecharPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFecharPesquisaMouseClicked
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
+        cl.show(jpnPaiLeft, "jpnPrincipal");
+    }//GEN-LAST:event_jFecharPesquisaMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1343,6 +1364,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JLabel jFecharPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

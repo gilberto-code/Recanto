@@ -64,6 +64,9 @@ public final class TelaMenu extends javax.swing.JFrame {
         jspScreens.getVerticalScrollBar().setUnitIncrement(10);
 
     }
+    public JPanel getLeftPanel(){
+        return jpLeftPanel;
+    }
 
     public void startArrayList() {
         listPanels.add(User);
@@ -651,45 +654,6 @@ public final class TelaMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jlbExitMouseClicked
 
-    private void CadastrarAnimal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarAnimal1MouseClicked
-        cleanAll();
-        jspScreens.setVisible(true);
-        jspScreens.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        card.show(panelScreens, "panelCadastro");
-        visiblePanel(Animals);
-    }//GEN-LAST:event_CadastrarAnimal1MouseClicked
-
-    private void SobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SobreMouseClicked
-        cleanAll();
-        visiblePanel(About);
-    }//GEN-LAST:event_SobreMouseClicked
-
-    private void CadastrarAnimal1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarAnimal1MousePressed
-        setColor(CadastrarAnimal1);
-        resetColor(Sobre);
-        resetColor(ListarAnimaisAdotados);
-        resetColor(CadastrarUser1);
-    }//GEN-LAST:event_CadastrarAnimal1MousePressed
-
-    private void SobreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SobreMousePressed
-        setColor(Sobre);
-        resetColor(CadastrarAnimal1);
-        resetColor(ListarAnimaisAdotados);
-        resetColor(CadastrarUser1);
-    }//GEN-LAST:event_SobreMousePressed
-
-    private void CadastrarUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarUser1MouseClicked
-        cleanAll();
-        visiblePanel(User);
-    }//GEN-LAST:event_CadastrarUser1MouseClicked
-
-    private void CadastrarUser1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarUser1MousePressed
-        setColor(CadastrarUser1);
-        resetColor(CadastrarAnimal1);
-        resetColor(ListarAnimaisAdotados);
-        resetColor(Sobre);
-    }//GEN-LAST:event_CadastrarUser1MousePressed
-
     private void jpnFinalizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarMousePressed
     }//GEN-LAST:event_jpnFinalizarMousePressed
 
@@ -704,32 +668,13 @@ public final class TelaMenu extends javax.swing.JFrame {
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_moveMouseDragged
 
-    private void ListarAnimaisAdotadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMouseClicked
-        try {
-            panelTabel = new TelaTabelaDeAnimais();
-        } catch (Exception ex) {
-            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jpnTabel.add(panelTabel);
-        panelTabel.setVisible(true);
-        cleanAll();
-        jlbVoltar.setVisible(true);
-        resetColor(ListarAnimaisAdotados);
-    }//GEN-LAST:event_ListarAnimaisAdotadosMouseClicked
-
-    private void ListarAnimaisAdotadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMousePressed
-        setColor(ListarAnimaisAdotados);
-        resetColor(CadastrarAnimal1);
-        resetColor(Sobre);
-        resetColor(CadastrarUser1);
-    }//GEN-LAST:event_ListarAnimaisAdotadosMousePressed
-
     private void jlbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbMinimizarMouseClicked
         setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jlbMinimizarMouseClicked
 
     private void jlbVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbVoltarMouseClicked
         jpnTabel.remove(panelTabel);
+        jpLeftPanel.setVisible(true);
         jlbVoltar.setVisible(false);
     }//GEN-LAST:event_jlbVoltarMouseClicked
 
@@ -765,6 +710,65 @@ public final class TelaMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "As senhas não são iguais");
         }
     }//GEN-LAST:event_jLabel25MousePressed
+
+    private void CadastrarUser1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarUser1MousePressed
+        setColor(CadastrarUser1);
+        resetColor(CadastrarAnimal1);
+        resetColor(ListarAnimaisAdotados);
+        resetColor(Sobre);
+    }//GEN-LAST:event_CadastrarUser1MousePressed
+
+    private void CadastrarUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarUser1MouseClicked
+        cleanAll();
+        visiblePanel(User);
+    }//GEN-LAST:event_CadastrarUser1MouseClicked
+
+    private void SobreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SobreMousePressed
+        setColor(Sobre);
+        resetColor(CadastrarAnimal1);
+        resetColor(ListarAnimaisAdotados);
+        resetColor(CadastrarUser1);
+    }//GEN-LAST:event_SobreMousePressed
+
+    private void SobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SobreMouseClicked
+        cleanAll();
+        visiblePanel(About);
+    }//GEN-LAST:event_SobreMouseClicked
+
+    private void CadastrarAnimal1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarAnimal1MousePressed
+        setColor(CadastrarAnimal1);
+        resetColor(Sobre);
+        resetColor(ListarAnimaisAdotados);
+        resetColor(CadastrarUser1);
+    }//GEN-LAST:event_CadastrarAnimal1MousePressed
+
+    private void CadastrarAnimal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarAnimal1MouseClicked
+        cleanAll();
+        jspScreens.setVisible(true);
+        jspScreens.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        card.show(panelScreens, "panelCadastro");
+        visiblePanel(Animals);
+    }//GEN-LAST:event_CadastrarAnimal1MouseClicked
+
+    private void ListarAnimaisAdotadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMousePressed
+        setColor(ListarAnimaisAdotados);
+        resetColor(CadastrarAnimal1);
+        resetColor(Sobre);
+        resetColor(CadastrarUser1);
+    }//GEN-LAST:event_ListarAnimaisAdotadosMousePressed
+
+    private void ListarAnimaisAdotadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarAnimaisAdotadosMouseClicked
+        try {
+            panelTabel = new TelaTabelaDeAnimais(this);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jpnTabel.add(panelTabel);
+        panelTabel.setVisible(true);
+        cleanAll();
+        jlbVoltar.setVisible(true);
+        resetColor(ListarAnimaisAdotados);
+    }//GEN-LAST:event_ListarAnimaisAdotadosMouseClicked
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(186, 46, 186));
