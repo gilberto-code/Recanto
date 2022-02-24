@@ -650,7 +650,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(56, 0, 56));
         jLabel33.setText("Espécie");
-        jpnFiltros.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 20));
+        jpnFiltros.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 12));
 
         jLabel44.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(56, 0, 56));
@@ -1302,38 +1302,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jpnListaMouseClicked
 
-    private void jcbEscolherTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEscolherTabelaActionPerformed
-        CardLayout cl = (CardLayout) jpnPai.getLayout();
-        switch (jcbEscolherTabela.getSelectedItem().toString()) {
-            case "Animais para Adoção":
-                {
-                    cl.show(jpnPai, "TabelaAdocao");
-                    try {
-                        modeloTabela = new MyTableModel(false);
-                    } catch (Exception ex) {
-                        Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    jtTabelaAnimais.setModel(modeloTabela);
-                    break;
-                }
-            case "Animais Adotados":
-                {
-                    cl.show(jpnPai, "TelaAdotados");
-                    
-                    try {
-                        modeloTabela = new MyTableModel(true);
-                    } catch (Exception ex) {
-                        Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    jtTabelaAnimais.setModel(modeloTabela);
-                    break;
-                }
-            default:
-                break;
-        }
-        System.out.println(jcbEscolherTabela.getSelectedItem().toString());
-    }//GEN-LAST:event_jcbEscolherTabelaActionPerformed
-
     private void jtfEmailAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmailAdotanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfEmailAdotanteActionPerformed
@@ -1534,6 +1502,37 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnPrincipal");        // TODO add your handling code here:
     }//GEN-LAST:event_jFecharPesquisaMouseClicked
+
+    private void jcbEscolherTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEscolherTabelaActionPerformed
+        CardLayout cl = (CardLayout) jpnPai.getLayout();
+        switch (jcbEscolherTabela.getSelectedItem().toString()) {
+            case "Animais para Adoção":
+            {
+                cl.show(jpnPai, "TabelaAdocao");
+                try {
+                    modeloTabela = new MyTableModel(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jtTabelaAnimais.setModel(modeloTabela);
+                break;
+            }
+            case "Animais Adotados":
+            {
+                cl.show(jpnPai, "TelaAdotados");
+                try {
+                    modeloTabela = new MyTableModel(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jtTabelaAnimais.setModel(modeloTabela);
+                break;
+            }
+            default:
+            break;
+        }
+        System.out.println(jcbEscolherTabela.getSelectedItem().toString());
+    }//GEN-LAST:event_jcbEscolherTabelaActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
