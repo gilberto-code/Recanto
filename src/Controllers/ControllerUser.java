@@ -58,9 +58,9 @@ public class ControllerUser {
         try {
             int row = stmt.executeUpdate();
             if (row == 0) {
-                throw new Exception("Insercao não realizada");
+                JOptionPane.showMessageDialog(null,"Insercao não realizada");
             } else {
-                JOptionPane.showMessageDialog(null, "Inserção falhou, tente por favor novamente");
+                JOptionPane.showMessageDialog(null, "Inserção realizada com Sucesso");
             }
         } catch (Exception e) {
             if (e.getLocalizedMessage().startsWith("Duplicate entry")) {

@@ -24,7 +24,7 @@ public class Animal {
     protected boolean vacinado;
     protected boolean adotado;
     protected int id;
-    protected ImageIcon ImagemIcon;
+    //protected ImageIcon ImagemIcon;
     protected String imagem;
 
     public Animal() {
@@ -47,13 +47,7 @@ public class Animal {
         this.imagem = imagem;
     }
 
-    public ImageIcon getImagemIcon() {
-        return ImagemIcon;
-    }
-
-    public void setImagemIcon(ImageIcon ImagemIcon) {
-        this.ImagemIcon = ImagemIcon;
-    }
+    
 
     public String getImagem() {
         return imagem;
@@ -243,7 +237,6 @@ public class Animal {
         sb.append(", castrado=").append(castrado);
         sb.append(", vacinado=").append(vacinado);
         sb.append(", id=").append(id);
-        sb.append(", ImagemIcon=").append(ImagemIcon);
         sb.append('}');
         return sb.toString();
     }
