@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -61,9 +62,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 
                 try {
-                    modeloTabela = new MyTableModel(false);;                
+                    modeloTabela = new MyTableModel(false);               
                     jtTabelaAnimais.setModel(modeloTabela);
-                    jtTabelaAnimais.setModel(modeloTabela);
+                    //jtTabelaAnimais.setModel(modeloTabela);
                     jtTabelaAnimais.setDefaultRenderer(Object.class, new CellRenderer());
                     jtTabelaAnimais.setRowHeight(150);
 
@@ -99,10 +100,10 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
+        bgFiltroPrenha = new javax.swing.ButtonGroup();
+        bgFiltroVacinado = new javax.swing.ButtonGroup();
+        bgFiltroCastrado = new javax.swing.ButtonGroup();
+        bgFiltroSexo = new javax.swing.ButtonGroup();
         jpnBackground = new javax.swing.JPanel();
         jpnPaiLeft = new javax.swing.JPanel();
         jpnPrincipal = new javax.swing.JPanel();
@@ -157,12 +158,25 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jpnLista = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jpPesquisa = new javax.swing.JPanel();
-        jtxPesquisaNome = new javax.swing.JTextField();
+        jpnFiltros = new javax.swing.JPanel();
         lblPesquisar = new javax.swing.JLabel();
-        jtxPesquisaIdade = new javax.swing.JTextField();
-        jcheqNome = new javax.swing.JCheckBox();
-        jcheqIdade = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
+        jLimparSexo = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jtfFiltroEspecie = new javax.swing.JTextField();
+        jtfFiltroNome = new javax.swing.JTextField();
+        jtfFiltroPorte = new javax.swing.JTextField();
+        jtfFiltroRaca = new javax.swing.JTextField();
+        jtfFiltroCor = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jrbFiltroMacho = new javax.swing.JRadioButton();
+        jrbFiltroFemea = new javax.swing.JRadioButton();
+        jrbFemea3 = new javax.swing.JRadioButton();
         jFecharPesquisa = new javax.swing.JLabel();
         jpnAdocao = new javax.swing.JPanel();
         jcbSelecioneAdotante = new javax.swing.JComboBox<>();
@@ -372,28 +386,28 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnDescricao.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 240, -1));
 
-        buttonGroup2.add(jrbVacinadoSim);
+        bgFiltroVacinado.add(jrbVacinadoSim);
         jrbVacinadoSim.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbVacinadoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrbVacinadoSim.setText("Sim");
         jrbVacinadoSim.setOpaque(false);
         jpnDescricao.add(jrbVacinadoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, 16));
 
-        buttonGroup2.add(jrbVacinadoNao);
+        bgFiltroVacinado.add(jrbVacinadoNao);
         jrbVacinadoNao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbVacinadoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrbVacinadoNao.setText("Não");
         jrbVacinadoNao.setOpaque(false);
         jpnDescricao.add(jrbVacinadoNao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, 16));
 
-        buttonGroup3.add(jrbCastradoSim);
+        bgFiltroCastrado.add(jrbCastradoSim);
         jrbCastradoSim.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbCastradoSim.setForeground(new java.awt.Color(56, 0, 56));
         jrbCastradoSim.setText("Sim");
         jrbCastradoSim.setOpaque(false);
         jpnDescricao.add(jrbCastradoSim, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, 16));
 
-        buttonGroup3.add(jrbCastradoNao);
+        bgFiltroCastrado.add(jrbCastradoNao);
         jrbCastradoNao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbCastradoNao.setForeground(new java.awt.Color(56, 0, 56));
         jrbCastradoNao.setText("Não");
@@ -430,13 +444,13 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnPrenha.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonGroup1.add(jrbPrenhaNao);
+        bgFiltroPrenha.add(jrbPrenhaNao);
         jrbPrenhaNao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbPrenhaNao.setForeground(new java.awt.Color(56, 0, 56));
         jrbPrenhaNao.setText("Não");
         jrbPrenhaNao.setOpaque(false);
 
-        buttonGroup1.add(jrbPrenhaSim);
+        bgFiltroPrenha.add(jrbPrenhaSim);
         jrbPrenhaSim.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbPrenhaSim.setForeground(new java.awt.Color(56, 0, 56));
         jrbPrenhaSim.setText("Sim");
@@ -463,7 +477,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
         jpnDescricao.add(jpnPrenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, 20));
 
-        buttonGroup4.add(jrbMacho);
+        bgFiltroSexo.add(jrbMacho);
         jrbMacho.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbMacho.setForeground(new java.awt.Color(56, 0, 56));
         jrbMacho.setText("Macho");
@@ -475,7 +489,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         });
         jpnDescricao.add(jrbMacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, 16));
 
-        buttonGroup4.add(jrbFemea);
+        bgFiltroSexo.add(jrbFemea);
         jrbFemea.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jrbFemea.setForeground(new java.awt.Color(56, 0, 56));
         jrbFemea.setText("Fêmea");
@@ -563,7 +577,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Pesquisar");
+        jLabel8.setText("Filtrar");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jpnPesquisarLayout = new javax.swing.GroupLayout(jpnPesquisar);
@@ -610,12 +624,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jpPesquisa.setPreferredSize(new java.awt.Dimension(300, 580));
         jpPesquisa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtxPesquisaNome.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtxPesquisaNome.setForeground(new java.awt.Color(56, 0, 56));
-        jtxPesquisaNome.setAlignmentX(0.0F);
-        jtxPesquisaNome.setAlignmentY(0.0F);
-        jtxPesquisaNome.setPreferredSize(new java.awt.Dimension(0, 17));
-        jpPesquisa.add(jtxPesquisaNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 230, 25));
+        jpnFiltros.setBackground(new java.awt.Color(255, 255, 255));
+        jpnFiltros.setPreferredSize(new java.awt.Dimension(300, 1000));
+        jpnFiltros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPesquisar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-pesquisar-30.png"))); // NOI18N
@@ -624,28 +635,139 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 lblPesquisarMouseClicked(evt);
             }
         });
-        jpPesquisa.add(lblPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+        jpnFiltros.add(lblPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, -1));
+        jpnFiltros.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, 360));
 
-        jtxPesquisaIdade.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtxPesquisaIdade.setForeground(new java.awt.Color(56, 0, 56));
-        jtxPesquisaIdade.setAlignmentX(0.0F);
-        jtxPesquisaIdade.setAlignmentY(0.0F);
-        jtxPesquisaIdade.setPreferredSize(new java.awt.Dimension(0, 17));
-        jtxPesquisaIdade.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpPesquisa.add(jtxPesquisaIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 230, 25));
+        jLimparSexo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/IconExit (6).png"))); // NOI18N
+        jLimparSexo.setPreferredSize(new java.awt.Dimension(40, 40));
+        jLimparSexo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLimparSexoMouseClicked(evt);
+            }
+        });
+        jpnFiltros.add(jLimparSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 20, 20));
 
-        jcheqNome.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jcheqNome.setForeground(new java.awt.Color(56, 0, 56));
-        jcheqNome.setText("Nome:");
-        jcheqNome.setOpaque(false);
-        jpPesquisa.add(jcheqNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        jLabel33.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel33.setText("Espécie");
+        jpnFiltros.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 20));
 
-        jcheqIdade.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jcheqIdade.setForeground(new java.awt.Color(56, 0, 56));
-        jcheqIdade.setText("Idade");
-        jcheqIdade.setOpaque(false);
-        jpPesquisa.add(jcheqIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-        jpPesquisa.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, 360));
+        jLabel44.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel44.setText("Nome");
+        jpnFiltros.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 40, 12));
+
+        jLabel46.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel46.setText("Porte");
+        jpnFiltros.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 12));
+
+        jLabel47.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel47.setText("Raça");
+        jpnFiltros.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 12));
+
+        jLabel48.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel48.setText("Cor");
+        jpnFiltros.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 12));
+
+        jLabel49.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel49.setText("Sexo");
+        jpnFiltros.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, 12));
+
+        jtfFiltroEspecie.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtfFiltroEspecie.setForeground(new java.awt.Color(56, 0, 56));
+        jtfFiltroEspecie.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
+        jtfFiltroEspecie.setSelectionColor(new java.awt.Color(149, 113, 149));
+        jtfFiltroEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroEspecieActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jtfFiltroEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 220, 20));
+
+        jtfFiltroNome.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtfFiltroNome.setForeground(new java.awt.Color(56, 0, 56));
+        jtfFiltroNome.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
+        jtfFiltroNome.setSelectionColor(new java.awt.Color(149, 113, 149));
+        jtfFiltroNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroNomeActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jtfFiltroNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 220, 20));
+
+        jtfFiltroPorte.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtfFiltroPorte.setForeground(new java.awt.Color(56, 0, 56));
+        jtfFiltroPorte.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
+        jtfFiltroPorte.setSelectionColor(new java.awt.Color(149, 113, 149));
+        jtfFiltroPorte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroPorteActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jtfFiltroPorte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 220, 20));
+
+        jtfFiltroRaca.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtfFiltroRaca.setForeground(new java.awt.Color(56, 0, 56));
+        jtfFiltroRaca.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
+        jtfFiltroRaca.setSelectionColor(new java.awt.Color(149, 113, 149));
+        jtfFiltroRaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroRacaActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jtfFiltroRaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 220, 20));
+
+        jtfFiltroCor.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtfFiltroCor.setForeground(new java.awt.Color(56, 0, 56));
+        jtfFiltroCor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(131, 106, 131), 1, true));
+        jtfFiltroCor.setSelectionColor(new java.awt.Color(149, 113, 149));
+        jtfFiltroCor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfFiltroCorActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jtfFiltroCor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 220, 20));
+        jpnFiltros.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 1140, 20, 20));
+
+        bgFiltroSexo.add(jrbFiltroMacho);
+        jrbFiltroMacho.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jrbFiltroMacho.setForeground(new java.awt.Color(56, 0, 56));
+        jrbFiltroMacho.setText("Macho");
+        jrbFiltroMacho.setOpaque(false);
+        jrbFiltroMacho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbFiltroMachoActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jrbFiltroMacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, 16));
+
+        bgFiltroSexo.add(jrbFiltroFemea);
+        jrbFiltroFemea.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jrbFiltroFemea.setForeground(new java.awt.Color(56, 0, 56));
+        jrbFiltroFemea.setText("Fêmea");
+        jrbFiltroFemea.setOpaque(false);
+        jrbFiltroFemea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbFiltroFemeaActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jrbFiltroFemea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, 16));
+
+        bgFiltroSexo.add(jrbFemea3);
+        jrbFemea3.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jrbFemea3.setForeground(new java.awt.Color(56, 0, 56));
+        jrbFemea3.setText("Fêmea");
+        jrbFemea3.setOpaque(false);
+        jrbFemea3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbFemea3ActionPerformed(evt);
+            }
+        });
+        jpnFiltros.add(jrbFemea3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, 16));
 
         jFecharPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/IconExit (6).png"))); // NOI18N
         jFecharPesquisa.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -654,7 +776,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jFecharPesquisaMouseClicked(evt);
             }
         });
-        jpPesquisa.add(jFecharPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, 20));
+        jpnFiltros.add(jFecharPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 20, 20));
+
+        jpPesquisa.add(jpnFiltros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jpnPaiLeft.add(jpPesquisa, "jpnPesquisa");
 
@@ -1021,37 +1145,54 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPesquisarMouseClicked
-        String nome ;
-        int idade;
-        nome = jtxPesquisaNome.getText();
-        ArrayList<Animal> animais = null;
         
-        if(jcheqNome.isSelected() && jcheqIdade.isSelected()){
-            try {
-                idade = Integer.parseInt(jtxPesquisaIdade.getText());
-                animais = controllerAnimal.retrieve(nome, idade);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        Animal animal_filtro = new Animal();
+        
+        animal_filtro.setNome(jtfFiltroNome.getText());
+        animal_filtro.setEspecie(jtfFiltroEspecie.getText());
+        animal_filtro.setPorte(jtfFiltroPorte.getText());
+        animal_filtro.setRaca(jtfFiltroRaca.getText());
+        animal_filtro.setCor(jtfFiltroCor.getText());
+        
+        if(!bgFiltroSexo.isSelected(null)){
+            if(jrbFiltroFemea.isSelected()){
+                animal_filtro.setSexo("Fêmea");
+            }else{
+                animal_filtro.setSexo("Macho");
             }
-        }else if(jcheqNome.isSelected()){
-            try {
-                animais = controllerAnimal.retrieve(nome);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else if(jcheqIdade.isSelected()){
-            try {
-                idade = Integer.parseInt(jtxPesquisaIdade.getText());
-                animais = controllerAnimal.retrieve(idade);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if(jcheqNome.isSelected() || jcheqIdade.isSelected()){
-            modeloTabela = new MyTableModel(animais);
         }else{
-            JOptionPane.showMessageDialog(null, "Não existem campos selecionados");
+            animal_filtro.setSexo("");
         }
+        new Thread(new Runnable() {
+            public void run() {
+                JFrame frame;
+                frame = new TelaLoading();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+                try {
+                    modeloTabela = new MyTableModel(animal_filtro);
+                    jtTabelaAnimais.setModel(modeloTabela);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(),
+                            "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.setVisible(false);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        }).start();
+        
+        
+        
+
+        System.out.println(animal_filtro);
+        
+        
+         
     }//GEN-LAST:event_lblPesquisarMouseClicked
     
     private void preencherComboBoxAnimaisAdocao(JComboBox jcbAnimaisParaAdotar){
@@ -1083,7 +1224,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnAdotarMouseClicked
     public int rowSelect;
     private void atualizarAnimal() throws Exception{
-        System.out.println(rowSelect);
+
         Animal animal_up = modeloTabela.getRowSelected(rowSelect);        
         animal_up.setNome(jtfNome.getText());
         animal_up.setEspecie(jtfEspecie.getText());
@@ -1352,18 +1493,54 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jpnAddFotoMouseClicked
 
-    private void jFecharPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFecharPesquisaMouseClicked
+    private void jLimparSexoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLimparSexoMouseClicked
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
-        cl.show(jpnPaiLeft, "jpnPrincipal");
+        bgFiltroSexo.clearSelection();
+    }//GEN-LAST:event_jLimparSexoMouseClicked
+
+    private void jtfFiltroEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroEspecieActionPerformed
+
+    private void jtfFiltroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroNomeActionPerformed
+
+    private void jtfFiltroPorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroPorteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroPorteActionPerformed
+
+    private void jtfFiltroRacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroRacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroRacaActionPerformed
+
+    private void jtfFiltroCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroCorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfFiltroCorActionPerformed
+
+    private void jrbFiltroMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFiltroMachoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbFiltroMachoActionPerformed
+
+    private void jrbFemea3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemea3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbFemea3ActionPerformed
+
+    private void jrbFiltroFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFiltroFemeaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbFiltroFemeaActionPerformed
+
+    private void jFecharPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFecharPesquisaMouseClicked
+CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
+        cl.show(jpnPaiLeft, "jpnPrincipal");        // TODO add your handling code here:
     }//GEN-LAST:event_jFecharPesquisaMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup bgFiltroCastrado;
+    private javax.swing.ButtonGroup bgFiltroPrenha;
+    private javax.swing.ButtonGroup bgFiltroSexo;
+    private javax.swing.ButtonGroup bgFiltroVacinado;
     private javax.swing.JLabel jFecharPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1373,6 +1550,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1386,6 +1564,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -1397,6 +1576,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -1406,6 +1590,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLimparSexo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField4;
@@ -1413,8 +1598,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbAnimais1;
     private javax.swing.JComboBox<String> jcbEscolherTabela;
     private javax.swing.JComboBox<String> jcbSelecioneAdotante;
-    private javax.swing.JCheckBox jcheqIdade;
-    private javax.swing.JCheckBox jcheqNome;
     private javax.swing.JLabel jlbNomeAnimalAdocao;
     private javax.swing.JPanel jpPesquisa;
     private javax.swing.JPanel jpnAddFoto;
@@ -1429,6 +1612,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JPanel jpnEfetuarAdocao;
     private javax.swing.JPanel jpnExcluir;
     private javax.swing.JPanel jpnExcluirFoto;
+    private javax.swing.JPanel jpnFiltros;
     private javax.swing.JPanel jpnLista;
     private javax.swing.JPanel jpnPai;
     private javax.swing.JPanel jpnPaiLeft;
@@ -1441,6 +1625,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JRadioButton jrbCastradoNao;
     private javax.swing.JRadioButton jrbCastradoSim;
     private javax.swing.JRadioButton jrbFemea;
+    private javax.swing.JRadioButton jrbFemea3;
+    private javax.swing.JRadioButton jrbFiltroFemea;
+    private javax.swing.JRadioButton jrbFiltroMacho;
     private javax.swing.JRadioButton jrbMacho;
     private javax.swing.JRadioButton jrbPrenhaNao;
     private javax.swing.JRadioButton jrbPrenhaSim;
@@ -1457,6 +1644,11 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JTextField jtfEmailAdotante;
     private javax.swing.JTextField jtfEndereçoAdotante;
     private javax.swing.JTextField jtfEspecie;
+    private javax.swing.JTextField jtfFiltroCor;
+    private javax.swing.JTextField jtfFiltroEspecie;
+    private javax.swing.JTextField jtfFiltroNome;
+    private javax.swing.JTextField jtfFiltroPorte;
+    private javax.swing.JTextField jtfFiltroRaca;
     private javax.swing.JLabel jtfFotoAdotante;
     private javax.swing.JTextField jtfIdade;
     private javax.swing.JTextField jtfNome;
@@ -1464,8 +1656,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private javax.swing.JTextField jtfPorte;
     private javax.swing.JTextField jtfRaca;
     private javax.swing.JFormattedTextField jtfTelefoneAdotante;
-    private javax.swing.JTextField jtxPesquisaIdade;
-    private javax.swing.JTextField jtxPesquisaNome;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel txt_imagem;
     // End of variables declaration//GEN-END:variables

@@ -149,6 +149,31 @@ public class ControllerAnimal {
         return carregarLista(rs);
     }
 
+    public ArrayList<Animal> retrieve(Animal animal) throws Exception {
+        PreparedStatement ps
+                = ConnectionDB.getConnection().prepareStatement(""
+                        + "select nome ,idade,especie,raca ,cor ,porte ,"
+                        + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
+                        + "doente ,castrado ,vacinado,imagem , "
+                        + "tb.idAnimal from tb_animais tb left join \n"
+                        + "tb_imagens img on tb.idAnimal = img.idAnimal WHERE adotado = ? and \n"
+                        + "nome like ? and \n"
+                        + "especie  like ? and \n"
+                        + "raca like ? and \n"
+                        + "porte like ? and \n"
+                        + "sexo like ? \n");
+        
+        ps.setBoolean(1,  animal.isAdotado() );
+        ps.setString(2, "%" + animal.getNome() + "%");
+        ps.setString(3, "%" + animal.getEspecie()+ "%");
+        ps.setString(4, "%" + animal.getRaca()+ "%");
+        ps.setString(5, "%" + animal.getPorte()+ "%");
+        ps.setString(6, "%" + animal.getSexo()+ "%");
+            
+        ResultSet rs = ps.executeQuery();
+        return carregarLista(rs);
+    }
+
     public ArrayList<Animal> retrieve(String nome, int idade) throws Exception {
         PreparedStatement ps
                 = ConnectionDB.getConnection().prepareStatement("select * from tbl_animais"

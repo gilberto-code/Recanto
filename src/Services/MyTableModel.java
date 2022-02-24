@@ -30,6 +30,11 @@ public class MyTableModel extends AbstractTableModel {
         this.animals = this.controllerAnimal.getList(isAdotado);
         fireTableRowsInserted(0, this.animals.size() - 1);//Força a chamada de getValueAt() para inserir todas as células na JTable
     }
+    public MyTableModel(Animal animal) throws Exception {
+        this.controllerAnimal = new ControllerAnimal();
+        this.animals = this.controllerAnimal.retrieve(animal);
+        fireTableRowsInserted(0, this.animals.size() - 1);//Força a chamada de getValueAt() para inserir todas as células na JTable
+    }
 
     //O construtor já recebe os dados do ArrayList para exibição 
     public MyTableModel(ArrayList<Animal> a) {
