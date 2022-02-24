@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import DataAcess.ConnectionDB;
 import Objects.Animal;
+import com.itextpdf.text.Rectangle;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,35 +19,46 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GerarPDF {
 
-    public void gerar() throws Exception {
-        int numcolunas = 10;
-        ArrayList<Animal> lis = getList();
+    public void gerar(ArrayList<Animal> lis) throws Exception {
+        int numcolunas = 12;
         Document doc = new Document();
         String arquivoPdf = "PDF Animais";
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(arquivoPdf));
             doc.open();
-            Paragraph p = new Paragraph("<: Lista de Animais :>");
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+
+
+            Paragraph p = new Paragraph("Lista de Animais - "+dateFormat.format(date));
             p.setAlignment(1);
             doc.add(p);
             p = new Paragraph("  ");
             doc.add(p);
             PdfPTable table = new PdfPTable(numcolunas);
-            PdfPCell cell = new PdfPCell(new Paragraph("Nome",
-                    new Font(FontFamily.UNDEFINED, 10, Font.NORMAL, new BaseColor(0, 0, 255))));
-            PdfPCell cel2 = new PdfPCell(new Paragraph("Especie"));
-            PdfPCell cel3 = new PdfPCell(new Paragraph("Raça"));
-            PdfPCell cel4 = new PdfPCell(new Paragraph("Cor"));
-            PdfPCell cel5 = new PdfPCell(new Paragraph("Bairro En contrado"));
-            PdfPCell cel6 = new PdfPCell(new Paragraph("Está Doente"));
-            PdfPCell cel7 = new PdfPCell(new Paragraph("Está Aci dentado"));
-            PdfPCell cel8 = new PdfPCell(new Paragraph("Data De Cadastro"));
-            PdfPCell cel9 = new PdfPCell(new Paragraph("Idade"));
+            Font font = new Font(FontFamily.UNDEFINED, 8, Font.NORMAL, new BaseColor(0, 0, 255));
+            Font font2 = new Font(FontFamily.UNDEFINED, 8, Font.NORMAL, new BaseColor(0, 0, 0));
 
+            PdfPCell cell = new PdfPCell(new Paragraph("Nome", font));
+            PdfPCell cel2 = new PdfPCell(new Paragraph("Idade", font));
+            PdfPCell cel3 = new PdfPCell(new Paragraph("Especie", font));
+            PdfPCell cel4 = new PdfPCell(new Paragraph("Raça", font));
+            PdfPCell cel5 = new PdfPCell(new Paragraph("Cor", font));
+            PdfPCell cel6 = new PdfPCell(new Paragraph("Porte", font));
+            PdfPCell cel7 = new PdfPCell(new Paragraph("Sexo", font));
+            PdfPCell cel8 = new PdfPCell(new Paragraph("Doente", font));
+            PdfPCell cel9 = new PdfPCell(new Paragraph("Castrado", font));
+            PdfPCell cel10 = new PdfPCell(new Paragraph("Vacinado", font));
+            PdfPCell cel11 = new PdfPCell(new Paragraph("Adotado", font));
+            PdfPCell cel12 = new PdfPCell(new Paragraph("Data Cadastro", font));
+            
             table.addCell(cell);
             table.addCell(cel2);
             table.addCell(cel3);
@@ -56,19 +68,41 @@ public class GerarPDF {
             table.addCell(cel7);
             table.addCell(cel8);
             table.addCell(cel9);
+            table.addCell(cel10);
+            table.addCell(cel11);
+            table.addCell(cel12);
 
             for (Animal animal : lis) {
-                cell = new PdfPCell(new Paragraph(animal.getNome()));
-                cel2 = new PdfPCell(new Paragraph(animal.getEspecie()));
-                cel3 = new PdfPCell(new Paragraph(animal.getRaca()));
-                cel4 = new PdfPCell(new Paragraph(animal.getCor()));
+                cell = new PdfPCell(new Paragraph(animal.getNome(), font2));
+                cel2 = new PdfPCell(new Paragraph(animal.getIdade() + "",font2));
+                cel3 = new PdfPCell(new Paragraph(animal.getEspecie(),font2));
+                cel4 = new PdfPCell(new Paragraph(animal.getRaca(),font2));
+                cel5 = new PdfPCell(new Paragraph(animal.getCor(),font2));
+                cel6 = new PdfPCell(new Paragraph(animal.getPorte(),font2));
+                cel7 = new PdfPCell(new Paragraph(animal.getSexo(),font2));
                 if (animal.isDoente()) {
-                    cel6 = new PdfPCell(new Paragraph("Sim"));
+                    cel8 = new PdfPCell(new Paragraph("Sim",font2));
                 } else {
-                    cel6 = new PdfPCell(new Paragraph("não"));
+                    cel8 = new PdfPCell(new Paragraph("Não",font2));
                 }
-                cel8 = new PdfPCell(new Paragraph("DATE"));
-                cel9 = new PdfPCell(new Paragraph(animal.getIdade() + ""));
+                if (animal.isCastrado()) {
+                    cel9 = new PdfPCell(new Paragraph("Sim",font2));
+                } else {
+                    cel9 = new PdfPCell(new Paragraph("Não",font2));
+                }
+                if (animal.isVacinado()) {
+                    cel10 = new PdfPCell(new Paragraph("Sim",font2));
+                } else {
+                    cel10 = new PdfPCell(new Paragraph("Não",font2));
+                }
+                if (animal.isAdotado()) {
+                    cel11 = new PdfPCell(new Paragraph("Sim",font2));
+                } else {
+                    cel11 = new PdfPCell(new Paragraph("Não",font2));
+                }
+                
+                cel12 = new PdfPCell(new Paragraph(animal.getDataDeCadastro()+"",font2));
+                float[] sizes = new float [12];
 
                 table.addCell(cell);
                 table.addCell(cel2);
@@ -79,6 +113,9 @@ public class GerarPDF {
                 table.addCell(cel7);
                 table.addCell(cel8);
                 table.addCell(cel9);
+                table.addCell(cel10);
+                table.addCell(cel11);
+                table.addCell(cel12);
             }
 
             table.setLockedWidth(true);
@@ -90,87 +127,5 @@ public class GerarPDF {
             System.out.println("Fecha o outro PDF  :)");
         }
     }
-
-    private static ArrayList<Animal> BindTable() {
-        ArrayList<Animal> list = new ArrayList<Animal>();
-        Connection con = getConnection();
-        Statement st;
-        ResultSet rs;
-
-        try {
-            st = con.createStatement();
-            rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n"
-                    + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
-                    + " doente ,castrado ,vacinado,imagem ,\n"
-                    + "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
-
-            Animal animal;
-            animal = new Animal();
-            while (rs.next()) {
-                animal = new Animal();
-                list.add(animal);
-            }
-
-        } catch (SQLException ex) {
-            //Logger.getLogger(MyQuery.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    private static Connection getConnection() {
-
-        ConnectionDB fdc = new ConnectionDB();
-        return ConnectionDB.getConnection();
-    }
-
-    public ArrayList<Animal> getList() throws Exception {
-        Statement st = ConnectionDB.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("select nome ,idade,especie,raca ,cor ,porte ,\n"
-                + "sexo ,descricao ,dataDeCadastro ,qualDoenca,\n"
-                + " doente ,castrado ,vacinado,imagem ,\n"
-                + "tb.idAnimal from tb_animais tb left join tb_imagens img on tb.idAnimal = img.idAnimal;");
-        return carregarLista(rs);
-    }
-
-    private ArrayList<Animal> carregarLista(ResultSet rs) throws SQLException, IOException {
-        ArrayList<Animal> lista = new ArrayList<>();
-        Animal animal;
-        while (rs.next()) {
-            animal = new Animal(
-                    //nome
-                    rs.getString(1),
-                    //especie
-                    rs.getInt(2),
-                    //idade
-                    rs.getString(3),
-                    //raca
-                    rs.getString(4),
-                    //cor
-                    rs.getString(5),
-                    //porte
-                    rs.getString(6),
-                    //sexo
-                    rs.getString(7),
-                    //descricao
-                    rs.getString(8),
-                    //date
-                    rs.getDate(9),
-                    //qualDoenca
-                    rs.getString(10),
-                    //doente
-                    rs.getBoolean(11),
-                    //castrado
-                    rs.getBoolean(12),
-                    //vacinado
-                    rs.getBoolean(13),
-                    //imaagem
-                    rs.getString(14),
-                    //id
-                    rs.getInt(15)
-            );
-            lista.add(animal);
-        }
-        rs.close();
-        return lista;
-    }
+    
 }

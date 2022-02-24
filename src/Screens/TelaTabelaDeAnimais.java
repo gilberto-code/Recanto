@@ -1296,7 +1296,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private void jpnListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnListaMouseClicked
         GerarPDF gerarPDF = new GerarPDF();
         try {
-            gerarPDF.gerar();
+            gerarPDF.gerar(modeloTabela.getListAnimal());
         } catch (Exception ex) {
             Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
