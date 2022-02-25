@@ -1,6 +1,7 @@
 package Controllers;
 
 import DataAcess.ConnectionDB;
+import Objects.Adotante;
 import Objects.Animal;
 import java.io.IOException;
 import java.sql.Date;
@@ -247,5 +248,27 @@ public class ControllerAnimal {
         }
         rs.close();
         return lista;
+    }
+    
+    public void adotarAnimal(Animal animal) {
+        try {
+            PreparedStatement ps
+                    = ConnectionDB.getConnection().prepareStatement(
+                            "UPDATE tb_animais SET"
+                            + " adotado = ? WHERE idAnimal = ?");
+
+            
+            ps.setBoolean(1, true);
+            ps.setInt(2, animal.getId());
+
+            int row = ps.executeUpdate();
+            if (row == 0) {
+                JOptionPane.showMessageDialog(null, "Adoção falhou, por favor tente novamente");
+            } else {
+                //JOptionPane.showMessageDialog(null, "Adoção falhou, por favor tente novamente");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

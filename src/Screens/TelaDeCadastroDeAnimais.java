@@ -1340,10 +1340,6 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         }
     }
 
-    public ImageIcon redimensionar_imagem(ImageIcon img) {
-        img.setImage(img.getImage().getScaledInstance(200, 150, 100));
-        return img;
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

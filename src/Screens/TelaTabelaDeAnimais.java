@@ -19,6 +19,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -195,32 +196,45 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jcbAnimais1 = new javax.swing.JComboBox<>();
         jpnCadastrarAdot = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
-        jtfEmailAdotante = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jtfDataAdotante = new javax.swing.JFormattedTextField();
         jtfTelefoneAdotante = new javax.swing.JFormattedTextField();
-        jLabel40 = new javax.swing.JLabel();
         jtfCPFAdotante = new javax.swing.JFormattedTextField();
         jLabel41 = new javax.swing.JLabel();
         jtfEndereçoAdotante = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         jtfNomeAdotante = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jLabel43 = new javax.swing.JLabel();
-        jtfFotoAdotante = new javax.swing.JLabel();
-        jpnAddFotoAdotant = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jpnSemFoto = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jpnVoltarAAdocao = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        txt_imagem1 = new javax.swing.JLabel();
+        txt_imagem_adotante = new javax.swing.JLabel();
+        jpnAddFotoAdptante = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jpnExcluirFotoAdotante = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         jpnPai = new javax.swing.JPanel();
         jspAdocao = new javax.swing.JScrollPane();
         jtTabelaAnimais = new javax.swing.JTable();
+        jpDadosAdocao = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        txt_imagem_animal_adocao = new javax.swing.JLabel();
+        jlEspecie = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
+        jlIdade = new javax.swing.JLabel();
+        jlCor = new javax.swing.JLabel();
+        jlDescricao = new javax.swing.JLabel();
+        jlSexo1 = new javax.swing.JLabel();
+        jpnCancelarAdocao = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jpnFinalizarAdocao = new javax.swing.JPanel();
+        jLabel55 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -901,16 +915,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel37.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(56, 0, 56));
         jLabel37.setText("Foto:");
-        jpnCadastrarAdot.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 20));
-
-        jtfEmailAdotante.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfEmailAdotante.setForeground(new java.awt.Color(56, 0, 56));
-        jtfEmailAdotante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfEmailAdotanteActionPerformed(evt);
-            }
-        });
-        jpnCadastrarAdot.add(jtfEmailAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 220, 20));
+        jpnCadastrarAdot.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
 
         jLabel38.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(56, 0, 56));
@@ -922,15 +927,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jLabel39.setText("CPF:");
         jpnCadastrarAdot.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
-        jtfDataAdotante.setForeground(new java.awt.Color(56, 0, 56));
-        try {
-            jtfDataAdotante.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jtfDataAdotante.setSelectionColor(new java.awt.Color(149, 113, 149));
-        jpnCadastrarAdot.add(jtfDataAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 140, 20));
-
         jtfTelefoneAdotante.setForeground(new java.awt.Color(56, 0, 56));
         try {
             jtfTelefoneAdotante.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -940,24 +936,20 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtfTelefoneAdotante.setSelectionColor(new java.awt.Color(149, 113, 149));
         jpnCadastrarAdot.add(jtfTelefoneAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 200, 20));
 
-        jLabel40.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel40.setText("Data de nascimento:");
-        jpnCadastrarAdot.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 20));
-
         jtfCPFAdotante.setForeground(new java.awt.Color(56, 0, 56));
         try {
             jtfCPFAdotante.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtfCPFAdotante.setText("0          ");
         jtfCPFAdotante.setSelectionColor(new java.awt.Color(149, 113, 149));
         jpnCadastrarAdot.add(jtfCPFAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 230, 20));
 
         jLabel41.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(56, 0, 56));
         jLabel41.setText("Endereço:");
-        jpnCadastrarAdot.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, 20));
+        jpnCadastrarAdot.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 20));
 
         jtfEndereçoAdotante.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jtfEndereçoAdotante.setForeground(new java.awt.Color(56, 0, 56));
@@ -966,7 +958,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jtfEndereçoAdotanteActionPerformed(evt);
             }
         });
-        jpnCadastrarAdot.add(jtfEndereçoAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 200, 20));
+        jpnCadastrarAdot.add(jtfEndereçoAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 200, 60));
 
         jLabel42.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(56, 0, 56));
@@ -980,7 +972,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
                 jtfNomeAdotanteActionPerformed(evt);
             }
         });
-        jpnCadastrarAdot.add(jtfNomeAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 220, 20));
+        jpnCadastrarAdot.add(jtfNomeAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 210, 20));
 
         jTextField4.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(56, 0, 56));
@@ -990,125 +982,55 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             }
         });
         jpnCadastrarAdot.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 210, 20));
-
-        jLabel43.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel43.setText("Email:");
-        jpnCadastrarAdot.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
-
-        jtfFotoAdotante.setBackground(new java.awt.Color(255, 255, 255));
-        jtfFotoAdotante.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jtfFotoAdotante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jtfFotoAdotante.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
-        jpnCadastrarAdot.add(jtfFotoAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 200, 150));
-
-        jpnAddFotoAdotant.setBackground(new java.awt.Color(56, 0, 56));
-        jpnAddFotoAdotant.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpnAddFotoAdotantMouseClicked(evt);
-            }
-        });
-
-        jLabel18.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Adicionar foto");
-        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jpnAddFotoAdotantLayout = new javax.swing.GroupLayout(jpnAddFotoAdotant);
-        jpnAddFotoAdotant.setLayout(jpnAddFotoAdotantLayout);
-        jpnAddFotoAdotantLayout.setHorizontalGroup(
-            jpnAddFotoAdotantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-        );
-        jpnAddFotoAdotantLayout.setVerticalGroup(
-            jpnAddFotoAdotantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jpnCadastrarAdot.add(jpnAddFotoAdotant, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, -1, -1));
-
-        jpnSemFoto.setBackground(new java.awt.Color(56, 0, 56));
-        jpnSemFoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpnSemFotoMouseClicked(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Sem foto");
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jpnSemFotoLayout = new javax.swing.GroupLayout(jpnSemFoto);
-        jpnSemFoto.setLayout(jpnSemFotoLayout);
-        jpnSemFotoLayout.setHorizontalGroup(
-            jpnSemFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-        );
-        jpnSemFotoLayout.setVerticalGroup(
-            jpnSemFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jpnCadastrarAdot.add(jpnSemFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 80, 30));
-
-        jpnVoltarAAdocao.setBackground(new java.awt.Color(56, 0, 56));
-        jpnVoltarAAdocao.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpnVoltarAAdocaoMouseClicked(evt);
-            }
-        });
-
-        jLabel20.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Voltar");
-        jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jpnVoltarAAdocaoLayout = new javax.swing.GroupLayout(jpnVoltarAAdocao);
-        jpnVoltarAAdocao.setLayout(jpnVoltarAAdocaoLayout);
-        jpnVoltarAAdocaoLayout.setHorizontalGroup(
-            jpnVoltarAAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnVoltarAAdocaoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jpnVoltarAAdocaoLayout.setVerticalGroup(
-            jpnVoltarAAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnVoltarAAdocaoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jpnCadastrarAdot.add(jpnVoltarAAdocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
         jpnCadastrarAdot.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, -1, 30));
 
-        jPanel1.setBackground(new java.awt.Color(56, 0, 56));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-cancelar-20 (1).png"))); // NOI18N
+        jpnCadastrarAdot.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-mais-20 (1).png"))); // NOI18N
+        jpnCadastrarAdot.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        txt_imagem1.setBackground(new java.awt.Color(255, 255, 255));
+        txt_imagem1.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        txt_imagem1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_imagem1.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
+        jpnCadastrarAdot.add(txt_imagem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 810, 200, 150));
+
+        txt_imagem_adotante.setBackground(new java.awt.Color(255, 255, 255));
+        txt_imagem_adotante.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        txt_imagem_adotante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_imagem_adotante.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
+        jpnCadastrarAdot.add(txt_imagem_adotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 200, 150));
+
+        jpnAddFotoAdptante.setBackground(new java.awt.Color(56, 0, 56));
+        jpnAddFotoAdptante.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
+                jpnAddFotoAdptanteMouseClicked(evt);
             }
         });
+        jpnAddFotoAdptante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel11.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Cadastrar");
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-mais-20 (1).png"))); // NOI18N
+        jpnAddFotoAdptante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
+        jpnCadastrarAdot.add(jpnAddFotoAdptante, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
 
-        jpnCadastrarAdot.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 520, 80, 30));
+        jpnExcluirFotoAdotante.setBackground(new java.awt.Color(56, 0, 56));
+        jpnExcluirFotoAdotante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnExcluirFotoAdotanteMouseClicked(evt);
+            }
+        });
+        jpnExcluirFotoAdotante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-cancelar-20 (1).png"))); // NOI18N
+        jpnExcluirFotoAdotante.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
+
+        jpnCadastrarAdot.add(jpnExcluirFotoAdotante, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, -1, -1));
 
         jpnPaiLeft.add(jpnCadastrarAdot, "jpnCadastrarAdotante");
 
@@ -1138,6 +1060,145 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jspAdocao.setViewportView(jtTabelaAnimais);
 
         jpnPai.add(jspAdocao, "TabelaAdocao");
+
+        jpDadosAdocao.setBackground(new java.awt.Color(255, 255, 255));
+        jpDadosAdocao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel40.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel40.setText("Espécie");
+        jpDadosAdocao.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, 20));
+
+        jLabel43.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel43.setText("Nome");
+        jpDadosAdocao.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 50, 20));
+
+        jLabel45.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel45.setText("Idade");
+        jpDadosAdocao.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 50, 20));
+
+        jLabel52.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel52.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel52.setText("Cor");
+        jpDadosAdocao.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, 20));
+
+        jLabel54.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel54.setText("Sexo");
+        jpDadosAdocao.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, 20));
+
+        jLabel66.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(56, 0, 56));
+        jLabel66.setText("Descrição");
+        jpDadosAdocao.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 90, 30));
+
+        txt_imagem_animal_adocao.setBackground(new java.awt.Color(255, 255, 255));
+        txt_imagem_animal_adocao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        txt_imagem_animal_adocao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_imagem_animal_adocao.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
+        jpDadosAdocao.add(txt_imagem_animal_adocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 230, 180));
+
+        jlEspecie.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jpDadosAdocao.add(jlEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 200, 40));
+
+        jlNome.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jpDadosAdocao.add(jlNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 200, 40));
+
+        jlIdade.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jpDadosAdocao.add(jlIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, 80, 40));
+
+        jlCor.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jpDadosAdocao.add(jlCor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 200, 40));
+
+        jlDescricao.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jlDescricao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlDescricao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jlDescricao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jlDescricao.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jpDadosAdocao.add(jlDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 410, 200, 90));
+
+        jlSexo1.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jpDadosAdocao.add(jlSexo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 200, 40));
+
+        jpnCancelarAdocao.setBackground(new java.awt.Color(56, 0, 56));
+        jpnCancelarAdocao.setPreferredSize(new java.awt.Dimension(80, 40));
+        jpnCancelarAdocao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnCancelarAdocaoMouseClicked(evt);
+            }
+        });
+
+        jLabel25.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Cancelar");
+        jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel25.setPreferredSize(new java.awt.Dimension(58, 16));
+
+        javax.swing.GroupLayout jpnCancelarAdocaoLayout = new javax.swing.GroupLayout(jpnCancelarAdocao);
+        jpnCancelarAdocao.setLayout(jpnCancelarAdocaoLayout);
+        jpnCancelarAdocaoLayout.setHorizontalGroup(
+            jpnCancelarAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnCancelarAdocaoLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpnCancelarAdocaoLayout.setVerticalGroup(
+            jpnCancelarAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnCancelarAdocaoLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
+
+        jpDadosAdocao.add(jpnCancelarAdocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 110, -1));
+
+        jpnFinalizarAdocao.setBackground(new java.awt.Color(56, 0, 56));
+        jpnFinalizarAdocao.setPreferredSize(new java.awt.Dimension(80, 40));
+        jpnFinalizarAdocao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnFinalizarAdocaoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpnFinalizarAdocaoMousePressed(evt);
+            }
+        });
+
+        jLabel55.setFont(new java.awt.Font("Open Sans", 0, 16)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel55.setText("Adotar");
+        jLabel55.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel55.setPreferredSize(new java.awt.Dimension(58, 16));
+        jLabel55.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel55MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpnFinalizarAdocaoLayout = new javax.swing.GroupLayout(jpnFinalizarAdocao);
+        jpnFinalizarAdocao.setLayout(jpnFinalizarAdocaoLayout);
+        jpnFinalizarAdocaoLayout.setHorizontalGroup(
+            jpnFinalizarAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnFinalizarAdocaoLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpnFinalizarAdocaoLayout.setVerticalGroup(
+            jpnFinalizarAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnFinalizarAdocaoLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
+
+        jpDadosAdocao.add(jpnFinalizarAdocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 530, 110, -1));
+
+        jpnPai.add(jpDadosAdocao, "card3");
 
         jpnBackground.add(jpnPai, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 700, 580));
 
@@ -1220,8 +1281,29 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnExcluirMouseClicked
 
     private void jpnAdotarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAdotarMouseClicked
-
+        
+        carregarAnimalParaAdocao();
+        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
+        cl.show(jpnPaiLeft, "jpnCadastrarAdotante");
+        
+        CardLayout c2 = (CardLayout) jpnPai.getLayout();
+        c2.show(jpnPai, "card3");
+        
+        JPanel p = framePrincipal.getLeftPanel();
+        p.setVisible(false);
+        
     }//GEN-LAST:event_jpnAdotarMouseClicked
+    public void carregarAnimalParaAdocao(){
+        Animal animal_up = modeloTabela.getRowSelected(rowSelect);        
+        txt_imagem_animal_adocao.setIcon(Controll_Images.montarImagem(animal_up.getImagem()));
+        jlNome.setText(animal_up.getNome());
+        jlEspecie.setText(animal_up.getEspecie());
+        jlSexo1.setText(animal_up.getSexo());
+        jlIdade.setText(animal_up.getIdade()+"");
+        jlDescricao.setText(animal_up.getDescricao());
+        jlCor.setText(animal_up.getCor());
+    }
+    
     public int rowSelect;
     private void atualizarAnimal() throws Exception{
 
@@ -1302,10 +1384,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jpnListaMouseClicked
 
-    private void jtfEmailAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEmailAdotanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfEmailAdotanteActionPerformed
-
     private void jtfEndereçoAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEndereçoAdotanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfEndereçoAdotanteActionPerformed
@@ -1317,11 +1395,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jpnSemFotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnSemFotoMouseClicked
-        ImagemIconAnimal = null;
-        txt_imagem.setIcon(null);
-    }//GEN-LAST:event_jpnSemFotoMouseClicked
     
     public void adicionarImagem(JLabel fotinha) throws IOException {
         JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
@@ -1343,20 +1416,27 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
             System.out.println("Deu muito ruim");
         }
     }
-    
-    private void jpnAddFotoAdotantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoAdotantMouseClicked
-        try {
-            adicionarImagem(jtfFotoAdotante);
-        } catch (IOException ex) {
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+    public void adicionarImagemAdotante(JLabel fotinha) throws IOException {
+        JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
+        jFileChooser1.showOpenDialog(null);
+        File arquivo = jFileChooser1.getSelectedFile();
+        
+        if (arquivo != null) {
+            ultimoPacote = arquivo.getPath();
+            BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
+            Image image = bufferedImage.getScaledInstance(500,
+                    500, Image.SCALE_SMOOTH);
+           
+            ImageIcon imagem = new ImageIcon(image);
+            Controll_Images redimencionar = new Controll_Images();
+            imagem = redimencionar.redimensionar_imagem(imagem);
+            fotinha.setIcon(imagem);
+            ImagemIconAdotante = imagem;
+        } else {
+            System.out.println("Deu muito ruim");
         }
-    }//GEN-LAST:event_jpnAddFotoAdotantMouseClicked
-
-    private void jpnVoltarAAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnVoltarAAdocaoMouseClicked
-        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
-        cl.show(jpnPaiLeft, "jpnAdocao");
-    }//GEN-LAST:event_jpnVoltarAAdocaoMouseClicked
-
+    }
+    
     private void jpnEfetuarAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnEfetuarAdocaoMouseClicked
        
     }//GEN-LAST:event_jpnEfetuarAdocaoMouseClicked
@@ -1408,10 +1488,6 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnCadastrarAdotante");
     }//GEN-LAST:event_jpnCadastrarAdotanteAtoDeAdocaoMouseClicked
-
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-
-    }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jrbFemeaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFemeaActionPerformed
         jpnPrenha.setVisible(true);
@@ -1499,7 +1575,7 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jrbFiltroFemeaActionPerformed
 
     private void jFecharPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFecharPesquisaMouseClicked
-CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
+        CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         cl.show(jpnPaiLeft, "jpnPrincipal");        // TODO add your handling code here:
     }//GEN-LAST:event_jFecharPesquisaMouseClicked
 
@@ -1533,6 +1609,87 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
         }
         System.out.println(jcbEscolherTabela.getSelectedItem().toString());
     }//GEN-LAST:event_jcbEscolherTabelaActionPerformed
+
+    private void jpnAddFotoAdptanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAddFotoAdptanteMouseClicked
+        try {
+            adicionarImagemAdotante(txt_imagem_adotante);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jpnAddFotoAdptanteMouseClicked
+
+    private void jpnExcluirFotoAdotanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirFotoAdotanteMouseClicked
+        ImagemIconAdotante = null;
+        txt_imagem_adotante.setIcon(null);
+    }//GEN-LAST:event_jpnExcluirFotoAdotanteMouseClicked
+    
+
+    private void jLabel55MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel55MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel55MousePressed
+
+    private void jpnFinalizarAdocaoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarAdocaoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpnFinalizarAdocaoMousePressed
+
+    private void jpnCancelarAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnCancelarAdocaoMouseClicked
+        // TODO add your handling code here:
+        CardLayout c2 = (CardLayout) jpnPaiLeft.getLayout();
+        c2.show(jpnPaiLeft, "jpnPrincipal");
+        
+        
+        CardLayout cl = (CardLayout) jpnPai.getLayout();
+        cl.show(jpnPai, "TabelaAdocao");
+                try {
+                    modeloTabela = new MyTableModel(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jtTabelaAnimais.setModel(modeloTabela);
+        
+        JPanel p = framePrincipal.getLeftPanel();
+        p.setVisible(false);
+    }//GEN-LAST:event_jpnCancelarAdocaoMouseClicked
+
+    private void jpnFinalizarAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarAdocaoMouseClicked
+        try {
+            // TODO add your handling code here:
+            String imagemAnimal = Controll_Images.ImagemParaString(ImagemIconAdotante);
+            Adotante adotante = new Adotante(
+                    jtfNomeAdotante.getText(),
+                    jtfCPFAdotante.getText(),
+                    jtfTelefoneAdotante.getText(),
+                    jtfEndereçoAdotante.getText(),
+                    imagemAnimal);
+            ControllerAdotante ca = new ControllerAdotante();
+            int id = ca.inserir(adotante);
+            adotante.setId(id);
+            Animal animal = modeloTabela.getRowSelected(rowSelect);
+            ca.adotarAnimal(adotante,animal);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        CardLayout c2 = (CardLayout) jpnPaiLeft.getLayout();
+        c2.show(jpnPaiLeft, "jpnPrincipal");
+        
+        
+        CardLayout cl = (CardLayout) jpnPai.getLayout();
+        cl.show(jpnPai, "TabelaAdocao");
+                try {
+                    modeloTabela = new MyTableModel(false);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                jtTabelaAnimais.setModel(modeloTabela);
+        
+        JPanel p = framePrincipal.getLeftPanel();
+        p.setVisible(false);
+    }//GEN-LAST:event_jpnFinalizarAdocaoMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1556,6 +1713,7 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1576,6 +1734,7 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
@@ -1583,43 +1742,54 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLimparSexo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel jblPrenha;
     private javax.swing.JComboBox<String> jcbAnimais1;
     private javax.swing.JComboBox<String> jcbEscolherTabela;
     private javax.swing.JComboBox<String> jcbSelecioneAdotante;
+    private javax.swing.JLabel jlCor;
+    private javax.swing.JLabel jlDescricao;
+    private javax.swing.JLabel jlEspecie;
+    private javax.swing.JLabel jlIdade;
+    private javax.swing.JLabel jlNome;
+    private javax.swing.JLabel jlSexo1;
     private javax.swing.JLabel jlbNomeAnimalAdocao;
+    private javax.swing.JPanel jpDadosAdocao;
     private javax.swing.JPanel jpPesquisa;
     private javax.swing.JPanel jpnAddFoto;
-    private javax.swing.JPanel jpnAddFotoAdotant;
+    private javax.swing.JPanel jpnAddFotoAdptante;
     private javax.swing.JPanel jpnAdocao;
     private javax.swing.JPanel jpnAdotar;
     private javax.swing.JPanel jpnAtualizar;
     private javax.swing.JPanel jpnBackground;
     private javax.swing.JPanel jpnCadastrarAdot;
     private javax.swing.JPanel jpnCadastrarAdotanteAtoDeAdocao;
+    private javax.swing.JPanel jpnCancelarAdocao;
     private javax.swing.JPanel jpnDescricao;
     private javax.swing.JPanel jpnEfetuarAdocao;
     private javax.swing.JPanel jpnExcluir;
     private javax.swing.JPanel jpnExcluirFoto;
+    private javax.swing.JPanel jpnExcluirFotoAdotante;
     private javax.swing.JPanel jpnFiltros;
+    private javax.swing.JPanel jpnFinalizarAdocao;
     private javax.swing.JPanel jpnLista;
     private javax.swing.JPanel jpnPai;
     private javax.swing.JPanel jpnPaiLeft;
     private javax.swing.JPanel jpnPesquisar;
     private javax.swing.JPanel jpnPrenha;
     private javax.swing.JPanel jpnPrincipal;
-    private javax.swing.JPanel jpnSemFoto;
-    private javax.swing.JPanel jpnVoltarAAdocao;
     private javax.swing.JPanel jpnVoltarATeladeAnimais;
     private javax.swing.JRadioButton jrbCastradoNao;
     private javax.swing.JRadioButton jrbCastradoSim;
@@ -1638,9 +1808,7 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JTextArea jtaDescricao;
     private javax.swing.JFormattedTextField jtfCPFAdotante;
     private javax.swing.JTextField jtfCor;
-    private javax.swing.JFormattedTextField jtfDataAdotante;
     private javax.swing.JTextField jtfDoenca;
-    private javax.swing.JTextField jtfEmailAdotante;
     private javax.swing.JTextField jtfEndereçoAdotante;
     private javax.swing.JTextField jtfEspecie;
     private javax.swing.JTextField jtfFiltroCor;
@@ -1648,7 +1816,6 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JTextField jtfFiltroNome;
     private javax.swing.JTextField jtfFiltroPorte;
     private javax.swing.JTextField jtfFiltroRaca;
-    private javax.swing.JLabel jtfFotoAdotante;
     private javax.swing.JTextField jtfIdade;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNomeAdotante;
@@ -1657,6 +1824,9 @@ CardLayout cl = (CardLayout) jpnPaiLeft.getLayout();
     private javax.swing.JFormattedTextField jtfTelefoneAdotante;
     private javax.swing.JLabel lblPesquisar;
     private javax.swing.JLabel txt_imagem;
+    private javax.swing.JLabel txt_imagem1;
+    private javax.swing.JLabel txt_imagem_adotante;
+    private javax.swing.JLabel txt_imagem_animal_adocao;
     // End of variables declaration//GEN-END:variables
 
 }

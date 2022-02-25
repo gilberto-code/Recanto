@@ -31,18 +31,21 @@ public final class TelaMenu extends javax.swing.JFrame {
     //Variáveis que pertencem ao código de movimentação do jFrame
     private final CardLayout card;
     private final JPanel panelCadastro;
-    private JPanel panelTabel;
+    JPanel panelTabel;
+    JPanel panelAdocao;
     int xx, xy;
     String data;
     String path;
     ArrayList<JPanel> listPanels = new ArrayList<>();
 
     ControllerAnimal cAnimal = new ControllerAnimal();
+    
 
     public TelaMenu() throws Exception {
         card = new CardLayout();
         panelCadastro = new TelaDeCadastroDeAnimais();
         panelTabel = new TelaDeCadastroDeAnimais();
+        panelAdocao = new TelaAdocao();
         //panelTabel = new TelaTabelaDeAnimais();
         initComponents();
 
