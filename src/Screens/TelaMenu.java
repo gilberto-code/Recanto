@@ -8,6 +8,7 @@ package Screens;
 import Controllers.ControllerAnimal;
 import Controllers.ControllerUser;
 import Objects.User;
+import Services.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -40,6 +41,12 @@ public final class TelaMenu extends javax.swing.JFrame {
 
     ControllerAnimal cAnimal = new ControllerAnimal();
 
+    private MyTableModel modeloTabela;
+    public void carregaHome(){
+        //modeloTabela = new MyTableModel(false);               
+        //jtTabelaPedidoAdocaoAnimais.setModel(modeloTabela);
+    }
+    
     public TelaMenu() throws Exception {
         card = new CardLayout();
         panelCadastro = new TelaDeCadastroDeAnimais();
@@ -59,11 +66,14 @@ public final class TelaMenu extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
 //Para o jFrame ser gerado no centro da tela
-        resetColor(AbrirHome);
+        setColor(AbrirHome);
         resetColor(CadastrarAnimal1);
         resetColor(ListarAnimaisAdotados);
         resetColor(CadastrarAnimal1);
         resetColor(Sobre);
+        
+        visiblePanel(Home);
+        
         jlbVoltar.setVisible(false);
         jspScreens.setVisible(false);
         jspScreens.getVerticalScrollBar().setUnitIncrement(10);
@@ -142,12 +152,14 @@ public final class TelaMenu extends javax.swing.JFrame {
         jspScreens = new javax.swing.JScrollPane();
         panelScreens = new javax.swing.JPanel();
         Home = new javax.swing.JPanel();
-        form3 = new javax.swing.JPanel();
         form4 = new javax.swing.JPanel();
+        form3 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jspScreens1 = new javax.swing.JScrollPane();
         panelScreens1 = new javax.swing.JPanel();
+        jspPedidosAdocao = new javax.swing.JScrollPane();
+        jtTabelaPedidoAdocao = new javax.swing.JTable();
         About = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
@@ -520,6 +532,21 @@ public final class TelaMenu extends javax.swing.JFrame {
         Home.setBackground(new java.awt.Color(255, 255, 255));
         Home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        form4.setBackground(new java.awt.Color(56, 0, 56));
+
+        javax.swing.GroupLayout form4Layout = new javax.swing.GroupLayout(form4);
+        form4.setLayout(form4Layout);
+        form4Layout.setHorizontalGroup(
+            form4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+        form4Layout.setVerticalGroup(
+            form4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        Home.add(form4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 440, 5));
+
         form3.setBackground(new java.awt.Color(56, 0, 56));
 
         javax.swing.GroupLayout form3Layout = new javax.swing.GroupLayout(form3);
@@ -535,24 +562,9 @@ public final class TelaMenu extends javax.swing.JFrame {
 
         Home.add(form3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 440, 5));
 
-        form4.setBackground(new java.awt.Color(56, 0, 56));
-
-        javax.swing.GroupLayout form4Layout = new javax.swing.GroupLayout(form4);
-        form4.setLayout(form4Layout);
-        form4Layout.setHorizontalGroup(
-            form4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-        form4Layout.setVerticalGroup(
-            form4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-
-        Home.add(form4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 440, 5));
-
         jLabel27.setFont(new java.awt.Font("Open Sans SemiBold", 0, 22)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(56, 0, 56));
-        jLabel27.setText("Tela de Animais");
+        jLabel27.setText("Pedidos de Adoção");
         Home.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 200, 40));
         Home.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, 40));
 
@@ -564,12 +576,39 @@ public final class TelaMenu extends javax.swing.JFrame {
         panelScreens1.setLayout(new java.awt.CardLayout());
         panelScreens.setSize(700, 310);
 
+        jspPedidosAdocao.setBackground(new java.awt.Color(255, 255, 255));
+        jspPedidosAdocao.setBorder(null);
+
+        jtTabelaPedidoAdocao.setFont(new java.awt.Font("Open Sans", 0, 12)); // NOI18N
+        jtTabelaPedidoAdocao.setForeground(new java.awt.Color(255,255,255
+        ));
+        jtTabelaPedidoAdocao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtTabelaPedidoAdocao.setSelectionBackground(new java.awt.Color(255,255,255
+        ));
+        jtTabelaPedidoAdocao.getTableHeader().setResizingAllowed(false);
+        jtTabelaPedidoAdocao.getTableHeader().setReorderingAllowed(false);
+        jtTabelaPedidoAdocao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTabelaPedidoAdocaoMouseClicked(evt);
+            }
+        });
+        jspPedidosAdocao.setViewportView(jtTabelaPedidoAdocao);
+
+        panelScreens1.add(jspPedidosAdocao, "TabelaAdocao");
+
         this.panelScreens.setLayout(card);
         panelScreens.add(panelCadastro, "panelCadastro");
 
         jspScreens1.setViewportView(panelScreens1);
 
-        Home.add(jspScreens1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+        Home.add(jspScreens1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 310));
 
         jpScreen.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -887,6 +926,12 @@ public final class TelaMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AbrirHomeMousePressed
 
+    private void jtTabelaPedidoAdocaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPedidoAdocaoMouseClicked
+        //rowSelect = jtTabelaAnimais.getSelectedRow();
+        //Animal animalAdocao =  modeloTabela.getRowSelected(rowSelect);
+        //preencherLabelsDescricao(animalAdocao);
+    }//GEN-LAST:event_jtTabelaPedidoAdocaoMouseClicked
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(186, 46, 186));
     }
@@ -1009,8 +1054,10 @@ public final class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jpTopPanel;
     private javax.swing.JPanel jpnFinalizar;
     private javax.swing.JPanel jpnTabel;
+    private javax.swing.JScrollPane jspPedidosAdocao;
     private javax.swing.JScrollPane jspScreens;
     private javax.swing.JScrollPane jspScreens1;
+    private javax.swing.JTable jtTabelaPedidoAdocao;
     private javax.swing.JLabel move;
     private javax.swing.JPanel panelScreens;
     private javax.swing.JPanel panelScreens1;
