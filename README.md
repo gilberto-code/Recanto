@@ -30,7 +30,23 @@ https://help.umbler.com/hc/pt-br/articles/202385865-MySQL-Importando-Exportando-
 
 
 # Aplicativo em Funcionamento
+### Home
+![](images/home.png)
 
+### Cadastro Animal
+![](images/cadastroanima1.png)
+
+### Tabelas
+![](images/tabela.png)
+
+### Adotar
+![](images/adotar.png)
+
+### Cadastro Usuário
+![](images/cadastrouser.png)
+
+### Sobre
+![](images/sobre.png)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
