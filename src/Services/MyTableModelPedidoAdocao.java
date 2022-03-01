@@ -116,10 +116,15 @@ public class MyTableModelPedidoAdocao extends AbstractTableModel {
     }
     @Override
     public Class getColumnClass(int column) {
-        if (column == 0) {
-            return Icon.class;
-        } else {
-            return getValueAt(0, column).getClass();
+        try {
+            if (column == 0) {
+                return Icon.class;
+            } else {
+                return getValueAt(0, column).getClass();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
+        return null;
     }
 }
