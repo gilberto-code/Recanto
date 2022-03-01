@@ -163,14 +163,14 @@ public class ControllerAnimal {
                         + "raca like ? and \n"
                         + "porte like ? and \n"
                         + "sexo like ? \n");
-        
-        ps.setBoolean(1,  animal.isAdotado() );
+
+        ps.setBoolean(1, animal.isAdotado());
         ps.setString(2, "%" + animal.getNome() + "%");
-        ps.setString(3, "%" + animal.getEspecie()+ "%");
-        ps.setString(4, "%" + animal.getRaca()+ "%");
-        ps.setString(5, "%" + animal.getPorte()+ "%");
-        ps.setString(6, "%" + animal.getSexo()+ "%");
-            
+        ps.setString(3, "%" + animal.getEspecie() + "%");
+        ps.setString(4, "%" + animal.getRaca() + "%");
+        ps.setString(5, "%" + animal.getPorte() + "%");
+        ps.setString(6, "%" + animal.getSexo() + "%");
+
         ResultSet rs = ps.executeQuery();
         return carregarLista(rs);
     }
@@ -249,7 +249,7 @@ public class ControllerAnimal {
         rs.close();
         return lista;
     }
-    
+
     public void adotarAnimal(Animal animal) {
         try {
             PreparedStatement ps
@@ -257,7 +257,6 @@ public class ControllerAnimal {
                             "UPDATE tb_animais SET"
                             + " adotado = ? WHERE idAnimal = ?");
 
-            
             ps.setBoolean(1, true);
             ps.setInt(2, animal.getId());
 

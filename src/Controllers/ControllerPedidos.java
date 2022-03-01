@@ -20,7 +20,8 @@ public class ControllerPedidos {
 
     public ArrayList<PedidoAdocao> getList() throws Exception {
         PreparedStatement ps
-                = ConnectionDB.getConnection().prepareStatement("select tu.idUser, ta.idAnimal , tu.nome nomeUser, ta.nome nomeAnimal, tp.mensagem, ti.imagem\n"
+                = ConnectionDB.getConnection().prepareStatement("select tu.idUser, ta.idAnimal , "
+                        + "tu.nome nomeUser, ta.nome nomeAnimal, tp.mensagem, ti.imagem\n"
                         + "from tb_pedidos_adocao tp\n"
                         + "left join tb_user_mobile tu on tp.idUser = tu.idUser\n"
                         + "left join tb_animais ta on tp.idAnimal = ta.idAnimal\n"
@@ -38,11 +39,14 @@ public class ControllerPedidos {
             pedido = new PedidoAdocao(
                     rs.getInt(1),
                     rs.getInt(2),
-                    rs.getString(3),
                     rs.getString(4),
+                    rs.getString(3),
                     rs.getString(5),
                     rs.getString(6));
             lista.add(pedido);
+        }
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println(lista.get(i));
         }
         rs.close();
         return lista;
