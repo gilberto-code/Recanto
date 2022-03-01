@@ -44,7 +44,7 @@ public final class TelaMenu extends javax.swing.JFrame {
     ControllerAnimal cAnimal = new ControllerAnimal();
 
     private MyTableModelPedidoAdocao modeloTabela;
-    public void carregaHome() throws Exception{
+    public void carregaHome()  throws Exception{
         visiblePanel(Home);
         setColor(AbrirHome);
         new Thread(new Runnable() {
