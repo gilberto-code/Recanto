@@ -110,7 +110,6 @@ public final class TelaMenu extends javax.swing.JFrame {
         resetColor(CadastrarAnimal1);
         resetColor(Sobre);
         
-        visiblePanel(Home);
         
         jlbVoltar.setVisible(false);
         jspScreens.setVisible(false);
@@ -161,7 +160,9 @@ public final class TelaMenu extends javax.swing.JFrame {
         jlbExit = new javax.swing.JLabel();
         jlbVoltar = new javax.swing.JLabel();
         move = new javax.swing.JLabel();
+        jpnTabel = new javax.swing.JPanel();
         jpLeftPanel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         ListarAnimaisAdotados = new javax.swing.JPanel();
         jLabel55 = new javax.swing.JLabel();
@@ -172,15 +173,13 @@ public final class TelaMenu extends javax.swing.JFrame {
         CadastrarAnimal1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        Sobre = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         CadastrarUser1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jpnTabel = new javax.swing.JPanel();
+        Sobre = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jpTopPanel = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         jpScreen = new javax.swing.JPanel();
@@ -189,9 +188,9 @@ public final class TelaMenu extends javax.swing.JFrame {
         form2 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        Home = new javax.swing.JPanel();
         jspScreens = new javax.swing.JScrollPane();
         panelScreens = new javax.swing.JPanel();
+        Home = new javax.swing.JPanel();
         form4 = new javax.swing.JPanel();
         form3 = new javax.swing.JPanel();
         jspAdocao = new javax.swing.JScrollPane();
@@ -282,9 +281,24 @@ public final class TelaMenu extends javax.swing.JFrame {
         });
         jpBackground.add(move, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 20));
 
+        jpnTabel.setOpaque(false);
+        jpnTabel.setLayout(new java.awt.CardLayout());
+
+        this.jpnTabel.setLayout(card);
+        jpnTabel.add(panelCadastro, "panelTabel");
+
+        jpBackground.add(jpnTabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1000, 580));
+
         jpLeftPanel.setBackground(new java.awt.Color(102, 0, 102));
         jpLeftPanel.setPreferredSize(new java.awt.Dimension(300, 600));
         jpLeftPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Open Sans SemiBold", 0, 20)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Recanto dos Animais");
+        jLabel9.setPreferredSize(new java.awt.Dimension(203, 30));
+        jpLeftPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 230, -1));
 
         jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/IconRecantoDosAnimaisPng (2).png"))); // NOI18N
         jpLeftPanel.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 30, 30));
@@ -376,54 +390,6 @@ public final class TelaMenu extends javax.swing.JFrame {
 
         jpLeftPanel.add(CadastrarAnimal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
-        Sobre.setBackground(new java.awt.Color(153, 0, 153));
-        Sobre.setPreferredSize(new java.awt.Dimension(300, 50));
-        Sobre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SobreMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                SobreMousePressed(evt);
-            }
-        });
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconAbout.png"))); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Sobre");
-        jLabel8.setPreferredSize(new java.awt.Dimension(163, 30));
-
-        javax.swing.GroupLayout SobreLayout = new javax.swing.GroupLayout(Sobre);
-        Sobre.setLayout(SobreLayout);
-        SobreLayout.setHorizontalGroup(
-            SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SobreLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        SobreLayout.setVerticalGroup(
-            SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SobreLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
-        );
-
-        jpLeftPanel.add(Sobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Open Sans SemiBold", 0, 20)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Recanto dos Animais");
-        jLabel9.setPreferredSize(new java.awt.Dimension(203, 30));
-        jpLeftPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 230, -1));
-
         CadastrarUser1.setBackground(new java.awt.Color(153, 0, 153));
         CadastrarUser1.setPreferredSize(new java.awt.Dimension(300, 50));
         CadastrarUser1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -480,13 +446,46 @@ public final class TelaMenu extends javax.swing.JFrame {
 
         jpLeftPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
-        jpnTabel.setOpaque(false);
-        jpnTabel.setLayout(new java.awt.CardLayout());
+        Sobre.setBackground(new java.awt.Color(153, 0, 153));
+        Sobre.setPreferredSize(new java.awt.Dimension(300, 50));
+        Sobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SobreMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SobreMousePressed(evt);
+            }
+        });
 
-        this.jpnTabel.setLayout(card);
-        jpnTabel.add(panelCadastro, "panelTabel");
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/IconAbout.png"))); // NOI18N
 
-        jpLeftPanel.add(jpnTabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 20, 1000, 580));
+        jLabel8.setFont(new java.awt.Font("Open Sans", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Sobre");
+        jLabel8.setPreferredSize(new java.awt.Dimension(163, 30));
+
+        javax.swing.GroupLayout SobreLayout = new javax.swing.GroupLayout(Sobre);
+        Sobre.setLayout(SobreLayout);
+        SobreLayout.setHorizontalGroup(
+            SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SobreLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        SobreLayout.setVerticalGroup(
+            SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SobreLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(SobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
+
+        jpLeftPanel.add(Sobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, -1, -1));
 
         jpBackground.add(jpLeftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -550,11 +549,6 @@ public final class TelaMenu extends javax.swing.JFrame {
         Animals.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 200, 40));
         Animals.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, 40));
 
-        jpScreen.add(Animals, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        Home.setBackground(new java.awt.Color(255, 255, 255));
-        Home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jspScreens.setBorder(null);
         jspScreens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jspScreens.setPreferredSize(new java.awt.Dimension(700, 310));
@@ -568,7 +562,12 @@ public final class TelaMenu extends javax.swing.JFrame {
 
         jspScreens.setViewportView(panelScreens);
 
-        Home.add(jspScreens, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+        Animals.add(jspScreens, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+
+        jpScreen.add(Animals, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Home.setBackground(new java.awt.Color(255, 255, 255));
+        Home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         form4.setBackground(new java.awt.Color(56, 0, 56));
 
@@ -807,9 +806,6 @@ public final class TelaMenu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jlbExitMouseClicked
 
-    private void jpnFinalizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarMousePressed
-    }//GEN-LAST:event_jpnFinalizarMousePressed
-
     private void moveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMousePressed
         xx = evt.getX();
         xy = evt.getY();
@@ -830,39 +826,6 @@ public final class TelaMenu extends javax.swing.JFrame {
         jpLeftPanel.setVisible(true);
         jlbVoltar.setVisible(false);
     }//GEN-LAST:event_jlbVoltarMouseClicked
-
-    private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
-        if (pswSenha1.getText().equals(pswConfSenha1.getText())) {
-            User u = new User(cxEmail.getText(), cxNome.getText(), pswSenha1.getText());
-            try {
-                new Thread(new Runnable() {
-                    public void run() {
-                        JFrame frame;
-                        frame = new TelaLoading();
-                        frame.pack();
-                        frame.setLocationRelativeTo(null);
-                        frame.setVisible(true);
-                        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                        try {
-                            Thread.sleep(1000);
-                            new ControllerUser().inserir(u);
-                        } catch (Exception ex) {
-                            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        frame.setVisible(false);
-                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                    }
-                }).start();
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-                Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "As senhas não são iguais");
-        }
-    }//GEN-LAST:event_jLabel25MousePressed
 
     private void CadastrarUser1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CadastrarUser1MousePressed
         setColor(CadastrarUser1);
@@ -921,9 +884,12 @@ public final class TelaMenu extends javax.swing.JFrame {
         }
         jpnTabel.add(panelTabel);
         panelTabel.setVisible(true);
+        
         cleanAll();
         jlbVoltar.setVisible(true);
         resetColor(ListarAnimaisAdotados);
+        
+       
     }//GEN-LAST:event_ListarAnimaisAdotadosMouseClicked
 
     private void AbrirHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AbrirHomeMouseClicked
@@ -936,13 +902,50 @@ public final class TelaMenu extends javax.swing.JFrame {
         resetColor(ListarAnimaisAdotados);
         resetColor(Sobre);
         resetColor(CadastrarUser1);
-        
+
         
     }//GEN-LAST:event_AbrirHomeMouseClicked
 
     private void AbrirHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AbrirHomeMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_AbrirHomeMousePressed
+
+    private void jpnFinalizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnFinalizarMousePressed
+
+    }//GEN-LAST:event_jpnFinalizarMousePressed
+
+    private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
+        if (pswSenha1.getText().equals(pswConfSenha1.getText())) {
+            User u = new User(cxEmail.getText(), cxNome.getText(), pswSenha1.getText());
+            try {
+                new Thread(new Runnable() {
+                    public void run() {
+                        JFrame frame;
+                        frame = new TelaLoading();
+                        frame.pack();
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
+                        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                        try {
+                            Thread.sleep(1000);
+                            new ControllerUser().inserir(u);
+                        } catch (Exception ex) {
+                            Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        frame.setVisible(false);
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                    }
+                }).start();
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+                Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "As senhas não são iguais");
+        }
+    }//GEN-LAST:event_jLabel25MousePressed
 
     private void jtTabelaPedidoAdocaoAnimaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaPedidoAdocaoAnimaisMouseClicked
         //rowSelect = jtTabelaPedidoAdocaoAnimais.getSelectedRow();
