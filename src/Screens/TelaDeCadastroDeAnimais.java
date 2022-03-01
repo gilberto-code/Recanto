@@ -1328,11 +1328,11 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         fc.addChoosableFileFilter(new ImageFilter());
         fc.setAcceptAllFileFilterUsed(false);
 
-	    //Add custom icons for file types.
-            fc.setFileView(new ImageFileView());
+        //Add custom icons for file types.
+        fc.setFileView(new ImageFileView());
 
-	    //Add the preview pane.
-            fc.setAccessory(new ImagePreview(fc));
+        //Add the preview pane.
+        fc.setAccessory(new ImagePreview(fc));
         
         
         

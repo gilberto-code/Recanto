@@ -11,6 +11,9 @@ import Controllers.*;
 import Services.CellRenderer;
 import Services.Controll_Images;
 import Services.GerarPDF;
+import Services.ImageFileView;
+import Services.ImageFilter;
+import Services.ImagePreview;
 import Services.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -1397,9 +1400,17 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField4ActionPerformed
     
     public void adicionarImagem(JLabel fotinha) throws IOException {
-        JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
-        jFileChooser1.showOpenDialog(null);
-        File arquivo = jFileChooser1.getSelectedFile();
+        JFileChooser fc = new javax.swing.JFileChooser(ultimoPacote);
+        fc.addChoosableFileFilter(new ImageFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+        //Add custom icons for file types.
+        fc.setFileView(new ImageFileView());
+
+        //Add the preview pane.
+        fc.setAccessory(new ImagePreview(fc));
+        fc.showOpenDialog(null);
+        File arquivo = fc.getSelectedFile();
         
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
