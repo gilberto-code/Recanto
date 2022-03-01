@@ -8,6 +8,9 @@ package Screens;
 import Objects.Animal;
 import Controllers.ControllerAnimal;
 import Services.Controll_Images;
+import Services.ImageFileView;
+import Services.ImageFilter;
+import Services.ImagePreview;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.WindowEvent;
@@ -1320,9 +1323,25 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
     }
 
     public void adicionarImagem(JLabel fotinha) throws IOException {
-        JFileChooser jFileChooser1 = new javax.swing.JFileChooser(ultimoPacote);
-        jFileChooser1.showOpenDialog(null);
-        File arquivo = jFileChooser1.getSelectedFile();
+        JFileChooser fc = new javax.swing.JFileChooser(ultimoPacote);
+        
+        fc.addChoosableFileFilter(new ImageFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+
+	    //Add custom icons for file types.
+            fc.setFileView(new ImageFileView());
+
+	    //Add the preview pane.
+            fc.setAccessory(new ImagePreview(fc));
+        
+        
+        
+        fc.showOpenDialog(null);
+        
+        
+        
+        
+        File arquivo = fc.getSelectedFile();
 
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
