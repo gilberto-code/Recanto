@@ -90,6 +90,8 @@ public class ControllerAnimal {
         int row = ps.executeUpdate();
         if (row == 0) {
             JOptionPane.showMessageDialog(null, "Exclusão Falhou");
+        }else{
+            JOptionPane.showMessageDialog(null, "Exclusão Realizada");
         }
 
     }

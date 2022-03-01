@@ -1274,13 +1274,38 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
 
     private void jpnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnExcluirMouseClicked
         Animal animal = modeloTabela.getRowSelected(rowSelect);
-        try {
-            controllerAnimal.delete(animal);
-        } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, ex.getMessage(),
+        
+        new Thread(new Runnable() {
+            public void run() {
+                JFrame frame;
+                frame = new TelaLoading();
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                
+                try {
+                    Thread.sleep(500);
+                    controllerAnimal.delete(animal);
+
+                } catch (Exception ex) {
+                      JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
-            Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                    Logger.getLogger(TelaDeCadastroDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    modeloTabela = new MyTableModel(animal.isAdotado());                
+                    jtTabelaAnimais.setModel(modeloTabela);
+                } catch (Exception ex) {
+                      JOptionPane.showMessageDialog(null, ex.getMessage(),
+                    "Ocorreu um erro durante a execução do programa", JOptionPane.INFORMATION_MESSAGE);
+                    Logger.getLogger(TelaTabelaDeAnimais.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                frame.setVisible(false);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+            }).start();
     }//GEN-LAST:event_jpnExcluirMouseClicked
 
     private void jpnAdotarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnAdotarMouseClicked
