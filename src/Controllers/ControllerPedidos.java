@@ -26,7 +26,7 @@ public class ControllerPedidos {
                         + "left join tb_user tu on tp.idUser = tu.idUser\n"
                         + "left join tb_animais ta on tp.idAnimal = ta.idAnimal\n"
                         + "left join tb_imagens ti\n"
-                        + "on ta.idAnimal = ti.idAnimal;");
+                        + "on ta.idAnimal = ti.idAnimal group by idAnimal;");
         //ps.setBoolean(1, isAdotado);
         ResultSet rs = ps.executeQuery();
         return carregarLista(rs);
