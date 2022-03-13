@@ -101,7 +101,8 @@ public class MyTableModelPedidoAdocao extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
 
         ImageIcon image;
-        image = Services.Controll_Images.montarImagem(this.pedidos.get(rowIndex).getImagemAnimal());
+        image = Services.Controll_Images.montarImagem(
+                this.pedidos.get(rowIndex).getImagemAnimal(),200,-1);
         switch (columnIndex) {
             case 0:
                 return image;

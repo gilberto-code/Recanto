@@ -23,7 +23,7 @@ public class ControllerPedidos {
                 = ConnectionDB.getConnection().prepareStatement("select tu.idUser, ta.idAnimal , "
                         + "tu.nome nomeUser, ta.nome nomeAnimal, tp.mensagem, ti.imagem\n"
                         + "from tb_pedidos_adocao tp\n"
-                        + "left join tb_user_mobile tu on tp.idUser = tu.idUser\n"
+                        + "left join tb_user tu on tp.idUser = tu.idUser\n"
                         + "left join tb_animais ta on tp.idAnimal = ta.idAnimal\n"
                         + "left join tb_imagens ti\n"
                         + "on ta.idAnimal = ti.idAnimal;");

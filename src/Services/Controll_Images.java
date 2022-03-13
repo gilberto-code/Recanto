@@ -119,17 +119,18 @@ public class Controll_Images {
         return null;
     }
 
-    public static ImageIcon montarImagem(String imgString) {
+    public static ImageIcon montarImagem(String imgString, int width, int height) {
 
         try {
             if (imgString != null) {
+                
                 byte[] montar = Base64.getDecoder().decode(imgString);
 
                 ImageIcon oi = new ImageIcon(montar);
                 int larg = oi.getIconWidth();
                 int alt = oi.getIconHeight();
                 ImageIcon image = new ImageIcon(oi.getImage()
-                        .getScaledInstance(150, 150, Image.SCALE_FAST));
+                        .getScaledInstance(width, height, Image.SCALE_FAST));
                 return image;
             }
 
@@ -140,6 +141,7 @@ public class Controll_Images {
         }
         return null;
     }
+    
 
     public static String ImagemParaStringNAO(ImageIcon Imagem) {
         ImageIcon img_icon = Imagem;

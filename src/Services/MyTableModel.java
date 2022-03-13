@@ -105,7 +105,9 @@ public class MyTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
 
         ImageIcon image;
-        image = Services.Controll_Images.montarImagem(this.animals.get(rowIndex).getImagem());
+        image = Services.Controll_Images.montarImagem(
+                this.animals.get(rowIndex).getImagem(),
+        200,-1);
         switch (columnIndex) {
             case 0:
                 return image;

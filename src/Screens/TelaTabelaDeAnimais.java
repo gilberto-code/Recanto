@@ -1323,7 +1323,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
     }//GEN-LAST:event_jpnAdotarMouseClicked
     public void carregarAnimalParaAdocao(){
         Animal animal_up = modeloTabela.getRowSelected(rowSelect);        
-        txt_imagem_animal_adocao.setIcon(Controll_Images.montarImagem(animal_up.getImagem()));
+        txt_imagem_animal_adocao.setIcon(Controll_Images.montarImagem(
+                animal_up.getImagem(),-1,250));
         jlNome.setText(animal_up.getNome());
         jlEspecie.setText(animal_up.getEspecie());
         jlSexo1.setText(animal_up.getSexo());
@@ -1440,12 +1441,13 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
-            Image image = bufferedImage.getScaledInstance(500,
-                    500, Image.SCALE_SMOOTH);
+            Image image = bufferedImage.getScaledInstance(-1,
+                    -1, Image.SCALE_FAST);
            
             ImageIcon imagem = new ImageIcon(image);
-            Controll_Images redimencionar = new Controll_Images();
-            imagem = redimencionar.redimensionar_imagem(imagem);
+            //Controll_Images redimencionar = new Controll_Images();
+            imagem.setImage(imagem.getImage().getScaledInstance(-1, 200, 100));
+            
             fotinha.setIcon(imagem);
             ImagemIconAnimal = imagem;
         } else {
@@ -1460,8 +1462,8 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
-            Image image = bufferedImage.getScaledInstance(500,
-                    500, Image.SCALE_SMOOTH);
+            Image image = bufferedImage.getScaledInstance(-1,
+                    -1, Image.SCALE_AREA_AVERAGING);
            
             ImageIcon imagem = new ImageIcon(image);
             Controll_Images redimencionar = new Controll_Images();
@@ -1516,7 +1518,9 @@ public class TelaTabelaDeAnimais extends javax.swing.JPanel {
         jtfDoenca.setText(animalAdocao.getQualDoenca());
         jtaDescricao.setText(animalAdocao.getDescricao());
         ImageIcon image;
-        image = Services.Controll_Images.montarImagem(animalAdocao.getImagem());
+        image = Services.Controll_Images.montarImagem(
+                animalAdocao.getImagem(),
+                200,-1);
         txt_imagem.setIcon(image);
     }
         

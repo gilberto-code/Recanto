@@ -1346,8 +1346,8 @@ public class TelaDeCadastroDeAnimais extends javax.swing.JPanel {
         if (arquivo != null) {
             ultimoPacote = arquivo.getPath();
             BufferedImage bufferedImage = ImageIO.read(new File(ultimoPacote));
-            Image image = bufferedImage.getScaledInstance(500,
-                    500, Image.SCALE_SMOOTH);
+            Image image = bufferedImage.getScaledInstance(-1,
+                    -1, Image.SCALE_DEFAULT);
 
             ImageIcon imagem = new ImageIcon(image);
             Controll_Images redimencionar = new Controll_Images();
