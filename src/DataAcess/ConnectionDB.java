@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class ConnectionDB {
 
-    private static final String STR_CONEXAO = "jdbc:mysql://database-recanto01.cnjmjy9kebcg.sa-east-1.rds.amazonaws.com/dbRecanto01";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String USUARIO = "admin";
-    private static final String SENHA = "senhateste";
+    private static final String STR_CONEXAO = "";
+    private static final String DRIVER = "";
+    private static final String USUARIO = "";
+    private static final String SENHA = "";
     private static Connection connection;
 
     public static Connection getConnection() {
