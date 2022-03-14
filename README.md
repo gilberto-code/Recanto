@@ -22,12 +22,6 @@ Instalação:
 https://dev.mysql.com/downloads/workbench/
 ```
 
-### Tutorial Data Import
-
-```bash
-https://help.umbler.com/hc/pt-br/articles/202385865-MySQL-Importando-Exportando-um-banco-de-dados
-```
-
 
 # Aplicativo em Funcionamento
 ### Home
